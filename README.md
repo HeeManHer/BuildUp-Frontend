@@ -1,6 +1,24 @@
-# Getting Started with Create React App
+# 사용방법
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pages 폴더에 화면.js파일을 만들고 Main.js파일에서 리턴으로 만들고 실행하세요
+
+function 화면(){
+  return (
+    <>
+    
+    </>
+  );
+}
+
+export default 화면;
+
+import 화면 from './화면.js';
+funtion Main(){
+  return (
+    <화면/>  
+  );
+}
+export default Main;
 
 ## Available Scripts
 
