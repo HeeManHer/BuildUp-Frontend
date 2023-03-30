@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import "../css/project.css";
+import "../../css/project.css";
 
 function NewProject() {
   const [items, setItems] = useState([]);
@@ -9,7 +9,7 @@ function NewProject() {
   const [status, setStatus] = useState('');
   const [priority, setPriority] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedItemIndex, setSelectedItemIndex] = useState(-1); 
+  const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);             //true일떄 생성가능함
@@ -29,9 +29,9 @@ function NewProject() {
       priority,
     };
 
-    if (selectedItemIndex === -1) { 
+    if (selectedItemIndex === -1) {
       setItems([...items, newItem]);
-    } else {  
+    } else {
       const updatedItems = [...items];
       updatedItems[selectedItemIndex] = newItem;
       setItems(updatedItems);
@@ -78,7 +78,7 @@ function NewProject() {
         <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <div style={{ background: '#fff', padding: 16 }}>
             <h2>{selectedItemIndex === -1 ? title : title}</h2> {/* change the modal title depending on whether an item is being added or edited */}
-          
+
             <form onSubmit={handleSubmit}>
 
               <label>
@@ -89,9 +89,9 @@ function NewProject() {
               <label>
                 담당자 :
                 <select value={status} onChange={(event) => setStatus(event.target.value)}>
-                <option value="">선택</option>
-              <option value="허희만">허희만</option>
-              {/* <label>
+                  <option value="">선택</option>
+                  <option value="허희만">허희만</option>
+                  {/* <label>
                 팀원 초대 :
                 <select value={main} onChange={(event) => setMain(event.target.value)} />
               <br />
@@ -99,7 +99,7 @@ function NewProject() {
               <option value="최명건">최명건</option>
               </label> */}
 
-                  </select>
+                </select>
               </label>
               <br />
               <label>
@@ -110,34 +110,34 @@ function NewProject() {
               <button type="submit">{selectedItemIndex === -1 ? '추가' : 'Save'}</button>
             </form>
           </div>
-          </div>
-          </div>
-          
-        
-      
-    
-    
-      <div className='newproject'>
-      <h1>프로젝트</h1>
-      <button className="button1" onClick={handleOpenModal}>프로젝트 생성</button>    
-      
-      </div>
-      <hr className="line"/>
-    
-      <ul>
-      <NavLink to="/ProjectManager">
-          <div>
-        {items.map((item, index) => (
-          <li key={index}>
-            <h3>{item.title}</h3>
-            <p>{item.main}</p>
-            <p>담당자 : {item.status}</p>
-            <p>팀원 : {item.priority}</p>
-            <button onClick={() => handleEditItem(index)}>수정</button>
-            <button onClick={() => handleDeleteItem(index)}>삭제</button>
-          </li>
-        ))}
         </div>
+      </div>
+
+
+
+
+
+      <div className='newproject'>
+        <h1>프로젝트</h1>
+        <button className="button1" onClick={handleOpenModal}>프로젝트 생성</button>
+
+      </div>
+      <hr className="line" />
+
+      <ul>
+        <NavLink to="project/ProjectManager">
+          <div>
+            {items.map((item, index) => (
+              <li key={index}>
+                <h3>{item.title}</h3>
+                <p>{item.main}</p>
+                <p>담당자 : {item.status}</p>
+                <p>팀원 : {item.priority}</p>
+                <button onClick={() => handleEditItem(index)}>수정</button>
+                <button onClick={() => handleDeleteItem(index)}>삭제</button>
+              </li>
+            ))}
+          </div>
         </NavLink>
       </ul>
 

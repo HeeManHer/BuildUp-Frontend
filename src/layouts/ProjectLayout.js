@@ -13,7 +13,7 @@ function ProjectLayout() {
         <>
             <div id="wrapper">
                 <ProjectSideBar />
-                <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
                         <Header />
                         <Outlet />
