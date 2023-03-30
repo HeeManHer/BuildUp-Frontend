@@ -1,17 +1,17 @@
-import '../css/page.css';
+import '../../css/page.css';
 
 function Login() {
 
-    return(
-        <div class="login-box">
+    return (
+        <div className="login-box">
             <h2>Login</h2>
             <form>
-                <div class="user-box">
-                    <input type="text" name="" required=""/>
+                <div className="user-box">
+                    <input type="text" name="" required="" />
                     <label>사번</label>
                 </div>
-                <div class="user-box">
-                    <input type="password" name="" required=""/>
+                <div className="user-box">
+                    <input type="password" name="" required="" />
                     <label>Password</label>
                 </div>
                 <a href="#">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import "../css/Issue.css";
+import "../../css/Issue.css";
 import { NavLink } from 'react-router-dom';
 
 function Issue() {

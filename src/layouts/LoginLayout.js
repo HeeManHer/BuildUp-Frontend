@@ -1,18 +1,15 @@
-import Footer from "../components/commons/Footer";
-import Header from "../components/commons/Header";
-import SideBar from "../components/commons/SideBar";
 import { Outlet } from "react-router-dom";
 import '../css/sb-admin-2.min.css';
 import '../vendor/fontawesome-free/css/all.min.css';
 
 
 
-function Layout2() {
+function LoginLayout() {
 
     return (
         <>
             <div id="wrapper">
-                <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
                         <Outlet />
                     </div>
@@ -22,4 +19,4 @@ function Layout2() {
     )
 }
 
-export default Layout2;
+export default LoginLayout;
