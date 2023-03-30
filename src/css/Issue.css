@@ -1,0 +1,91 @@
+.box {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+
+.ISSUE {
+    height: 80%;
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 120px;
+    font-weight: 900;
+}
+
+.btnIssue {
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.container1 {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+    ;
+}
+
+
+.issuename {
+    border: 3px solid cornflowerblue;
+    width: 100%;
+    height: 8%;
+    display: flex;
+
+}
+
+.issuelist {
+    width: 150px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid cornflowerblue;
+    background-color: white;
+    text-align: center;
+}
+
+.issuelist>header {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.issuelist>ul>li {
+    list-style-type: none;
+    text-align: left;
+
+}
+
+.issuelist>ul {
+    display: flex;
+    flex-direction: column;
+    line-height: 70px;
+}
+
+.head1 {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.createissue {
+    width: 10%;
+    border-radius: 50px;
+    background-color: #4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight: bold;
+    font-size: 70%;
+    color: white;
+    padding: 10px;
+}
