@@ -1,0 +1,25 @@
+
+
+.button1 {
+    width: 10%;
+    
+    border-radius: 50px;
+    background-color:#4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight:bold;
+    color: white;
+    padding: 10px;
+}
+
+.zzz{
+    display: flex;
+    justify-content: space-between;  
+    
+}
+
+.asd {
+    border: solid #4e73df 5px;
+    width: 100%;
+    }
+
