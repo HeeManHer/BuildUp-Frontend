@@ -17,7 +17,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<LoginLayout />}>
-          <Route index element={<Login />} />
+          {/* <Route index element={<Login />} /> */}
         </Route>
 
         <Route path="/" element={<MypageLayout />}>
