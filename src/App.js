@@ -17,8 +17,9 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<MypageLayout />}>
-          <Route index element={<Changepassword />} />
+
+        <Route path="/" element={<LoginLayout />}>
+          {/* <Route index element={<Login />} /> */}
         </Route>
 
         <Route path="/" element={<MypageLayout />}>

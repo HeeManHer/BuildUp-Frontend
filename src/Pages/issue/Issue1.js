@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../css/Issue.css";
+import "../css/Issue.css";
 import { NavLink } from 'react-router-dom';
 
 function Issue1() {
@@ -24,22 +24,6 @@ function Issue1() {
                 <NavLink to="/isuuecreate" className="createissue" value={issuecreate} onChange={handleissuecreate} >이슈 생성</NavLink>
             </h1>
             <div className="container1">
-                <div className="issuelist">
-                    {/* 왼쪽 목록을 볼 수 있는 영역 */}
-                    <header>이슈</header>
-                    <ul>
-                        <br />
-                        <li>Issue1</li>
-                        <li>Issue2</li>
-                        <li>Issue4</li>
-                        <li>Issue5</li>
-                        <li>Issue6</li>
-                        <li>Issue7</li>
-                        <li>Issue8</li>
-                        <li>Issue9</li>
-                        <li>Issue10</li>
-                    </ul>
-                </div>
 
                 <div className="box">
                     <div>
