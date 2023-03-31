@@ -10,11 +10,13 @@ import NewProject from "./Pages/project/NewProject";
 import ProjectManager from "./Pages/project/ProjectManager";
 import MyPage from "./Pages/mypage/mypage";
 import Login from "./Pages/login/login";
+import Changepassword from "./Pages/login/changepassword";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+
 
         <Route path="/" element={<LoginLayout />}>
           {/* <Route index element={<Login />} /> */}
