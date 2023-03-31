@@ -66,7 +66,7 @@ class CommenList extends Component {
                             :
                             <>
                                 <span onClick={this.handleClick(k)}>{v.content}</span>
-                                <button className='comment-delete-btn' 
+                                <button className="btn btn-danger btn-icon-split, icon text-white-50, fas fa-trash btn-sm"
                                     onClick={() => {this.deleteList(k)}}
                                 >
                                 댓글 삭제

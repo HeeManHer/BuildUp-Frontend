@@ -1,28 +1,28 @@
 import { Component } from "react";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import CommenList from "./CommentList";
+import CommentList from "./CommentList";
 
 class Wan extends Component {
 
     state = {
         value: '',
         list:[
-            {userid: '1', content:'테스트1', date: '2022-03-29'},
-            {userid: '2', content:'테스트2', date: '2022-03-29'},
-            {userid: '3', content:'테스트3', date: '2022-03-29'}
+            {userid:'', content:'', date: ''},
         ]
     }
 
     addList = (content) => {
+        const lastComment = this.state.list.length === 0 ? null : this.state.list[this.state.list.length - 1];
+        const newUserId = lastComment ? Number(lastComment.userid) + 1 : 1;
+        const today = new Date().toISOString().substr(0, 10); // 현재 날짜를 YYYY-MM-DD 형식으로 가져옴
         this.setState({
-            list:[
-                ...this.state.list,
-                {userid: 'userid',content,date:'2022-03-29'}
-            ]
+          list:[
+            ...this.state.list,
+            {userid: newUserId.toString(), content, date: today}
+          ]
         })
-
-    }
+      }
 
     updateList = list => {
         this.setState({
@@ -36,7 +36,7 @@ class Wan extends Component {
             <>
                 <Comment>
                     <CommentForm addList = {this.addList}/>
-                    <CommenList list = { this.state.list }
+                    <CommentList list = { this.state.list }
                                 updateList = {this.updateList}
                     />
                 </Comment>
