@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
-
-function SprintList() {
+function SprintOne() {
     return (
         <>
             <div className="newproject">
-                <h1>스프린트 목록</h1>
-                <button className="button1">스프린트 시작</button>
+                <h1>스프린트/</h1>
+                <button className="button1">스프린트 삭제</button>
+                <button className="button2">스프린트 생성</button>
             </div>
             <hr className="line" />
             <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -69,7 +68,7 @@ function SprintList() {
                         <div style={{ margin: '10px', padding: '10px', border: '1px solid black' }}>
                             <span>해결할 이슈4</span>
                             <br />
-                            <span style={{ fontSize: '9px' }}>담당자 : 허희만</span>
+                            <span style={{ fontSize: '9px' }}>담당자 : 박완규</span>
                         </div>
                     </div>
                 </div>
@@ -100,4 +99,4 @@ function SprintList() {
     );
 }
 
-export default SprintList;
+export default SprintOne;
