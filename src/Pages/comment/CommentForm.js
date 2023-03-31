@@ -35,7 +35,13 @@ class CommentForm extends Component {
                         value={this.state.value}
                         />
                     </span>
-                    <input type='submit' className='btn' value='등록'/>
+
+                    <button type='submit' className="btn btn-success btn-icon-split btn-sm">
+                            <span className="icon text-white-50">
+                                <i className="fas fa-check"></i>
+                            </span>
+                            <span className="text">등록</span>
+                    </button>
                 </form>
             </li>
         )
