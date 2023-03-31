@@ -1,7 +1,20 @@
 // import '../../css/sb-admin-2.min.css';
 import '../../css/page.css';
+import Modal from './Modal';
+import '../../css/loginModal.css';
+import React, {useState} from 'react';
 
 function Changepassword() {
+
+    const[modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
 
     return (
         <div className="border">
@@ -11,7 +24,7 @@ function Changepassword() {
             </div>
             <br />
             <br />
-            <div className="new">
+            <div className="newPwd">
                 <label>새 비밀번호 : </label>
                 <input type="password" placeholder="새 비밀번호를 입력하세요" />
             </div>
@@ -21,6 +34,12 @@ function Changepassword() {
                 <lable>새 비밀번호 확인 : </lable>
                 <input type="password" placeholder="새 비밀번호 확인" />
             </div>
+            <br/>
+            <React.Fragment>
+            <button onClick={openModal}>수정하기</button>
+            <Modal open={modalOpen} close={closeModal} header="비밀번호가 변경되었습니다.">
+            </Modal>
+            </React.Fragment>
         </div>
     );
 
