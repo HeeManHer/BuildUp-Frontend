@@ -11,6 +11,16 @@
     color: white;
     padding: 10px;
 }
+.button2 {
+    width: 30%;
+    border-radius: 50px;
+    background-color:#4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight:bold;
+    color: white;
+    padding: 4px;
+}
 
 .zzz{
     display: flex;
@@ -23,3 +33,18 @@
     width: 100%;
     }
 
+
+.in{
+    display: flex;
+    background-color: white;
+    border: 1px solid black;
+    width: 100%;
+    align-items: center;
+    border-radius: 20px;
+    padding-left: 10px;
+    justify-content: space-between;
+
+}
+
+.bg-blue{ background-color: #4e73df;
+            color: black; }
