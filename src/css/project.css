@@ -1,14 +1,14 @@
 .newproject {
     display: flex;
     margin-left: 20px;
-    color: #002040;
+    color: #002060;
     width:100%;
     height: 50px;
     justify-content: space-between;
     
 }
 .button1 {
-    width: 10%;
+    width: 170px;
     border-radius: 50px;
     background-color:#4e73df;
     border-style: none;
@@ -16,6 +16,29 @@
     font-weight:bold;
     color: white;
     padding: 10px;
+}
+
+.button2 {
+    width: 80px;
+    border-radius: 50px;
+    background-color:#4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight:bold;
+    color: white;
+    padding: 5px;
+    border-bottom: 0;
+}
+
+.button3 {
+    width: 80px;
+    border-radius: 50px;
+    background-color:#4e73df;
+    border-style: none;
+    margin-left: 90px;
+    font-weight:bold;
+    color: white;
+    padding: 5px;
 }
 
 .Create {
@@ -31,16 +54,25 @@
 
 .line2 {
     border: solid #4e73df 3px;
+    width: 98%;
 }
-
+/*프로젝트 생성된 화면*/
 .build {
     -webkit-text-stroke: 2px #4e73df;
-    border: 2px solid #4e73df;
-    padding: 10px;
-    border-radius: 10px;
-    width: 100px;
+    border: 3px solid #4e73df;
+    width: 200px;
     margin-left: 10px;
-    margin-top: 10px;
+
+}
+
+.build p {
+    width: 80px;
+    border: 3px solid #4e73df;
+    margin-top: 3px;
+    margin-bottom: -10px;
+    margin-left: 3px;
+    border-radius: 10px;
+    padding: 3px;
 }
 
 .projectname {
@@ -55,26 +87,6 @@
 .teamlist {
     margin-left: 25px;
     color:#002040;
-}
-
-table {
-    /* margin-top: 30px; */
-    margin-left: 300px;
-    border-collapse: collapse;
-    width: 60%;
-    border : 1px solid #4e73df;
-    color:#002040;
-}
-
-table> tr, td {
-    height: 30px;
-    border : 1px solid #4e73df;
-    /* border-top : 1px solid #4e73df; */
-    justify-content: center;
-    color:#002040;
-    text-align: center;
-
-    
 }
 
 #size {
@@ -98,4 +110,33 @@ table> tr, td {
     font-weight:bold;
     color: white;
     padding: 10px;
+}
+
+.projectlist {
+    display: flex;
+    text-align: center;
+    
+}
+
+.title {
+    text-align: center;
+    font-weight: lighter;
+    color :#4e73df;
+
+}
+
+.project2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+}
+
+.aaa {
+    color: #002040;
+    border-radius: 20px;
+}
+
+.modal{
+    border-radius: 20px;
+    border: 3px solid #4e73df;
 }
