@@ -5,9 +5,8 @@ import "../../css/project.css";
 function NewProject() {
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
-  const [main, setMain] = useState('');
-  const [status, setStatus] = useState('');
-  const [priority, setPriority] = useState('');
+  const [manager, setManager] = useState('');
+  const [invite, setInvite] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
@@ -24,33 +23,31 @@ function NewProject() {
     event.preventDefault();
     const newItem = {
       title,
-      main,
-      status,
-      priority,
+      manager,
+      invite,
     };
 
-    if (selectedItemIndex === -1) {
-      setItems([...items, newItem]);
-    } else {
-      const updatedItems = [...items];
-      updatedItems[selectedItemIndex] = newItem;
-      setItems(updatedItems);
+    if (title && manager && invite) { // 값이 모두 채워져 있는 경우에만 생성 가능
+      if (selectedItemIndex === -1) {
+        setItems([...items, newItem]);
+      } else {
+        const updatedItems = [...items];
+        updatedItems[selectedItemIndex] = newItem;
+        setItems(updatedItems);
+      }
+      setTitle('');
+      setManager('');
+      setInvite('');
+      handleCloseModal();
     }
-
-    setTitle('');
-    setMain('');
-    setStatus('');
-    setPriority('');
-    handleCloseModal();
   };
 
   const handleEditItem = (index) => {
     setSelectedItemIndex(index);
     const selectedItem = items[index];
     setTitle(selectedItem.title);
-    setMain(selectedItem.main);
-    setStatus(selectedItem.status);
-    setPriority(selectedItem.priority);
+    setManager(selectedItem.manager);
+    setInvite(selectedItem.invite);
     handleOpenModal();
   };
 
@@ -76,46 +73,46 @@ function NewProject() {
           onClick={handleCloseModal}
         />
         <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-          <div style={{ background: '#fff', padding: 16 }}>
+          <div style={{ background: '#fff', padding: 30 }}>
             <h2>{selectedItemIndex === -1 ? title : title}</h2> {/* change the modal title depending on whether an item is being added or edited */}
 
             <form onSubmit={handleSubmit}>
 
               <label>
-                제목 :
-                <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
+                제목 : <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
               </label>
               <br />
+              <br />
               <label>
-                담당자 :
-                <select value={status} onChange={(event) => setStatus(event.target.value)}>
+                담당자 : <select value={manager} onChange={(event) => setManager(event.target.value)}>
                   <option value="">선택</option>
                   <option value="허희만">허희만</option>
-                  {/* <label>
-                팀원 초대 :
-                <select value={main} onChange={(event) => setMain(event.target.value)} />
-              <br />
-              <option value="남효정">남효정</option>
-              <option value="최명건">최명건</option>
-              </label> */}
+                  <option value="남효정">남효정</option>
+                  <option value="조평훈">조평훈</option>
+                  <option value="이준성">이준성</option>
+                  <option value="최명건">최명건</option>
+                  <option value="박완규">박완규</option>
+                  <option value="염진호">염진호</option>
+
 
                 </select>
               </label>
               <br />
+              <br />
               <label>
-                팀원 초대 :
-                <input type="text" value={priority} onChange={(event) => setPriority(event.target.value)} />
+                팀원 초대 : <input type="text" value={invite} onChange={(event) => setInvite(event.target.value)} />
               </label>
               <br />
-              <button type="submit">{selectedItemIndex === -1 ? '추가' : 'Save'}</button>
+              <br />
+              <br />
+
+              <button className='button2' type="submit">{selectedItemIndex === -1 ? '생성' : 'Save'}</button>
+                <button className="button3" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
+                </button>
             </form>
           </div>
         </div>
       </div>
-
-
-
-
 
       <div className='newproject'>
         <h1>프로젝트</h1>
@@ -124,22 +121,20 @@ function NewProject() {
       </div>
       <hr className="line" />
 
-      <ul>
-        <NavLink to="project/ProjectManager">
+      <div className="project2">
+        {items.map((item, index) => (
           <div>
-            {items.map((item, index) => (
-              <li key={index}>
-                <h3>{item.title}</h3>
-                <p>{item.main}</p>
-                <p>담당자 : {item.status}</p>
-                <p>팀원 : {item.priority}</p>
-                <button onClick={() => handleEditItem(index)}>수정</button>
-                <button onClick={() => handleDeleteItem(index)}>삭제</button>
-              </li>
-            ))}
+            <div className="build"><p>Build Up</p>
+              <hr className="line2" />
+              <NavLink to="project/ProjectManager">
+                <div className="title"><h6>{item.title}</h6></div>
+              </NavLink>
+            </div>
+            {/* <button onClick={() => handleEditItem(index)}>수정</button>
+                <button onClick={() => handleDeleteItem(index)}>삭제</button> */}
           </div>
-        </NavLink>
-      </ul>
+        ))}
+      </div>
 
     </div>
   );

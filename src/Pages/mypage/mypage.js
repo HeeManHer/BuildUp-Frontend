@@ -7,8 +7,8 @@ function Mypage() {
 
         <div className="border">
             <div className="myname">
-                <label>이름 : </label>
-                <input type="text" placeholder="이름을 입력하세요" />
+                <label>이름 : 허희만</label>
+                {/* <input type="text" placeholder="이름을 입력하세요" /> */}
             </div>
             <br />
             <br />
@@ -17,6 +17,7 @@ function Mypage() {
             <br />
             <div className="passwordupdate">
                 <label>비밀번호 : </label>
+                {/* 버튼에 링크 or 핸들러 이용해서 수정페이지로 넘어가게 해야됨 */}
                 <button>  수정하기</button>
             </div>
             <br />
@@ -25,8 +26,8 @@ function Mypage() {
             <br />
             <br />
             <div className="myemail">
-                <label>Email : </label>
-                <input type="email" placeholder="이메일" />
+                <label>Email : heeman0401@naver.com</label>
+                {/* <input type="email" placeholder="이메일" /> */}
             </div>
         </div>
     );

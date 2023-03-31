@@ -137,17 +137,25 @@ function Backlog() {
         </div>
       </div>
       <ul>
+   
+          <li className='in bg-blue'>
+            <p>제목 :</p>
+            <p> 내용 :</p>
+            <p>상태 :</p>
+            <p>우선순위 :</p>
+    <div></div>
 
+          </li>
 
         {items.map((item, index) => (
-          <li key={index}>
+          <li className='in' key={index}>
             <h3>{item.title}</h3>
             <p>{item.main}</p>
             <p>상태 : {item.status}</p>
             <p>우선순위 : {item.priority}</p>
             <div>
-              <button className='button1' onClick={() => handleEditItem(index)}>수정</button>
-              <button className='button1' onClick={() => handleDeleteItem(index)}>삭제</button>
+              <button className='button2' onClick={() => handleEditItem(index)}>수정</button>
+              <button className='button2' onClick={() => handleDeleteItem(index)}>삭제</button>
             </div>
           </li>
         ))}

@@ -1,0 +1,118 @@
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+    
+  }
+  .modal button {
+    outline: none;
+    cursor: pointer;
+    color: #002060;
+    
+    border: 0;
+  }
+  .modal > section {
+    height: 200px;
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-show 0.3s;
+    overflow: hidden;
+    border: 3px solid black;
+    color: black;
+    text-align: center;
+    font-size: larger;
+  }
+  /* 문구 영역*/
+  .modal > section > header {
+    text-align: center;
+    /* position: relative; */
+    align-items: center;
+    /* padding: 16px 64px 16px 16px; */
+    background-color: white;
+    font-weight: 900;
+    margin-top: 20px;
+  }
+  /* .modal > section > header button {
+    position: absolute;
+    top: 17px;
+    right: 15px;
+    width: 30px;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+    color: #999;
+    background-color: transparent;
+  } */
+
+  /* 비밀번호와 확인버튼 구분선 위치 */
+  .modal > section > main {
+    padding: 7px;
+    border-bottom: 3px solid #4e73df;
+    border-top: 3px solid #4e73df;
+    background-color: #4e73df;
+    margin-top: 18px;
+
+  }
+  /* 확인 버튼 위치*/
+  .modal > section > footer {
+    /* padding: 30px 180px; */
+    /*text-align: center;*/
+    margin: 10px;
+    display: flex;
+    display: inline-block;
+    flex: space-between; 
+    /* border: 1px solid bl; */
+    /* border: 1px solid black; */
+    
+    align-items: center;
+  }
+  .modal > section > footer > button {
+    /* padding: 6px 12px; */
+    /* padding: 13px 2px; */
+    /*display: inline-block;*/
+    margin: 30px;
+    width: 80px;
+    height: 50px;
+    color: #4e73df;
+    background-color:white;
+    align-items: center;
+    /* border-radius: 5px; */
+    font-size:larger;
+    /* text-align: center; */
+    border: 1px solid black;
+  }
+  .modal.openModal {
+    display: flex;
+    align-items: center;
+    /* 팝업이 열릴때 스르륵 열리는 효과 */
+    animation: modal-bg-show 0.3s;
+  }
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      margin-top: -50px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
+  @keyframes modal-bg-show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+ 
