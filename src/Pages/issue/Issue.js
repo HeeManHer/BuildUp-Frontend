@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { SetIssueAPI, SaveIssueAPI } from "../apis/ISSUEAPI";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
-import "../../css/Issue.css";
+import "../css/Issue.css";
 import { NavLink } from 'react-router-dom';
+import issue from './Issue.json'
 
 function Issue() {
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('');
     const [situation, setSituation] = useState('');
     const [backlogname, setBacklogname] = useState('');
-
-    // 이슈 목록을 배열로 관리하고, 각각의 이슈에 대한 정보를 객체로 저장합니다.
-    const [issues, setIssues] = useState([
-        { id: 1, title: 'Issue1', description: 'Issue1 내용', priority: 'High', situation: 'TODO', backlogname: 'Backlog1' },
-        { id: 2, title: 'Issue2', description: 'Issue2 내용', priority: 'Middle', situation: 'IN PROGRESS', backlogname: 'Backlog2' },
-        { id: 3, title: 'Issue3', description: 'Issue3 내용', priority: 'Low', situation: 'DONE', backlogname: 'Backlog3' },
-        { id: 4, title: 'Issue4', description: 'Issue4 내용', priority: 'High', situation: 'TODO', backlogname: 'Backlog1' },
-        { id: 5, title: 'Issue5', description: 'Issue5 내용', priority: 'Middle', situation: 'IN PROGRESS', backlogname: 'Backlog2' },
-        { id: 6, title: 'Issue6', description: 'Issue6 내용', priority: 'Low', situation: 'DONE', backlogname: 'Backlog3' },
-        { id: 7, title: 'Issue7', description: 'Issue7 내용', priority: 'High', situation: 'TODO', backlogname: 'Backlog1' },
-        { id: 8, title: 'Issue8', description: 'Issue8 내용', priority: 'Middle', situation: 'IN PROGRESS', backlogname: 'Backlog2' },
-        { id: 9, title: 'Issue9', description: 'Issue9 내용', priority: 'Low', situation: 'DONE', backlogname: 'Backlog3' }
-    ]);
+    const save = () => {
+        const saveIssue = {
+            title, description, priority, situation, backlogname
+        }
+        dispatch(SaveIssueAPI(saveIssue));
+        setTitle('');
+        setDescription('');
+        setPriority('');
+        setSituation('');
+        setBacklogname('');
+    }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [hoveredIssue, setHoveredIssue] = useState(null);
@@ -30,110 +30,141 @@ function Issue() {
     const handleTitleChange = (event) => setTitle(event.target.value);
     const handleDescriptionChange = (event) => setDescription(event.target.value);
     const handlePriorityChange = (event) => setPriority(event.target.value);
-    const handleSituationChange = (event) => setSituation(event.target.value);
     const handleBacklognameChange = (event) => setBacklogname(event.target.value);
+    const handleSituationChange = (event) => setSituation(event.target.value);
 
-    const handleModalOpen = () => setIsModalOpen(true);
-    const handleModalClose = () => setIsModalOpen(false);
+    const issue = useSelector(state => state.IssueReducer);
+    const dispatch = useDispatch();
 
-    const handleIssueSubmit = (event) => {
+    useEffect(
+        () => {
+            dispatch(SetIssueAPI());
+        },
+        []
+    );
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
+
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const newIssue = {
-            id: issues.length + 1,
-            title,
-            description,
-            priority,
-            situation,
-            backlogname
-        };
-        setIssues([...issues, newIssue]);
-        setTitle('');
-        setDescription('');
-        setPriority('');
-        setSituation('');
-        setBacklogname('');
-        handleModalClose();
-    };
+        // 새로운 이슈 생성 로직
+        console.log('새로운 이슈가 생성되었습니다.');
+        closeModal();
+    }
 
-    const handleIssueHover = (id) => {
-        setHoveredIssue(id);
-    };
+    const handleUpdate = (event) => {
+        event.preventDefault();
+        // 이슈 수정 로직
+        console.log('이슈가 수정되었습니다.');
+        closeModal();
+    }
 
-    const handleIssueLeave = () => {
-        setHoveredIssue(null);
-    };
-
-    const handleIssueDelete = (id) => {
-        setIssues(issues.filter(issue => issue.id !== id));
-    };
+    const handleIssueHover = (event, issue) => {
+        setHoveredIssue(issue);
+    }
 
     return (
-        <div className="issue-container">
-            <div className="issue-header">
-                <h2>이슈</h2>
-                <button onClick={handleModalOpen}>Add Issue</button>
+        <>
+            <h1 className="head1">이슈
+                <button className="createissue" onClick={openModal}>이슈 생성</button>
+            </h1>
+            <div className="container1">
+                <div className="issuelist">
+                    {/* 왼쪽 목록을 볼 수 있는 영역 */}
+                    <header>이슈</header>
+                    <ul>
+                        <br />
+                        {issue.map(issue => (
+
+                            <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}><a href="#" onClick={openModal}>{issue.title}</a></li>
+                        ))}
+
+                    </ul>
+                </div>
+                <div className="issuemain">
+                    {/* 오른쪽 메인 영역 */}
+                    <header>{hoveredIssue ? hoveredIssue : 'Issue 목록'}</header>
+                    <p>Issue 내용</p>
+                </div>
+                <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+                    <h2>이슈 관리</h2>
+                    <form onSubmit={handleSubmit}>
+                        <label>
+                            제목:
+                            <input type="text" value={title} onChange={handleTitleChange} />
+                        </label>
+                        <br />
+                        <label>
+                            설명:
+                            <textarea value={description} onChange={handleDescriptionChange} />
+                        </label>
+                        <br />
+                        <label>
+                            우선순위:
+                            <select value={priority} onChange={handlePriorityChange}>
+                                <option value="High">높음</option>
+                                <option value="Middle">보통</option>
+                                <option value="Low">낮음</option>
+                            </select>
+                        </label>
+                        <br />
+                        <label>
+                            백로그 이름:
+                            <input type="text" value={backlogname} onChange={handleBacklognameChange} />
+                        </label>
+                        <br />
+                        <label>
+                            상황:
+                            <input type="text" value={situation} onChange={handleSituationChange} />
+                        </label>
+                        <br />
+                        <button type="submit" onClick={save}>생성</button>
+                        <button onClick={closeModal}>닫기</button>
+                    </form>
+                </Modal>
             </div>
-            <div className="issue-list">
-                {issues.map(issue => (
-                    <div
-                        key={issue.id}
-                        className="issue"
-                        onMouseEnter={() => handleIssueHover(issue.id)}
-                        onMouseLeave={handleIssueLeave}
-                    >
-                        <NavLink to={`/issue/${issue.id}`}>
-                            <h3>{issue.title}</h3>
-                            <p>{issue.description}</p>
-                        </NavLink>
-                        {hoveredIssue === issue.id && (
-                            <button onClick={() => handleIssueDelete(issue.id)}>Delete</button>
-                        )}
-                    </div>
-                ))}
-            </div>
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={handleModalClose}
-                contentLabel="Add Issue Modal"
-                className="add-issue-modal"
-            >
-                <h2>이슈 추가</h2>
-                <form onSubmit={handleIssueSubmit}>
+            <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
+                <h2>이슈 생성</h2>
+                <form onSubmit={handleSubmit}>
                     <label>
-                        제목 :
-                        <input type="text" value={title} onChange={handleTitleChange} required />
+                        제목:
+                        <input type="text" value={title} onChange={handleTitleChange} />
                     </label>
+                    <br />
                     <label>
-                        내용 :
-                        <textarea value={description} onChange={handleDescriptionChange} required />
+                        설명:
+                        <textarea value={description} onChange={handleDescriptionChange} />
                     </label>
+                    <br />
                     <label>
-                        우선순위
-                        <select value={priority} onChange={handlePriorityChange} required>
-                            <option value="">우선순위</option>
-                            <option value="High">긴급</option>
+                        우선순위:
+                        <select value={priority} onChange={handlePriorityChange}>
+                            <option value="High">높음</option>
                             <option value="Middle">보통</option>
-                            <option value="Low">보류</option>
+                            <option value="Low">낮음</option>
                         </select>
                     </label>
+                    <br />
                     <label>
-                        Situation:
-                        <select value={situation} onChange={handleSituationChange} required>
-                            <option value="">중요도</option>
-                            <option value="TODO">예정</option>
-                            <option value="IN PROGRESS">진행중</option>
-                            <option value="DONE">완료</option>
-                        </select>
+                        백로그 이름:
+                        <input type="text" value={backlogname} onChange={handleBacklognameChange} />
                     </label>
+                    <br />
                     <label>
-                        Backlog Name:
-                        <input type="text" value={backlogname} onChange={handleBacklognameChange} required />
+                        상황:
+                        <input type="text" value={situation} onChange={handleSituationChange} />
                     </label>
-                    <button type="submit">Add</button>
-                    <button onClick={handleModalClose}>Cancel</button>
+                    <br />
+                    <button type="submit" onClick={save}>생성</button>
+                    <button onClick={closeModal}>닫기</button>
                 </form>
             </Modal>
-        </div>
+        </>
     );
 }
 
