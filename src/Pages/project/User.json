@@ -1,0 +1,44 @@
+[
+    {
+        "name": "허희만",
+        "no": "230101",
+        "email": "hhm@buildup.com",
+        "authority": "PM"
+    },
+    {
+        "name": "이준성",
+        "no": "230201",
+        "email": "ljs@buildup.com",
+        "authority": "팀원"
+    },
+    {
+        "name": "최명건",
+        "no": "230301",
+        "email": "cmg@buildup.com",
+        "authority": "팀원"
+    },
+    {
+        "name": "남효정",
+        "no": "230401",
+        "email": "nhj@buildup.com",
+        "authority": "사수"
+    },
+    {
+        "name": "조평훈",
+        "no": "230501",
+        "email": "jph@buildup.com",
+        "authority": "부사수"
+    },
+    {
+        "name": "염진호",
+        "no": "230601",
+        "email": "yjh@buildup.com",
+        "authority": "부사수"
+    },
+    {
+        "name": "박완규",
+        "no": "230701",
+        "email": "pwg@buildup.com",
+        "authority": "사수"
+    }
+]
