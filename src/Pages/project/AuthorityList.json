@@ -1,0 +1,114 @@
+[
+    {
+        "no": 1,
+        "name": "PM",
+        "project": {
+            "c": true,
+            "r": true,
+            "u": true,
+            "d": true
+        },
+        "backlog": {
+            "c": true,
+            "r": true,
+            "u": true,
+            "d": true
+        },
+        "issue": {
+            "c": true,
+            "r": true,
+            "u": true,
+            "d": true
+        },
+        "sprint": {
+            "c": true,
+            "r": true,
+            "u": true,
+            "d": true
+        }
+    },
+    {
+        "no": 2,
+        "name": "팀원",
+        "project": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "backlog": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "issue": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "sprint": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        }
+    },
+    {
+        "no": 3,
+        "name": "사수",
+        "project": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "backlog": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "issue": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "sprint": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        }
+    },
+    {
+        "no": 4,
+        "name": "부사수",
+        "project": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "backlog": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "issue": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        },
+        "sprint": {
+            "c": false,
+            "r": true,
+            "u": false,
+            "d": false
+        }
+    }
+]

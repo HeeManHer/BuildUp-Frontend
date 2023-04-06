@@ -9,10 +9,11 @@ import Backlog from "./Pages/backlog/Backlog";
 import Issue from "./Pages/issue/Issue";
 import SprintList from "./Pages/sprint/SprintList";
 import NewProject from "./Pages/project/NewProject";
-import ProjectManager from "./Pages/project/ProjectManager";
+import Manager from "./Pages/project/Manager";
 import MyPage from "./Pages/mypage/mypage";
 import Login from "./Pages/login/login";
 import Changepassword from "./Pages/login/changepassword";
+
 
 
 function App() {
@@ -40,8 +41,8 @@ function App() {
           <Route path="sprint">
             <Route index element={<SprintList />} />
           </Route>
-          <Route path="ProjectManager">
-            <Route index element={<ProjectManager />} />
+          <Route path="Manager">
+            <Route index element={<Manager />} />
           </Route>
         </Route>
       </Routes>
