@@ -1,11 +1,24 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import SprintCreate from "./SprintCreate";
 
 function SprintList() {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openSprintCreateModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
+    };
+
+
     return (
         <>
             <div className="newproject">
                 <h1>스프린트 목록</h1>
-                <button className="button1">스프린트 시작</button>
+                <button id="sprintcreatebtn" onClick={openSprintCreateModal}>스프린트 생성</button>
+                <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
             </div>
             <hr className="line" />
             <div style={{ display: 'flex', flexDirection: 'row' }}>

@@ -19,23 +19,23 @@
 }
 
 .button2 {
-    width: 80px;
-    border-radius: 50px;
+    width: 90px;
+    border-radius: 15px;
     background-color:#4e73df;
     border-style: none;
+    margin-top: 10px;
     margin-right: 40px;
     font-weight:bold;
     color: white;
     padding: 5px;
-    border-bottom: 0;
 }
 
 .button3 {
-    width: 80px;
-    border-radius: 50px;
+    width: 90px;
+    border-radius: 15px;
     background-color:#4e73df;
     border-style: none;
-    margin-left: 90px;
+    margin-left: 320px;
     font-weight:bold;
     color: white;
     padding: 5px;
@@ -55,6 +55,49 @@
 .line2 {
     border: solid #4e73df 3px;
     width: 98%;
+}
+
+.line3 {
+    border-top: 1px solid black;
+}
+
+.smalltitle {
+    color:#002040;
+    margin-bottom: -10px;
+    font-weight: bold;
+}
+
+.smalltitle2 {
+    color:black;
+    font-weight: bolder;
+}
+
+.title {
+    color:black;
+    margin-left: 50px;
+    font-weight: bold;
+}
+
+.title2 {
+    color:#4e73df;
+    text-align: center;
+    font-weight: bold;
+}
+
+.manager {
+    color: black;
+    margin-left: 35px;
+    font-weight: bold;
+}
+
+.invite {
+     color: black;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.invite2 {
+    margin-left: 97px;
 }
 /*프로젝트 생성된 화면*/
 .build {
@@ -76,12 +119,12 @@
 }
 
 .projectname {
-    margin-top: 30px;
-    color:#002040;
+    margin-top: 40px;
+    color:black;
     display: flex;
-    justify-content: space-around;
-    width: 20%;
-    /* padding: 10px; */
+    /* width: 20%; */
+    font-weight:bolder;
+    margin-left: 80px;
 }
 
 .teamlist {
@@ -91,15 +134,20 @@
 
 #size {
     font-size: small;
+    font-weight: bold;
     color: #002040;
 }
 
 #name {
     font-size:medium;
     color:#002040;
-    border: 3px solid #002040;
+    border: 3px solid #4e73df;
     border-radius: 30px;
     padding: 5px;
+    width: 200px;
+    margin-left: 20px;
+    font-weight: bold;
+    
 }
 
 .new {
@@ -118,13 +166,6 @@
     
 }
 
-.title {
-    text-align: center;
-    font-weight: lighter;
-    color :#4e73df;
-
-}
-
 .project2 {
     display: flex;
     flex-wrap: wrap;
@@ -139,4 +180,46 @@
 .modal{
     border-radius: 20px;
     border: 3px solid #4e73df;
+}
+
+/*프로젝트 관리 css*/
+.admin-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    margin-left: 50px;
+    width: 100%;
+    height: 400px;
+    text-align: center;
+}
+
+.button {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+
+.user-table>*>tr>td {
+    border-inline-start: 3px solid #4e73df;
+    border-bottom: 3px solid #4e73df;
+    text-align: center;
+}
+
+.user-table>*>tr>th {
+    background: #4e73df;
+    color: #fff;
+    text-align: center;
+    border-inline-start: 3px solid #fff;
+}
+
+.user-table>*>tr>*:first-child {
+    border-left: none;
+    text-align: center;
+}
+
+.user-table {
+    margin-left: 80px;
 }
