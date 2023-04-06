@@ -1,5 +1,5 @@
 import { CREATE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE } from "../modules/Issue";
-import Issue from "../Pages/Issue.json";
+import Issue from "../Pages/issue/Issue.json";
 
 export function SetIssueAPI() {
 

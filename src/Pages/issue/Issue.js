@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { SetIssueAPI, SaveIssueAPI } from "../apis/ISSUEAPI";
+import { SetIssueAPI, SaveIssueAPI } from "../../apis/ISSUEAPI";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
-import "../css/Issue.css";
+import "../../css/Issue.css";
 import { NavLink } from 'react-router-dom';
 import issue from './Issue.json'
 
