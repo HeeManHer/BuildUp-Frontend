@@ -9,10 +9,11 @@ import Backlog from "./Pages/backlog/Backlog";
 import Issue from "./Pages/issue/Issue";
 import SprintList from "./Pages/sprint/SprintList";
 import NewProject from "./Pages/project/NewProject";
-import ProjectManager from "./Pages/project/ProjectManager";
+import Manager from "./Pages/project/Manager";
 import MyPage from "./Pages/mypage/mypage";
 import Login from "./Pages/login/login";
 import Changepassword from "./Pages/login/changepassword";
+
 
 
 function App() {
@@ -24,28 +25,26 @@ function App() {
         </Route>
 
         <Route path="/" element={<MypageLayout />}>
-          <Route index element={<Main />} />
-          <Route path="project">
-            <Route index element={<Main />} />
-          </Route>
+          <Route index element={<NewProject />} />
           <Route path="mypage">
-            <Route index element={<Main />} />
+            <Route index element={<MyPage />} />
           </Route>
         </Route>
 
         <Route path="/project" element={<ProjectLayout />} >
-          <Route index element={<Main />} />
           <Route path="backlog">
-            <Route index element={<Main />} />
+            <Route index element={<Backlog />} />
           </Route>
           <Route path="issue">
-            <Route index element={<Main />} />
+            <Route index element={<Issue />} />
           </Route>
           <Route path="sprint">
-            <Route index element={<Main />} />
+            <Route index element={<SprintList />} />
+          </Route>
+          <Route path="Manager">
+            <Route index element={<Manager />} />
           </Route>
         </Route>
-
       </Routes>
     </BrowserRouter>
 
