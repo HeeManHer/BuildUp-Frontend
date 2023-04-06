@@ -137,15 +137,15 @@ function Backlog() {
         </div>
       </div>
       <ul>
-   
-          <li className='in bg-blue'>
-            <p>제목 :</p>
-            <p> 내용 :</p>
-            <p>상태 :</p>
-            <p>우선순위 :</p>
-    <div></div>
 
-          </li>
+        <li className='in bg-blue'>
+          <p>제목 :</p>
+          <p> 내용 :</p>
+          <p>상태 :</p>
+          <p>우선순위 :</p>
+          <div></div>
+
+        </li>
 
         {items.map((item, index) => (
           <li className='in' key={index}>

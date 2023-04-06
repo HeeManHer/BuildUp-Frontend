@@ -1,91 +1,71 @@
-import { Component } from "react";
+import React, { useState } from 'react';
 
-class CommenList extends Component {
+function CommentList(props) {
+    const [value, setValue] = useState('');
+    const [update, setUpdate] = useState(null);
 
-    state = {
-        value: '',
-        update: null
-    }
+    const handleClick = (index, event) => {
+        setValue(event.target.innerHTML);
+        setUpdate(index);
+    };
 
-    handleClick = i => e => {
-        this.setState({
-            ...this.state,
-            value: e.target.innerHTML,
-            update: i
-        })
-    }
+    const handleChange = (event) => {
+        const { value } = event.target;
+        setValue(value);
+    };
 
-    handleChange = e => {
-        const { value } = { ...e.target }
+    const updateKeyDown = (key, event) => {
+        if (event.key !== 'Enter') return;
 
-        this.setState({
-            ...this.state,
-            value,
-        })
-    }
+        const newList = [...props.list];
+        newList[key].content = value;
 
-    updateKeyDown = k => e => {
-        if (e.key !== 'Enter') return
+        setUpdate(null);
+        props.updateList(newList);
+    };
 
-        const { updateList, list } = this.props
+    const deleteList = (key) => {
+        const { updateList, list } = props;
+        const newList = [...list].filter((item, index) => index !== key);
 
-        const newList = [...list]
-        newList[k].content = this.state.value
+        updateList(newList);
+    };
 
-        this.setState({
-            ...this.state,
-            update: null
-        })
-
-        updateList(newList)
-    }
-
-    deleteList = k => {
-        const { updateList, list } = this.props
-        const newList = [...list].filter ( (v,i) => i !== k)
-        
-        updateList(newList)
-    }
-
-    rendList = () => this.props.list.map((v, k) => {
-        return (
-            
-            <ul className='comment-row' key={k}>
-                <li className='comment-id'>{v.userid}</li>
-                <li className='comment-content'>
-                    {
-                        this.state.update === k
-                            ?
+    const rendList = () => {
+        return props.list.map((item, key) => {
+            return (
+                <div className='comment-row' key={key} style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className='comment-id' style={{ marginRight: '1rem' }}>{item.userid}</div>
+                    <div className='comment-content' style={{ flex: 1 }}>
+                        {update === key ? (
                             <input
                                 type='text'
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                                onKeyDown={this.updateKeyDown(k)}
+                                value={value}
+                                onChange={handleChange}
+                                onKeyDown={(event) => updateKeyDown(key, event)}
                                 className='comment-update-input'
                             />
-                            :
+                        ) : (
                             <>
-                                <span onClick={this.handleClick(k)}>{v.content}</span>
-                                <button className="btn btn-danger btn-icon-split, icon text-white-50, fas fa-trash btn-sm"
-                                    onClick={() => {this.deleteList(k)}}
+                                <span onClick={(event) => handleClick(key, event)}>{item.content}</span>
+                                <button
+                                    className='btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm'
+                                    onClick={() => {
+                                        deleteList(key);
+                                    }}
                                 >
-                                댓글 삭제
+                                    삭제
                                 </button>
                             </>
-                    }
-                </li>
-                <li className='comment-date'>{v.date}</li>
-            </ul>
-        )
-    })
+                        )}
+                    </div>
+                    <div className='comment-date' style={{ marginLeft: '1rem' }}>{item.date}</div>
+                </div>
+            );
+        });
+    };
 
-    render() {
-        return (
-            <li>
-                {this.rendList()}
-            </li>
-        )
-    }
+    return <div>{rendList()}</div>;
 }
 
-export default CommenList
+export default CommentList;
