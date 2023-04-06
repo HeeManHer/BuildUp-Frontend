@@ -1,10 +1,10 @@
-import { CREATE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE } from "../modules/Issue";
-import Issue from "../Pages/issue/Issue.json";
+import { CREATE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE, DELETE_ISSUE } from "../modules/Issue";
+import Issue from "../Pages/Issue/Issue.json";
 
 export function SetIssueAPI() {
 
 
-    return function SetIssues(dispatch, getState) {
+    return function (dispatch, getState) {
 
 
         dispatch({ type: CREATE_ISSUE, payload: Issue });
@@ -12,18 +12,26 @@ export function SetIssueAPI() {
 
 }
 
-export function UpdateIssueAPI(issue) {
+export function SaveIssueAPI(issue) {
 
-    return function UpdateIssue(dispatch, getState) {
+    return function (dispatch, getState) {
 
-        dispatch({ type: UPDATE_ISSUE, payload: Issue });
+        dispatch({ type: SAVE_ISSUE, payload: issue });
     }
 }
 
-export function SaveIssueAPI(issue) {
+export function UpdateIssueAPI(issue) {
 
-    return function SaveIssue(dispatch, getState) {
+    return function (dispatch, getState) {
 
-        dispatch({ type: SAVE_ISSUE, payload: Issue });
+        dispatch({ type: UPDATE_ISSUE, payload: issue });
+    }
+}
+
+export function DeleteIssueAPI(issue) {
+
+    return function (dispatch, getState) {
+
+        dispatch({ type: DELETE_ISSUE, payload: issue });
     }
 }

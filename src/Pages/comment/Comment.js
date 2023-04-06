@@ -1,15 +1,14 @@
-import { Component } from "react";
 import "../../css/Comment.css";
 
-class Comment extends Component {
+function Comment(props) {
+    return (
+        <ul className="comment">
+            <div style={{ overflow: "auto", height: "150px" }}>
 
-    render() {
-        return(
-            <ul className="comment">
-                {this.props.children}
-            </ul>
-        )
-    }
+                {props.children}
+            </div>
+        </ul>
+    );
 }
 
-export default Comment
+export default Comment;
