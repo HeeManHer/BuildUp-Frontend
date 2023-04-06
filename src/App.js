@@ -13,6 +13,8 @@ import ProjectManager from "./Pages/project/ProjectManager";
 import MyPage from "./Pages/mypage/mypage";
 import Login from "./Pages/login/login";
 import Changepassword from "./Pages/login/changepassword";
+import Findpassword from "./Pages/login/findpassword";
+import ContactUs from "./Pages/login/email";
 
 
 function App() {
@@ -20,32 +22,33 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginLayout />}>
-          {/* <Route index element={<Login />} /> */}
+          <Route index element={<Login />} />
         </Route>
+        {/* <Route pate="/" element={<MypageLayout/>}>
+          <Route index element={<}
+        </Route> */}
 
         <Route path="/" element={<MypageLayout />}>
-          <Route index element={<Main />} />
-          <Route path="project">
-            <Route index element={<Main />} />
-          </Route>
+          <Route index element={<NewProject />} />
           <Route path="mypage">
-            <Route index element={<Main />} />
+            <Route index element={<MyPage />} />
           </Route>
         </Route>
 
         <Route path="/project" element={<ProjectLayout />} >
-          <Route index element={<Main />} />
           <Route path="backlog">
-            <Route index element={<Main />} />
+            <Route index element={<Backlog />} />
           </Route>
           <Route path="issue">
-            <Route index element={<Main />} />
+            <Route index element={<Issue />} />
           </Route>
           <Route path="sprint">
-            <Route index element={<Main />} />
+            <Route index element={<SprintList />} />
+          </Route>
+          <Route path="ProjectManager">
+            <Route index element={<ProjectManager />} />
           </Route>
         </Route>
-
       </Routes>
     </BrowserRouter>
 
