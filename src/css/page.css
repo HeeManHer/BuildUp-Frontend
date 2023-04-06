@@ -21,7 +21,7 @@
   width: 400px;
   padding: 40px;
   transform: translate(-50%, -50%);
-  background: rgb(233, 231, 225);
+  background: white;
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
@@ -31,7 +31,7 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin: 0 0 30px;
   padding: 0;
-  color: #402b2b;
+  color: #002040;
   text-align: center;
 }
 
@@ -46,7 +46,7 @@
   color: #1c1a1a;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 3px solid #fff;
+  border-bottom: 3px solid #002040;
   outline: none;
   background: transparent;
 }
@@ -74,7 +74,7 @@
 .login-box form a {
   position: relative;
   display:inline-flex;
-  margin: 12.5px;
+  /* margin: 12.5px; */
   padding: 10px 20px;
   color: #17757a;
   font-size: 16px;
@@ -82,8 +82,20 @@
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   letter-spacing: 4px
+}
+
+.btn1 {
+  border-radius: 5px;
+  width: 130px;
+  border: none;
+  background-color: white;
+}
+
+.btn2 {
+  border: none;
+  background-color: white;
 }
 
 .login-box a:hover {

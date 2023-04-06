@@ -13,6 +13,8 @@ import Manager from "./Pages/project/Manager";
 import MyPage from "./Pages/mypage/mypage";
 import Login from "./Pages/login/login";
 import Changepassword from "./Pages/login/changepassword";
+import Findpassword from "./Pages/login/findpassword";
+import ContactUs from "./Pages/login/email";
 
 
 
@@ -21,8 +23,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginLayout />}>
-          {/* <Route index element={<Login />} /> */}
+          <Route index element={<Login />} />
         </Route>
+        {/* <Route pate="/" element={<MypageLayout/>}>
+          <Route index element={<}
+        </Route> */}
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />

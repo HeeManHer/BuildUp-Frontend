@@ -1,8 +1,9 @@
 // import '../../css/sb-admin-2.min.css';
 import '../../css/page.css';
-import Modal from './Modal';
+import Modal from './ChangeModal';
 import '../../css/loginModal.css';
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Changepassword() {
 
