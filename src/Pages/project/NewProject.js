@@ -125,7 +125,7 @@ function NewProject() {
               <div>
                 <label className="invite">
                   팀원 초대 : <input type="text" value={inviteText} onChange={handleInviteTextChange} style={{ width: '395px' }} />
-                  <button type="button" onClick={handleInviteAdd}>추가</button>
+                  <button className="btn btn-success btn-icon-split btn-sm"  type="button" onClick={handleInviteAdd}>추가</button>
                 </label>
                 <div className='row' style={{ overflow: 'auto', height: '150px' }}>
 
@@ -135,7 +135,7 @@ function NewProject() {
 
                         {invite}
                       </div>
-                      <button type="button" style={{ marginLeft: '20px' }} onClick={() => { handleInviteRemove(index) }}>X</button>
+                      <button className='btn btn-danger btn-icon-split icon text-white fas fa-trash btn-sm' type="button" style={{ marginLeft: '20px' }} onClick={() => { handleInviteRemove(index) }}>삭제</button>
                     </div>
                   ))}
                 </div>
@@ -164,7 +164,8 @@ function NewProject() {
             <div className="build"><p>Build Up</p>
               <hr className="line2" />
               <NavLink to="project/Manager">
-                <div className="title2" style={{ height: '80px' }}><h6>{item.title}</h6></div>
+                <div className="title2" style={{ height: '80px' }}><h4>{item.title}</h4></div>
+                <div className="title3" style={{ height: '25px' }}><h6>( PM : {item.manager} )</h6></div>
               </NavLink>
             </div>
           </div>

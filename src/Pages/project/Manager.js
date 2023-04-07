@@ -146,14 +146,13 @@ function Manager() {
                             <div>
                                 <div className="invite">
                                     <label>
-                                        팀원 초대 :
-                                        <input
+                                        팀원 초대 : <input
                                             type="text"
                                             value={inviteText}
                                             onChange={(e) => setInviteText(e.target.value)}
                                             style={{ width: "395px" }}
                                         />
-                                        <button type="button" onClick={handleInviteAdd}>
+                                        <button className="btn btn-success btn-icon-split btn-sm" type="button" onClick={handleInviteAdd}>
                                             추가
                                         </button>
                                     </label>
@@ -170,14 +169,14 @@ function Manager() {
                                                 }}
                                             >
                                                 <div>{invite}</div>
-                                                <button
+                                                <button className='btn btn-danger btn-icon-split icon text-white fas fa-trash btn-sm'
                                                     type="button"
                                                     style={{ marginLeft: "20px" }}
                                                     onClick={() => {
                                                         setInviteList(inviteList.filter((_, i) => i !== index));
                                                     }}
                                                 >
-                                                    X
+                                                    삭제
                                                 </button>
                                             </div>
                                         ))}
@@ -218,32 +217,6 @@ function Manager() {
                         <th>권한</th>
                     </tr>
                 </thead>
-                {/* <tbody>
-                    {userList.map(user =>
-                        <tr key={user.no}>
-                            <td>
-                                <input
-                                    type="checkbox"
-                                    name="delete"
-                                    id={user.no}
-                                    value={user.no}
-                                    onClick={e => onDeleteUserChecked(e.target.value, e.target.checked)}
-                                />
-                            </td>
-                            <td>{user.name}</td>
-                            <td>{user.no}</td>
-                            <td>{user.email}</td>
-                            <td>
-                                <select name="authority" value={user.authority} onChange={(e) => onChangeAuthority(user, e.target.value)}>
-                                    {authorityList.map(authority => (
-                                        <option key={authority.no} value={authority.name}>{authority.name}</option>
-                                    ))}
-                                </select>
-
-                            </td>
-                        </tr>
-                    )}
-                </tbody> */}
                 <tbody>
                     {userList.map((user) => (
                         <tr key={user.no}>
@@ -311,13 +284,12 @@ function Manager() {
             </table>
             <br />
             <br />
-            <div className='button'>
+            <div className="button">
 
-                <button type="button" className='btn btn-primary' onClick={handleOpenModal} >추가</button>
-
-                <button type="button" className='btn btn-success' >저장</button>
-                <button type="button" className='btn btn-warning' >취소</button>
-                <button type="button" className='btn btn-danger' onClick={onClickDeleteBtn}>삭제</button>
+                <button type="button" className='button4' onClick={handleOpenModal}>추가</button>
+                <button type="button" className='button4'>저장</button>
+                <button type="button" className='button4'>취소</button>
+                <button type="button" className='button4' onClick={onClickDeleteBtn}>삭제</button>
             </div>
         </div>
 
