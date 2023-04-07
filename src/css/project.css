@@ -7,6 +7,11 @@
     justify-content: space-between;
     
 }
+
+.button {
+    float: right;
+    margin-right: 70px;
+}
 .button1 {
     width: 170px;
     border-radius: 50px;
@@ -36,6 +41,17 @@
     background-color:#4e73df;
     border-style: none;
     margin-left: 320px;
+    font-weight:bold;
+    color: white;
+    padding: 5px;
+}
+
+.button4 {
+    width: 90px;
+    border-radius: 15px;
+    background-color:#4e73df;
+    border-style: none;
+    margin-left: 10px;
     font-weight:bold;
     color: white;
     padding: 5px;
@@ -82,6 +98,12 @@
     color:#4e73df;
     text-align: center;
     font-weight: bold;
+}
+
+.title3 {
+    color:#002040;
+    text-align: center;
+    font-size: x-small;
 }
 
 .manager {
