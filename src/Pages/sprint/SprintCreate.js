@@ -43,54 +43,105 @@ function SprintCreate(props) {
                     <br />
                     <label style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", width: "120px", textAlign: "right" }}>스프린트 내용 : </label>
                     <input type="text" style={{
-                        width: "calc(80% - 120px)", height: "100px", display: "inline-block",
-                        verticalAlign: "top", marginBottom: "-20px"
+                        width: "calc(80% - 120px)", height: "80px", display: "inline-block",
+                        verticalAlign: "top", marginBottom: "20px"
                     }} />
                     <br />
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <label style={{ marginRight: "10px", textAlign: "right" }}>
+                        <label id="issueList" style={{ marginRight: "10px", textAlign: "right" }}>
                             이슈 목록 :
                         </label>
-                        <table style={{ border: "1px solid black" }}>
+                        <table style={{ border: "1px solid black", width: "100%", height: "40px" }}>
                             <thead>
                                 <tr>
-                                    <th style={{ border: "1px solid black", width: "25%" }}>이슈 번호</th>
-                                    <th style={{ border: "1px solid black", width: "25%" }}>제목</th>
-                                    <th style={{ border: "1px solid black", width: "25%" }}>작성자</th>
-                                    <th style={{ border: "1px solid black", width: "25%" }}>상태</th>
+                                    <th style={{ border: "1px solid black", width: "5%" }}></th>
+                                    <th style={{ border: "1px solid black", width: "17.5%" }}>이슈 이름</th>
+                                    <th style={{ border: "1px solid black", width: "57.5%" }}>이슈 내용</th>
+                                    <th style={{ border: "1px solid black", width: "10%" }}>담당자</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style={{ border: "1px solid black" }}>1</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 제목 1</td>
-                                    <td style={{ border: "1px solid black" }}>작성자 1</td>
-                                    <td style={{ border: "1px solid black" }}>완료</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
+                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <select>
+                                            <option value="담당자1">허희만</option>
+                                            <option value="담당자2">박완규</option>
+                                            <option value="담당자3">조평훈</option>
+                                            <option value="담당자4">남효정</option>
+                                            <option value="담당자5">이준성</option>
+                                            <option value="담당자6">최명건</option>
+                                            <option value="담당자7">염진호</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style={{ border: "1px solid black" }}>2</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 제목 2</td>
-                                    <td style={{ border: "1px solid black" }}>작성자 2</td>
-                                    <td style={{ border: "1px solid black" }}>진행 중</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
+                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <select>
+                                            <option value="담당자1">허희만</option>
+                                            <option value="담당자2">박완규</option>
+                                            <option value="담당자3">조평훈</option>
+                                            <option value="담당자4">남효정</option>
+                                            <option value="담당자5">이준성</option>
+                                            <option value="담당자6">최명건</option>
+                                            <option value="담당자7">염진호</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style={{ border: "1px solid black" }}>3</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 제목 3</td>
-                                    <td style={{ border: "1px solid black" }}>작성자 3</td>
-                                    <td style={{ border: "1px solid black" }}>진행 중</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
+                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <select>
+                                            <option value="담당자1">허희만</option>
+                                            <option value="담당자2">박완규</option>
+                                            <option value="담당자3">조평훈</option>
+                                            <option value="담당자4">남효정</option>
+                                            <option value="담당자5">이준성</option>
+                                            <option value="담당자6">최명건</option>
+                                            <option value="담당자7">염진호</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style={{ border: "1px solid black" }}>4</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 제목 4</td>
-                                    <td style={{ border: "1px solid black" }}>작성자 4</td>
-                                    <td style={{ border: "1px solid black" }}>완료</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
+                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
+                                    <td style={{ border: "1px solid black" }}>
+                                        <select>
+                                            <option value="담당자1">허희만</option>
+                                            <option value="담당자2">박완규</option>
+                                            <option value="담당자3">조평훈</option>
+                                            <option value="담당자4">남효정</option>
+                                            <option value="담당자5">이준성</option>
+                                            <option value="담당자6">최명건</option>
+                                            <option value="담당자7">염진호</option>
+                                        </select>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <br />
-                    <button onClick={handleCloseModal}> 시작 </button>
-                    <button onClick={handleCloseModal}> 취소 </button>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }} >시작</button>
+                        <button id= "sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
+                    </div>
+
                 </div>
             </Modal>
         </div>
