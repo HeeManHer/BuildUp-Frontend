@@ -24,11 +24,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginLayout />}>
-          <Route index element={<firstpage />} />
-        </Route>
-        {/* <Route pate="/" element={<MypageLayout/>}>
-          <Route index element={<}
-        </Route> */}
+          <Route index element={<Login />} />
+         </Route>
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />

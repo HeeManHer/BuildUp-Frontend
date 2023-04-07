@@ -12,33 +12,38 @@
     padding: 10px;
 }
 .button2 {
-    width: 30%;
-    border-radius: 50px;
+    width: 90px;
+    border-radius: 15px;
     background-color:#4e73df;
     border-style: none;
+    margin-top: 10px;
     margin-right: 40px;
     font-weight:bold;
     color: white;
-    padding: 4px;
+    padding: 5px;
 }
 
-.zzz{
+/*백로그와 백로그 생성 추가 버튼 나누기*/
+.bar{
     display: flex;
-    justify-content: space-between;  
-    
+    margin-left: 20px;
+    color: #002060;
+    width:100%;
+    height: 50px;
+    justify-content: space-between;
 }
-
-.asd {
+/*파란 라인 선*/
+.line {
     border: solid #4e73df 5px;
     width: 100%;
     }
 
-
+/*인덱스에 들어가는 정보스타일*/
 .in{
     display: flex;
     background-color: white;
     border: 1px solid black;
-    width: 100%;
+    width: 1520px;
     align-items: center;
     border-radius: 20px;
     padding-left: 10px;
@@ -46,5 +51,40 @@
 
 }
 
-.bg-blue{ background-color: #4e73df;
-            color: black; }
+.blue{
+	display: flex;
+	background-color: #4e73df;
+	border: 1px solid black;
+	width: 1520px;
+	align-items: center;
+	border-radius: 20px;
+	padding-left: 10px;
+	justify-content: space-between;
+	color: black;
+    }
+
+.smalltitle {
+    color:#002040;
+    margin-bottom: -10px;
+    font-weight: bold;
+    }
+
+    .title {
+        color:black;
+        margin-left: 50px;
+        font-weight: bold;
+    }
+    
+    .manager {
+        color: black;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+
+    .smalltitle2 {
+        color:black;
+        font-weight: bolder;
+    }
+    .line3 {
+        border-top: 1px solid black;
+    }
