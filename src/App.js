@@ -15,6 +15,7 @@ import Login from "./Pages/login/login";
 import Changepassword from "./Pages/login/changepassword";
 import Findpassword from "./Pages/login/findpassword";
 import ContactUs from "./Pages/login/email";
+import firstpage from "./Pages/login/FirstPage";
 
 
 
@@ -22,12 +23,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<LoginLayout />}> */}
-          {/* <Route index element={<Login />} /> */}
-        {/* </Route> */}
-        {/* <Route pate="/" element={<MypageLayout/>}>
-          <Route index element={<}
-        </Route> */}
+        <Route path="/" element={<LoginLayout />}>
+          <Route index element={<Login />} />
+         </Route>
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />
