@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SetIssueAPI, SaveIssueAPI, UpdateIssueAPI, DeleteIssueAPI } from "../../apis/ISSUEAPI";
-
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
 import "../../css/Issue.css";
@@ -94,6 +93,7 @@ function Issue() {
             <h1 className="head1">이슈
                 <button className="createissue" onClick={() => { setIsModal1(true) }}>이슈 생성</button>
             </h1>
+            <h2 className="line" />
             <div className="container1">
                 <div className="issuelist">
                     {/* 왼쪽 목록을 볼 수 있는 영역 */}
@@ -106,9 +106,9 @@ function Issue() {
                         ))}
                         <div className="pagebtn">
 
-                            <button className="pagenext" onClick={nextpage}></button>
+                            <button className="pagenext" onClick={prevpage}></button>
                             <h1>{currentPage}</h1>
-                            <button className="pageprev" onClick={prevpage}></button>
+                            <button className="pageprev" onClick={nextpage}></button>
                         </div>
                     </ul>
                 </div>
@@ -116,6 +116,7 @@ function Issue() {
                     {/* 오른쪽 메인 영역 */}
                     <header>{hoveredIssue ? hoveredIssue : 'Issue 목록'}</header>
                     <p>Issue 내용</p>
+                    <hr className="line2" />
                 </div>
 
                 <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
@@ -163,7 +164,7 @@ function Issue() {
             </div>
 
             <Modal className="modalsub" isOpen={isModal2} onRequestClose={() => { setIsModal2(false) }}>
-                <h2>이슈 생성</h2>
+                <h2>이슈 수정</h2>
                 <form onSubmit={handleSubmit}>
                     <label>
                         제목:
