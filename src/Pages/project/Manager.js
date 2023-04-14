@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import userList from './User.json';
 import "../../css/project.css";
 
 import { getUserList, setUserList, changeUserList, deleteUserList } from '../../apis/UserListAPI';
 import { setAuthorityList } from '../../apis/AuthorityListAPI';
+import { getProjectDetail } from '../../apis/NewprojectAPICalls';
 
 function Manager() {
-
+    const [project, setProject] = useState('');
     const [deleteUser, setDeleteUser] = useState([]);
     const [items, setItems] = useState([]);
     const [title, setTitle] = useState('');
@@ -17,6 +18,9 @@ function Manager() {
     const [inviteList, setInviteList] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
+
+    const { projectNo } = useParams();
+
 
     const handleInviteTextChange = (event) => {
         setInviteText(event.target.value);
@@ -65,23 +69,18 @@ function Manager() {
         setInviteList(inviteList.filter(invite => inviteList.indexOf(invite) !== index));
     };
 
-    const authorityList = useSelector(state => state.authorityReducer);
     const userList = useSelector(state => state.userReducer);
 
     const dispatch = useDispatch();
 
     useEffect(
         () => {
-            if (userList.length == 0) {
-                dispatch(setUserList());
-            } else {
-                dispatch(getUserList());
-            }
-            dispatch(setAuthorityList());
+            dispatch(setUserList(projectNo));
+            getProjectDetail(projectNo).then(data=> setProject(data));
         },
         []
     );
-
+console.log(userList);
     const onChangeAuthority = (user, value) => {
 
         user = {
@@ -104,7 +103,6 @@ function Manager() {
 
         dispatch(deleteUserList(deleteUser));
     }
-
     return (
 
         <div>
@@ -195,7 +193,7 @@ function Manager() {
             </div>
 
             <div className="newproject">
-                <h1>프로젝트 관리/<span id="size">희만은 우리의 희망</span></h1>
+                <h1>프로젝트 관리/<span id="size">{project.projectTitle}</span></h1>
                 <button className="button1">프로젝트 삭제</button>
             </div>
             <hr className="line" />
@@ -203,7 +201,7 @@ function Manager() {
             <div className="projectname">
                 <h3>프로젝트 명 : </h3>
                 <br />
-                <h6 id="name">희만은 우리의 희망</h6>
+                <h6 id="name">{project.projectTitle}</h6>
             </div>
             <br />
 
@@ -231,21 +229,11 @@ function Manager() {
                                     }
                                 />
                             </td>
-                            <td>{user.name}</td>
-                            <td>{user.no}</td>
-                            <td>{user.email}</td>
-                            <td>
-                                <select
-                                    name="authority"
-                                    value={user.authority}
-                                    onChange={(e) => onChangeAuthority(user, e.target.value)}
-                                >
-                                    {authorityList.map((authority) => (
-                                        <option key={authority.no} value={authority.name}>
-                                            {authority.name}
-                                        </option>
-                                    ))}
-                                </select>
+                            <td>{user.employeeName}</td>
+                            <td>{user.employeeNo}</td>
+                            <td>{user.employeeEmail}</td>
+                            <td>{user.roleName}
+                                
                             </td>
                         </tr>
 
@@ -261,7 +249,7 @@ function Manager() {
                                     onClick={(e) =>
                                         onDeleteUserChecked(e.target.value, e.target.checked)
                                     }></input>
-                                    </td>
+                            </td>
                             <td>{invite}</td>
 
                             <td>{ }</td>
@@ -272,7 +260,7 @@ function Manager() {
                                     value={invite.authority}
                                     onChange={(e) => onChangeAuthority(invite, e.target.value)}>
 
-                                    <option value="팀원">팀원</option>
+                                    <option value={invite.roleNo}>{invite.roleName}</option>
                                     <option value="PM">PM</option>
                                     <option value="부사수">부사수</option>
                                     <option value="사수">사수</option>
