@@ -4,6 +4,7 @@ import Modal from "react-modal";
 function SprintCreate(props) {
     const { modalIsOpen, handleCloseModal } = props;
 
+
     return (
         <div>
             <Modal
@@ -139,10 +140,10 @@ function SprintCreate(props) {
                     <br />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }} >시작</button>
-                        <button id= "sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
+                        <button id="sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
                     </div>
-
                 </div>
+                
             </Modal>
         </div>
     );

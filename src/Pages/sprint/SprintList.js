@@ -17,9 +17,9 @@ function SprintList() {
         <>
             <div className="newproject">
                 <h1>스프린트 목록</h1>
-                <button id="sprintcreatebtn" onClick={openSprintCreateModal}>스프린트 생성</button>
-                <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
+                <button id="sprintCreateBtn" class="button1" onClick={openSprintCreateModal}>스프린트 생성</button>
             </div>
+            <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
             <hr className="line" />
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{
@@ -41,7 +41,8 @@ function SprintList() {
                                 <span>완료</span>
                             </div>
                         </div>
-                        <span style={{ margin: '20px 10px', borderBottom: '8px solid blue', paddingBottom: '1px' }}>2023.02.01~2023.02.15</span>
+                        <span style={{ margin: '20px 10px'}}>2023.02.01~2023.02.15</span>
+                        <div style={{ width: '100%', height: '10px', backgroundColor: 'blue' }}></div>
                         <div style={{ margin: '10px', padding: '10px', border: '1px solid black' }}>
                             <span>해결할 이슈1</span>
                             <br />
@@ -73,7 +74,8 @@ function SprintList() {
                                 <span>완료</span>
                             </div>
                         </div>
-                        <span style={{ margin: '10px', borderBottom: '8px solid blue', paddingBottom: '1px' }}>2023.02.15~2023.03.01</span>
+                        <span style={{ margin: '20px 10px'}}>2023.02.15~2023.02.28</span>
+                        <div style={{ width: '100%', height: '10px', backgroundColor: 'blue' }}></div>
                         <div style={{ margin: '10px', padding: '10px', border: '1px solid black' }}>
                             <span>해결할 이슈3</span>
                             <br />
