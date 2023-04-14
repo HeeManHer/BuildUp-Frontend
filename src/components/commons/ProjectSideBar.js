@@ -64,7 +64,7 @@ function ProjectSideBar() {
             {/* 이슈 */}
             <li className="nav-item">
 
-                <NavLink to="/project/issue">
+                <NavLink to={"/project/"+ projectNo +"/issue"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>이슈</span>
@@ -74,7 +74,7 @@ function ProjectSideBar() {
 
             {/* 스프린트 */}
             <li className="nav-item">
-                <NavLink to="/project/sprint">
+                <NavLink to={"/project/"+ projectNo +"/sprint"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-table"></i>
                         <span>스프린트</span>
@@ -84,7 +84,7 @@ function ProjectSideBar() {
 
             {/* 프로젝트 관리 */}
             <li className="nav-item">
-                <NavLink to={`/project/Manager`}>
+                <NavLink to={"/project/"+ projectNo +"/Manager"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-table"></i>
                         <span>프로젝트 관리</span>
