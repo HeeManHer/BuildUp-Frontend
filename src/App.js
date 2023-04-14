@@ -8,6 +8,7 @@ import LoginLayout from "./layouts/LoginLayout";
 import Backlog from "./Pages/backlog/Backlog";
 import Issue from "./Pages/issue/Issue";
 import SprintList from "./Pages/sprint/SprintList";
+import SprintOne from "./Pages/sprint/SprintOne";
 import NewProject from "./Pages/project/NewProject";
 import Manager from "./Pages/project/Manager";
 import MyPage from "./Pages/mypage/mypage";
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="sprint">
             <Route index element={<SprintList />} />
+          </Route>
+          <Route path="sprintOne">
+            <Route index element={<SprintOne />} />
           </Route>
           <Route path="Manager">
             <Route index element={<Manager />} />
