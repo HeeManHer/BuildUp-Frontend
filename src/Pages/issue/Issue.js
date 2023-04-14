@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { SetIssueAPI, SaveIssueAPI, UpdateIssueAPI, DeleteIssueAPI } from "../../apis/ISSUEAPI";
+import { SetIssueAPI, SaveIssueAPI, UpdateIssueAPI, DeleteIssueAPI, GetBacklogListAPI, SearchIssueAPI } from "../../apis/ISSUEAPI";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
 import "../../css/Issue.css";
 import { NavLink } from 'react-router-dom';
-import issue from './Issue.json'
 import Wan from '../comment/Wan';
 
 function Issue() {
@@ -13,14 +12,15 @@ function Issue() {
     const [priority, setPriority] = useState('');
     const [situation, setSituation] = useState('');
     const [backlogname, setBacklogname] = useState('');
+    const [searchValue, setsearchValue] = useState('');
 
     const [isModal1, setIsModal1] = useState(false);
     const [isModal2, setIsModal2] = useState(false);
     const [hoveredIssue, setHoveredIssue] = useState(null);
     const [oneissue, setoneissue] = useState({});
     const [showModal, setShowModal] = useState(false);
-
     const issueList = useSelector(state => state.IssueReducer);
+    const backlogList = useSelector(state => state.BacklogReducer);
 
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const [itemsPerPage] = useState(10); // 페이지 당 보여줄 항목 수
@@ -28,7 +28,7 @@ function Issue() {
     const dispatch = useDispatch();
     const save = () => {
         const saveIssue = {
-            title, description, priority, situation, backlogname
+            issueName: title, issueContent: description, issuePriority: priority, issueStatus: situation, backlogNo: backlogname
         };
 
         dispatch(SaveIssueAPI(saveIssue));
@@ -40,9 +40,12 @@ function Issue() {
         setIsModal1(false);
     }
 
+
     const update = () => {
         dispatch(UpdateIssueAPI(oneissue));
-    }
+
+    };
+
 
     const deleted = () => {
         dispatch(DeleteIssueAPI(oneissue));
@@ -56,12 +59,18 @@ function Issue() {
         setCurrentPage(currentPage - 1);
     }
 
+    const search = () => {
+        dispatch(SearchIssueAPI(searchValue));
+    }
+
+
 
     const handleTitleChange = (event) => setTitle(event.target.value);
     const handleDescriptionChange = (event) => setDescription(event.target.value);
     const handlePriorityChange = (event) => setPriority(event.target.value);
     const handleBacklognameChange = (event) => setBacklogname(event.target.value);
     const handleSituationChange = (event) => setSituation(event.target.value);
+
 
 
     useEffect(
@@ -84,6 +93,7 @@ function Issue() {
         console.log('이슈가 수정되었습니다.');
     }
 
+
     const handleIssueHover = (event, issue) => {
         setHoveredIssue(issue);
     }
@@ -91,18 +101,46 @@ function Issue() {
     return (
         <>
             <h1 className="head1">이슈
-                <button className="createissue" onClick={() => { setIsModal1(true) }}>이슈 생성</button>
+                <button className="createissue" onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI()) }}>이슈 생성</button>
             </h1>
+            <form style={{ position: 'fixed', right: 0, width: "400px" }}
+                class="issuesearch">
+                <div class="input-group">
+
+                    {/* <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2" value={searchValue} onChange={e => setsearchValue(e.target.value)} /> */}
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2"
+                        value={searchValue}
+                        onChange={e => setsearchValue(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key === 'Enter') {
+                                search();
+                            }
+                        }}
+                    />
+
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onClick={search}>
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+
             <h2 className="line" />
             <div className="container1">
                 <div className="issuelist">
+
                     {/* 왼쪽 목록을 볼 수 있는 영역 */}
                     <header>이슈</header>
                     <ul>
                         <br />
                         {issueList.map(issue => (
                             (issueList.indexOf(issue) >= 5 * (currentPage - 1) && issueList.indexOf(issue) < 5 * currentPage) &&  /* < 10 &&*/
-                            <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}><a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); }}>{issue.title}</a></li>
+                            <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}><a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI()) }}>{issue.issueName}</a></li>
                         ))}
                         <div className="pagebtn">
 
@@ -118,6 +156,7 @@ function Issue() {
                     <p>Issue 내용</p>
                     <hr className="line2" />
                 </div>
+
 
                 <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
                     <h2>이슈 생성</h2>
@@ -144,7 +183,11 @@ function Issue() {
                         <br />
                         <label>
                             백로그 이름:
-                            <input type="text" value={backlogname} onChange={handleBacklognameChange} />
+                            <select value={backlogname} onChange={handleBacklognameChange} >
+                                {backlogList.map(backlog =>
+                                    <option value={backlog.backlogNo}>{backlog.backlogName}</option>
+                                )}
+                            </select>
                         </label>
                         <br />
                         <label>
@@ -157,9 +200,13 @@ function Issue() {
                             </select>
                         </label>
                         <br />
-                        <button type="submit" onClick={save}>생성</button>
-                        <button onClick={() => { setIsModal1(false) }}>닫기</button>
                     </form>
+                    <button type="submit" onClick={() => {
+                        save();
+                        window.location.reload();
+                    }}>생성</button>
+
+                    <button type="button" onClick={() => { setIsModal1(false) }}>닫기</button>
                 </Modal>
             </div>
 
@@ -168,32 +215,36 @@ function Issue() {
                 <form onSubmit={handleSubmit}>
                     <label>
                         제목:
-                        <input type="text" value={oneissue.title} onChange={e => setoneissue({ ...oneissue, title: e.target.value })} name="title" />
+                        <input type="text" value={oneissue.issueName} onChange={e => setoneissue({ ...oneissue, issueName: e.target.value })} name="title" />
                     </label>
                     <br />
                     <label>
                         설명:
                     </label>
-                    <textarea className="descriptiontext" value={oneissue.description} onChange={e => setoneissue({ ...oneissue, description: e.target.value })} />
+                    <textarea className="descriptiontext" value={oneissue.issueContent} onChange={e => setoneissue({ ...oneissue, issueContent: e.target.value })} />
                     <br />
                     <label>
                         우선순위:
-                        <select value={oneissue.priority} onChange={e => setoneissue({ ...oneissue, priority: e.target.value })}>
+                        <select value={oneissue.issuePriority} onChange={e => setoneissue({ ...oneissue, issuePriority: e.target.value })}>
                             <option value="">선택</option>
-                            <option value="High">높음</option>
-                            <option value="Middle">보통</option>
-                            <option value="Low">낮음</option>
+                            <option value="긴급">긴급</option>
+                            <option value="보통">보통</option>
+                            <option value="낮음">낮음</option>
                         </select>
                     </label>
                     <br />
                     <label>
                         백로그 이름:
-                        <input type="text" value={oneissue.backlogname} onChange={e => setoneissue({ ...oneissue, backlogname: e.target.value })} />
+                        <select value={oneissue.backlogNo} onChange={e => setoneissue({ ...oneissue, backlogNo: e.target.value })} >
+                            {backlogList.map(backlog =>
+                                <option value={backlog.backlogNo}>{backlog.backlogName}</option>
+                            )}
+                        </select>
                     </label>
                     <br />
                     <label>
                         상태:
-                        <select value={oneissue.situation} onChange={e => setoneissue({ ...oneissue, situation: e.target.value })} >
+                        <select value={oneissue.issueStatus} onChange={e => setoneissue({ ...oneissue, issueStatus: e.target.value })} >
                             <option value="">선택</option>
                             <option value="expected">예정</option>
                             <option value="proceeding">진행중</option>
@@ -212,6 +263,7 @@ function Issue() {
                                     deleted(oneissue);
                                     setIsModal2(false);
                                     setShowModal(false); // 모달 2개 모두 닫기
+                                    window.location.reload(); // 페이지 새로고침
                                 }}>확인</button>
 
                                 <button onClick={() => { setShowModal(false) }}>취소</button>
