@@ -24,10 +24,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginLayout />}>
+        {/* <Route path="/" element={<LoginLayout />}>
           <Route index element={<Login />} />
           <Route path="findpassword" element={<Findpassword/>}/>
-         </Route> 
+         </Route>  */}
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />
