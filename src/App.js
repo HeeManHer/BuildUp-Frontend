@@ -25,12 +25,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginLayout />}>
           <Route index element={<Login />} />
+          <Route path="findpassword" element={<Findpassword/>}/>
          </Route>
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />
           <Route path="mypage">
             <Route index element={<MyPage />} />
+            <Route path="changepassword" element={<Changepassword/>} />
           </Route>
         </Route>
 
