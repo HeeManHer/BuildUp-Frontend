@@ -1,7 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 function ProjectSideBar() {
 
+    const { projectNo } = useParams();
     return (
         // Sidebar
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -52,7 +53,7 @@ function ProjectSideBar() {
 
             {/* 백로그 */}
             <li className="nav-item">
-                <NavLink to="/project/backlog">
+                <NavLink to={"/project/"+ projectNo +"/backlog"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-folder"></i>
                         <span>백로그</span>
@@ -81,9 +82,9 @@ function ProjectSideBar() {
                 </NavLink>
             </li>
 
-            {/* 스프린트 */}
+            {/* 프로젝트 관리 */}
             <li className="nav-item">
-                <NavLink to="/project/ProjectManager">
+                <NavLink to={`/project/Manager`}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-table"></i>
                         <span>프로젝트 관리</span>

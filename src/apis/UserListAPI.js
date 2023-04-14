@@ -7,10 +7,20 @@ export function getUserList() {
         dispatch({ type: GET_USER });
     }
 }
-export function setUserList() {
+/*restapi 가지고오는 기본 방식*/
+export function setUserList(projectNo) {
+    const URL="http://localhost:8888/api/v1/projects/"+projectNo;
 
-    return function (dispatch, getState) {
-        dispatch({ type: SET_USER, payload: User });
+    return async function (dispatch, getState) {
+        const result = await fetch(URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            }
+        }).then(response => response.json());
+        dispatch({ type: SET_USER, payload: result.data });
     }
 }
 export function changeUserList(user) {

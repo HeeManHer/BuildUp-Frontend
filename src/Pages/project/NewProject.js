@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import { getProject, postProject } from '../../apis/NewprojectAPICalls';
 import "../../css/project.css";
 
 function NewProject() {
@@ -10,6 +11,17 @@ function NewProject() {
   const [inviteList, setInviteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
+
+  const { projectNo } = useParams();
+  
+  /* 리덕스 안썼을때 useState를 가지고 오는 방법 */
+  useEffect(
+    () => {
+      getProject().then(data => {console.log(data); setItems(data.data);});
+      // console.log(getProject()());
+    },
+    []
+  )
 
   const handleInviteTextChange = (event) => {
     setInviteText(event.target.value);
@@ -34,14 +46,24 @@ function NewProject() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newItem = {
-      title,
-      manager,
-      inviteText
+      projectTitle : title, 
+      employeeName : manager
     };
+    postProject(newItem).then(() => {
+      setTitle('');
+      setManager('');
+      setInviteList([]);
+      handleCloseModal();
+      getProject().then(data => {
+        console.log(data);
+        setItems(data.data);
+      });
+    });
+
 
     if (title && manager) { // 값이 모두 채워져 있는 경우에만 생성 가능
       if (selectedItemIndex === -1) {
-        setItems([...items, newItem]);
+        postProject(newItem);
       } else {
         const updatedItems = [...items];
         updatedItems[selectedItemIndex] = newItem;
@@ -74,7 +96,7 @@ function NewProject() {
     updatedItems.splice(index, 1);
     setItems(updatedItems);
   };
-
+console.log(items);
   return (
     <div>
       {/* 모달스타일 적용 */}
@@ -108,7 +130,7 @@ function NewProject() {
               <br />
               <br />
               <label className="manager">
-                담당자 : <select value={manager} onChange={(event) => setManager(event.target.value)}>
+                담당자 : <select value={items.employeeNo} onChange={(event) => setManager(event.target.value)}>
                   <option value="">선택</option>
                   <option value="허희만">허희만</option>
                   <option value="남효정">남효정</option>
@@ -117,7 +139,6 @@ function NewProject() {
                   <option value="최명건">최명건</option>
                   <option value="박완규">박완규</option>
                   <option value="염진호">염진호</option>
-
                 </select>
               </label>
               <br />
@@ -143,7 +164,7 @@ function NewProject() {
                 <br />
 
               </div>
-              <button className='button2' type="submit" >{selectedItemIndex === -1 ? '생성' : 'Save'}</button>
+              <button className='button2' type="submit" onClick={() => { window.location.reload();}}>{selectedItemIndex === -1 ? '생성' : 'Save'}</button>
               <button className="button3" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
               </button>
             </form>
@@ -163,9 +184,9 @@ function NewProject() {
           <div>
             <div className="build"><p>Build Up</p>
               <hr className="line2" />
-              <NavLink to="project/Manager">
-                <div className="title2" style={{ height: '80px' }}><h4>{item.title}</h4></div>
-                <div className="title3" style={{ height: '25px' }}><h6>( PM : {item.manager} )</h6></div>
+              <NavLink to={`/project/${item.projectNo}/Manager`}>
+                <div className="title2" style={{ height: '80px' }}><h4>{item.projectTitle}</h4></div>
+                <div className="title3" style={{ height: '25px' }}><h6>(PM : {item.employeeName} )</h6></div>
               </NavLink>
             </div>
           </div>

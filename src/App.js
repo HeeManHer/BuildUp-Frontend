@@ -26,34 +26,28 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginLayout />}>
           <Route index element={<Login />} />
-         </Route>
+          <Route path="findpassword" element={<Findpassword/>}/>
+         </Route> 
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />
           <Route path="mypage">
             <Route index element={<MyPage />} />
+            <Route path="changepassword" element={<Changepassword/>} />
           </Route>
         </Route>
 
         <Route path="/project" element={<ProjectLayout />} >
-          <Route path="backlog">
-            <Route index element={<Backlog />} />
-          </Route>
-          <Route path="issue">
-            <Route index element={<Issue />} />
-          </Route>
-          <Route path="sprint">
-            <Route index element={<SprintList />} />
-          </Route>
-          <Route path="sprintOne">
-            <Route index element={<SprintOne />} />
-          </Route>
-          <Route path="Manager">
-            <Route index element={<Manager />} />
+          <Route path=":projectNo" >
+            <Route path="backlog" element={<Backlog />} />
+            <Route path="issue" element={<Issue />} />
+            <Route path="sprint" element={<SprintList />} />
+            <Route path="sprintOne" element={<SprintOne />} />
+            <Route path="Manager" element={<Manager />} />
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
 
   );
 }
