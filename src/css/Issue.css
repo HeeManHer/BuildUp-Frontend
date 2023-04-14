@@ -82,6 +82,7 @@
 }
 
 .createissue {
+    font-size: 20px;
     width: 170px;
     border-radius: 50px;
     background-color: #4e73df;
@@ -180,15 +181,4 @@
 
 .line2 {
     border-top: 1px solid black;
-}
-
-.smalltitle {
-    color: #002040;
-    margin-bottom: -10px;
-    font-weight: bold;
-}
-
-.smalltitle2 {
-    color: black;
-    font-weight: bolder;
 }
