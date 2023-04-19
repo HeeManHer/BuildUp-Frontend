@@ -2,9 +2,9 @@ import { createActions, handleActions } from 'redux-actions';
 
 const initialState = [];
 
-export const POST_LOGIN = 'employee/POST_LOGIN';
-export const GET_EMPLOYEE = 'employee/GET_EMPLOYEE';
-export const POST_FINDPWD = 'employee/POST_FINDPWD';
+export const POST_LOGIN = 'login/POST_LOGIN';
+export const GET_EMPLOYEE = 'mypage/GET_EMPLOYEE';
+export const POST_FINDPWD = 'login/POST_FINDPWD';
 
 const actions = createActions({
     [POST_LOGIN]: () => {},

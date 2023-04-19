@@ -30,7 +30,7 @@ function Mypage() {
             console.log('token', token.sub);
             if(token !== null) {
                 dispatch(callGetEmployeeAPI({	// 구매 정보 조회
-                    employeeId: token.sub
+                    employeeNo: token.sub
                 }));            
             }
         }
@@ -41,7 +41,7 @@ function Mypage() {
         // 토큰이 없기 때문에 오류가 나는 것이 당연하다.
 
     const onClickModifyHandler = () => { 
-        navigate("./changepassword", { replace: true })
+        navigate("./changepassword")
     }
 
    
