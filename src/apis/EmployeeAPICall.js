@@ -1,92 +1,101 @@
-import {
+
+import { 
     GET_EMPLOYEE
-   ,POST_LOGIN
-   ,POST_FINDPWD
+  , POST_LOGIN
+  , POST_REGISTER
 } from '../modules/EmployeeModule';
 
-export function callLoginAPI({form}) {
-    // const requestURL =  `http://localhost:8888/auth/login`;
-    
-    return function (dispatch, getState) {
-        dispatch({ type: POST_LOGIN, payload: form});
-    };
-};
-        // const result = await fetch(requestURL, {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Accept": "*/*",
-        //         "Access-Control-Allow-Origin": "*"  
-        //     },
-        //     body: JSON.stringify({
-        //         employeeId: form.employeeId,
-        //         employeePwd: form.employeePwd
-        //     })
-        // })
-        // .then(response => response.json());
+export const callGetEmployeeAPI = ({employeeNo}) => {
+    const requestURL = `http://localhost:8888/api/v1/auth/login/${employeeNo}`;
 
-        // console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
-        // if(result.status === 200) {
-        //     window.localStorage.setItem('accessToken', result.data.accessToken);
-        // }
-        // dispatch({ type: POST_LOGIN, payload: result});
+    return async (dispatch, getState) => {
 
-//-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-export function callGetEmployeeAPI({employeeId}) {
-    const requestURL = `https://localhost:8080/api/v1/employees/${employeeId}`;
+        // 클라이언트 fetch mode : no-cors 사용시 application/json 방식으로 요청이 불가능
+        // 서버에서 cors 허용을 해주어야 함
+        const result = await fetch(requestURL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            }
+        })
+        .then(response => response.json());
 
-    return function (dispatch, getState) {
-        // const result = await fetch(requestURL, {
-        //     method: "GET",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         "Accept": "*/*",
-        //         "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
-        //     }
-        // })
-        // .then(response => response.json());
+        console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
 
-        // console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
-
-        dispatch({type: GET_EMPLOYEE, payload:employeeId});
+        dispatch({ type: GET_EMPLOYEE,  payload: result });
+        
     };
 }
 
-export function callLogoutAPI() {
+export const callLoginAPI = ({form}) => {
+    const requestURL = `http://localhost:8888/auth/login`;
+
+    return async (dispatch, getState) => {  
+
+        // 클라이언트 fetch mode : no-cors 사용시 application/json 방식으로 요청이 불가능
+        // 서버에서 cors 허용을 해주어야 함
+        const result = await fetch(requestURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                "Access-Control-Allow-Origin": "*"      
+            },
+            body: JSON.stringify({
+                employeeNo: form.employeeNo,
+                employeePassword: form.employeePassword
+            })
+        })
+        .then(response => response.json());
+
+        // result에 data가 없어서 안 뜨는 것 같음.
+        console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
+        if(result.status === 200){
+            window.localStorage.setItem('accessToken', result.data.accessToken);            
+        }
+        dispatch({ type: POST_LOGIN,  payload: result });
+        
+    };
+}
+
+
+export const callLogoutAPI = () => {
     
 
-    return function (dispatch, getState) {            
+    return async (dispatch, getState) => {            
 
         dispatch({ type: POST_LOGIN,  payload: '' });        
-        // console.log('[EmployeeAPICalls] callLogoutAPI RESULT : SUCCESS');
+        console.log('[EmployeeAPICalls] callLogoutAPI RESULT : SUCCESS');
     };
 }
 
 
-export function callFindPwdAPI  ({form})  {
-    // const requestURL = `http://localhost:8080/auth/findpassword`;
+// export const callRegisterAPI = ({form}) => {
+//     const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8080/auth/signup`;
 
-    return function (dispatch, getState) {
-        dispatch({ type: POST_FINDPWD,  payload: form });
-        
-        // const result = await fetch(requestURL, {
-            //     method: "POST",
-            //     headers: {
-                //         "Content-Type": "application/json",
-                //         "Accept": "*/*"
-                //     },
-                //     body: JSON.stringify({
-                    //         employeeId: form.employeeId,
-        //         employeePassword: form.employeePassword,
-        //         employeeName: form.employeeName,
-        //         employeeEmail: form.employeeEmail                
-        //     })
-        // })
-        // .then(response => response.json());
+//     return async (dispatch, getState) => {
 
-        // console.log('[EmployeeAPICalls] callFindPwdAPI RESULT : ', result);        
+//         const result = await fetch(requestURL, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Accept": "*/*"
+//             },
+//             body: JSON.stringify({
+//                 memberId: form.memberId,
+//                 memberPassword: form.memberPassword,
+//                 memberName: form.memberName,
+//                 memberEmail: form.memberEmail                
+//             })
+//         })
+//         .then(response => response.json());
+
+//         console.log('[MemberAPICalls] callRegisterAPI RESULT : ', result);        
         
-        // if(result.status === 201){
-        // }        
-    };
-}
+//         if(result.status === 201){
+//             dispatch({ type: POST_REGISTER,  payload: result });
+//         }        
+//     };
+// }

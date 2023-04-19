@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-    callFindPwdAPI
-} from '../../apis/EmployeeAPICall';
+// import {
+//     callFindPwdAPI
+// } from '../../apis/EmployeeAPICall';
 
 import { POST_LOGIN } from '../../modules/EmployeeModule';
 
@@ -37,11 +37,11 @@ function Findpassword() {
         });
     };    
 
-    const onClickFindPwdHandler = () => {
-        dispatch(callFindPwdAPI({
-            form: form
-        }));
-    }
+    // const onClickFindPwdHandler = () => {
+    //     dispatch(callFindPwdAPI({
+    //         form: form
+    //     }));
+    // }
 
     return (
         <div className="find-box">

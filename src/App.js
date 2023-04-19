@@ -16,7 +16,8 @@ import Login from "./Pages/login/login";
 import Changepassword from "./Pages/login/changepassword";
 import Findpassword from "./Pages/login/findpassword";
 import ContactUs from "./Pages/login/email";
-import firstpage from "./Pages/login/FirstPage";
+// import firstpage from "./Pages/login/FirstPage";
+import Firstpage from "./Pages/login/FirstPage";
 
 
 
@@ -27,7 +28,7 @@ function App() {
         {/* <Route path="/" element={<LoginLayout />}>
           <Route index element={<Login />} />
           <Route path="findpassword" element={<Findpassword/>}/>
-         </Route>  */}
+         </Route> 
 
         <Route path="/" element={<MypageLayout />}>
           <Route index element={<NewProject />} />
@@ -35,7 +36,19 @@ function App() {
             <Route index element={<MyPage />} />
             <Route path="changepassword" element={<Changepassword/>} />
           </Route>
+        </Route> */}
+        <Route path="/" element={<Firstpage/>}/>
+        <Route path="/auth" element={<LoginLayout/>}>
+          <Route path="login" element={<Login/>}/>
+          <Route path="login/findpassword" element={<Findpassword/>}/>          
         </Route>
+
+        <Route path="mypage" element={<MypageLayout/>}>
+        <Route index element={<MyPage/>} />
+	        <Route path="changepassword" element={<Changepassword/>}/>
+	        <Route path="newproject" element={<NewProject/>}/>
+        </Route>
+
 
         <Route path="/project" element={<ProjectLayout />} >
           <Route path=":projectNo" >

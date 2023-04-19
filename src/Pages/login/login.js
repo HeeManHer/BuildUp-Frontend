@@ -23,7 +23,7 @@ function Login() {
     // 폼 데이터 한번에 변경 및 State에 저장    
     const [form, setForm] = useState({
         employeeNo: '',
-        employeePwd: ''
+        employeePassword: ''
     });
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function Login() {
 
     // 회원가입페이지로 넘어가는 화면 나는 비밀번호 찾기 화면으로 가야한다. 
     const onClickFindPwdHandler = () => { 
-        navigate("./findpassword", { replace: true })
+        navigate("./findpassword")
     }
 
     // 로그인 버튼 클릭시 디스패처 실행 및 메인 페이지로 이동
