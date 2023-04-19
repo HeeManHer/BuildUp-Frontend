@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getProject, postProject } from '../../apis/NewprojectAPICalls';
 import "../../css/project.css";
 
 function NewProject() {
+  const Navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
   const [manager, setManager] = useState('');
