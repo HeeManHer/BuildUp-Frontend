@@ -14,16 +14,11 @@ function NewProject() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
   const { projectNo } = useParams();
-  
-  if(true) {
-    Navigate("/login");
-  }
 
   /* 리덕스 안썼을때 useState를 가지고 오는 방법 */
   useEffect(
     () => {
-      getProject().then(data => {console.log(data); setItems(data.data);});
-      // console.log(getProject()());
+      getProject().then(data => { console.log(data); setItems(data.data);});
     },
     []
   )
@@ -35,7 +30,7 @@ function NewProject() {
   const handleInviteAdd = () => {
     if (inviteText == null || inviteText == "")
       return;
-    setInviteList([...inviteList, inviteText]);
+    setInviteList([...inviteList, { roleNo: 2, employeeName: inviteText }]);
     setInviteText('');
   }
 
@@ -51,19 +46,15 @@ function NewProject() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newItem = {
-      projectTitle : title, 
-      employeeName : manager
+      projectTitle: title,
+      employeeName: [
+        {
+          roleNo: 1,
+          employeeName: manager
+        },
+        ...inviteList
+      ]
     };
-    postProject(newItem).then(() => {
-      setTitle('');
-      setManager('');
-      setInviteList([]);
-      handleCloseModal();
-      getProject().then(data => {
-        console.log(data);
-        setItems(data.data);
-      });
-    });
 
 
     if (title && manager) { // 값이 모두 채워져 있는 경우에만 생성 가능
@@ -79,6 +70,7 @@ function NewProject() {
       setInviteText('');
       setInviteList([]);
       handleCloseModal();
+      window.location.reload();
     }
   };
 
@@ -101,7 +93,7 @@ function NewProject() {
     updatedItems.splice(index, 1);
     setItems(updatedItems);
   };
-console.log(items);
+
   return (
     <div>
       {/* 모달스타일 적용 */}
@@ -114,8 +106,6 @@ console.log(items);
             right: 0,
             bottom: 0,
             background: 'rgba(0, 0, 0, 0.5)',
-
-
           }}
           onClick={handleCloseModal}
         />
@@ -125,7 +115,6 @@ console.log(items);
             <hr className="line3" />
             <br />
             <form onSubmit={handleSubmit}>
-
               <h3 className="smalltitle2">프로젝트 생성</h3>
               <br />
               <br />
@@ -151,39 +140,33 @@ console.log(items);
               <div>
                 <label className="invite">
                   팀원 초대 : <input type="text" value={inviteText} onChange={handleInviteTextChange} style={{ width: '395px' }} />
-                  <button className="btn btn-success btn-icon-split btn-sm"  type="button" onClick={handleInviteAdd}>추가</button>
+                  <button className="btn btn-success btn-icon-split btn-sm" type="button" onClick={handleInviteAdd}>추가</button>
                 </label>
                 <div className='row' style={{ overflow: 'auto', height: '150px' }}>
 
                   {inviteList.map((invite, index) => (
                     <div key={index} style={{ border: '1px solid black', padding: '5px', margin: '5px', display: 'flex', height: '40px' }}>
                       <div>
-
-                        {invite}
+                        {invite.employeeName}
                       </div>
                       <button className='btn btn-danger btn-icon-split icon text-white fas fa-trash btn-sm' type="button" style={{ marginLeft: '20px' }} onClick={() => { handleInviteRemove(index) }}>삭제</button>
                     </div>
                   ))}
                 </div>
-
                 <br />
-
               </div>
-              <button className='button2' type="submit" onClick={() => { window.location.reload();}}>{selectedItemIndex === -1 ? '생성' : 'Save'}</button>
+              <button className='button2' type="submit" >{selectedItemIndex === -1 ? '생성' : 'Save'}</button>
               <button className="button3" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
               </button>
             </form>
           </div>
         </div>
       </div>
-
       <div className='newproject'>
         <h1>프로젝트</h1>
         <button className="button1" onClick={handleOpenModal}>프로젝트 생성</button>
-
       </div>
       <hr className="line" />
-
       <div className="project2">
         {items.map((item, index) => (
           <div>
@@ -197,9 +180,7 @@ console.log(items);
           </div>
         ))}
       </div>
-
     </div>
   );
 }
-
 export default NewProject;
