@@ -5,9 +5,10 @@ import authorityReducer from "./authority";
 import employeeReducer from "./EmployeeModule";
 import BacklogReducer from "./Backlog";
 import CommentReducer from "./comment";
+import SprintReducer from "./sprint";
 
 const rootReducer = combineReducers({
-    IssueReducer, userReducer, authorityReducer, BacklogReducer, employeeReducer, CommentReducer
+    IssueReducer, userReducer, authorityReducer, BacklogReducer, employeeReducer,SprintReducer, CommentReducer
 });
 
 export default rootReducer;
