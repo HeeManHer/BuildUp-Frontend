@@ -2,9 +2,23 @@ import { createActions, handleActions } from "redux-actions";
 
 
 /* 초기 state값 */
-const initialState = [
+const initialState =
+{
+    data: [],
+    pageInfo: {
+        pageNo: 0,
+        totalCount: 0,
+        limit: 0,
+        buttonAmount: 0,
+        maxPage: 0,
+        startPage: 0,
+        endPage: 0,
+        startRow: 0,
+        endRow: 0
+    }
+};
 
-];
+
 
 /* 액션 타입 설정 */
 export const CREATE_ISSUE = 'CREATE_ISSUE';
