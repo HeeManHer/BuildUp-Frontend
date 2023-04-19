@@ -2,9 +2,9 @@ import { GET_BACKLOG } from "../modules/Backlog";
 import { CREATE_ISSUE, DELETE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE, SEARCH_ISSUE } from "../modules/Issue";
 import Issue from "../Pages/issue/Issue.json";
 
-export function SetIssueAPI() {
+export function SetIssueAPI(projectNo, pageNumber) {
+    let RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues?offset=" + pageNumber;
 
-    const RequestUrl = "http://localhost:8888/api/v1/issues";
 
     return async function (dispatch, getState) {
 
@@ -23,7 +23,7 @@ export function SetIssueAPI() {
 
 export function SaveIssueAPI(issue) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/issues";
+    const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues";
     console.log(JSON.stringify(issue));
 
     return async function (dispatch, getState) {
@@ -36,12 +36,12 @@ export function SaveIssueAPI(issue) {
             }, body: JSON.stringify(issue)
 
         }).then(res => res.json());
-        dispatch({ type: "POST", payload: result.data });
+        dispatch({ type: "POST", payload: result.data.issues });
     }
 }
 export function UpdateIssueAPI(issue) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/issues";
+    const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues";
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {
@@ -58,7 +58,7 @@ export function UpdateIssueAPI(issue) {
 
 export function DeleteIssueAPI(issue) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/issues/" + issue.issueNo;
+    const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues/" + issue.issueNo;
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {
@@ -72,9 +72,9 @@ export function DeleteIssueAPI(issue) {
     }
 }
 
-export function GetBacklogListAPI() {
+export function GetBacklogListAPI(projectNo) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/issues/backloglist";
+    const RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues/backloglist";
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {
@@ -89,9 +89,9 @@ export function GetBacklogListAPI() {
     }
 }
 
-export function SearchIssueAPI(searchValue) {
+export function SearchIssueAPI(searchValue, projectNo) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/issues/search?search=" + searchValue;
+    const RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues?search=" + searchValue;
 
     return async function (dispatch, getState) {
 
