@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getComment, addComment, deleteComment, updateComment } from "../../apis/CommentAPI";
 
-function CommentForm(props) {
-    const [comment, setComment] = useState('')
-
-    const handleChange = event => {
-        const value = event.target.value;
-        setComment(value)
-    }
+function CommentForm({ issueNo }) {
+    const [comment, setComment] = useState({ issueNo: issueNo, employeeNo: '20230329', replyContent: "" });
+    const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
+        dispatch(addComment(comment));
+        dispatch(getComment(issueNo));
+        setComment({ issueNo: issueNo, employeeNo: '20230329', replyContent: '' });
+      };
 
-        props.addList(comment);
-        setComment('');
-    }
 
     return (
         <li className='comment-form'>
@@ -23,8 +22,8 @@ function CommentForm(props) {
                         type='text'
                         className='int'
                         placeholder='댓글을 입력해주세요.'
-                        onChange={handleChange}
-                        value={comment}
+                        onChange={e=>setComment({...comment, replyContent:e.target.value})}
+                        value={comment.replyContent}
                     />
                 </span>
 
@@ -36,7 +35,7 @@ function CommentForm(props) {
                 </button>
             </form>
         </li>
-    )
+    );
 }
 
 export default CommentForm;
