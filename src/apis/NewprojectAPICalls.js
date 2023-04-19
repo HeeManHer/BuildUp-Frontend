@@ -23,7 +23,7 @@ export async function postProject(project) {
                 "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             },
             body: JSON.stringify(project)
-        }).then(response => response.json());
+        });
     }
 
     export async function getProjectDetail(projectNo) {
@@ -38,3 +38,20 @@ export async function postProject(project) {
                 }
             }).then(response => response.json()).then(data=>data.data[0]);
         }
+
+    export async function searchMember(search) {
+
+        const URL = "http://localhost:8888/api/v1/projects/search?search=" + search;
+        
+        return await fetch(URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+            },
+        }).then(response => response.json());
+        
+    }
+
+        
