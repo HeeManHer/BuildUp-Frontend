@@ -3,12 +3,10 @@ import { SetIssueAPI, SaveIssueAPI, UpdateIssueAPI, DeleteIssueAPI, GetBacklogLi
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
 import "../../css/Issue.css";
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Wan from '../comment/Wan';
 
-
 function Issue() {
-    const { projectNo } = useParams();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('');
@@ -19,22 +17,19 @@ function Issue() {
     const [isModal1, setIsModal1] = useState(false);
     const [isModal2, setIsModal2] = useState(false);
     const [hoveredIssue, setHoveredIssue] = useState(null);
-    const [oneissue, setoneissue] = useState({ projectNo });
+    const [oneissue, setoneissue] = useState({});
     const [showModal, setShowModal] = useState(false);
-    const IssueReducer = useSelector(state => state.IssueReducer);
+    const issueList = useSelector(state => state.IssueReducer);
     const backlogList = useSelector(state => state.BacklogReducer);
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
-    const currentIssues = IssueReducer.data;
-    const PageInfo = IssueReducer.pageInfo;
 
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
+    const [itemsPerPage] = useState(10); // 페이지 당 보여줄 항목 수
+    const [pageCount, setPageCount] = useState(Math.ceil(issueList.length / itemsPerPage)); // 전체 페이지 수
     const dispatch = useDispatch();
     const save = () => {
         const saveIssue = {
-            issueName: title, issueContent: description, issuePriority: priority, issueStatus: situation, backlogNo: backlogname, projectNo
+            issueName: title, issueContent: description, issuePriority: priority, issueStatus: situation, backlogNo: backlogname
         };
-
-
-
 
         dispatch(SaveIssueAPI(saveIssue));
         setTitle('');
@@ -52,21 +47,20 @@ function Issue() {
     };
 
 
-
-    const deleted = (oneissue) => {
+    const deleted = () => {
         dispatch(DeleteIssueAPI(oneissue));
     }
 
-    // const nextpage = () => {
-    //     setCurrentPage(currentPage + 1);
-    // }
+    const nextpage = () => {
+        setCurrentPage(currentPage + 1);
+    }
 
-    // const prevpage = () => {
-    //     setCurrentPage(currentPage - 1);
-    // }
+    const prevpage = () => {
+        setCurrentPage(currentPage - 1);
+    }
 
     const search = () => {
-        dispatch(SearchIssueAPI(searchValue, projectNo));
+        dispatch(SearchIssueAPI(searchValue));
     }
 
 
@@ -77,40 +71,15 @@ function Issue() {
     const handleBacklognameChange = (event) => setBacklogname(event.target.value);
     const handleSituationChange = (event) => setSituation(event.target.value);
 
-    // const handlePageChange = (pageNumber) => {
-    //     dispatch(SetIssueAPI(projectNo, pageNumber))
-    //     setCurrentPage(pageNumber + 1);
-    // };
 
-    const pageNumber = [];
-    if (PageInfo) {
-        for (let i = PageInfo.startPage; i <= PageInfo.endPage; i++) {
-            pageNumber.push(i);
-        }
-    }
 
     useEffect(
         () => {
-            dispatch(SetIssueAPI(projectNo, currentPage));
+            dispatch(SetIssueAPI());
         },
-        [currentPage]
+        []
     );
-    // const nextPage = () => {
-    //     if (currentPage + 1 <= PageInfo.maxPage) {
-    //         setCurrentPage(currentPage + 5);
-    //     }
-    // }
 
-    const nextPage = () => {
-        const next = Math.min(currentPage + 5, PageInfo.maxPage);
-        setCurrentPage(next);
-    }
-
-    const prevPage = () => {
-        if (currentPage - 1 >= 1) {
-            setCurrentPage(Math.max(currentPage - 5, 1));
-        }
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -132,7 +101,7 @@ function Issue() {
     return (
         <>
             <h1 className="head1">이슈
-                <button className="createissue" onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
+                <button className="createissue" onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI()) }}>이슈 생성</button>
             </h1>
             <form style={{ position: 'fixed', right: 0, width: "400px" }}
                 class="issuesearch">
@@ -169,31 +138,17 @@ function Issue() {
                     <header>이슈</header>
                     <ul>
                         <br />
-                        {currentIssues.map(issue => (
-                            <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}>
-                                <a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>{issue.issueName}</a>
-                            </li>
+                        {issueList.map(issue => (
+                            (issueList.indexOf(issue) >= 5 * (currentPage - 1) && issueList.indexOf(issue) < 5 * currentPage) &&  /* < 10 &&*/
+                            <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}><a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI()) }}>{issue.issueName}</a></li>
                         ))}
-                        <div className="pageset">
+                        <div className="pagebtn">
 
-                            {pageNumber.map((num) => (
-                                <li className="pagenum" key={num} onClick={() => setCurrentPage(num)}>
-                                    <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
-                                        {num}
-                                    </span>
-                                </li>
-                            ))}
-
+                            <button className="pagenext" onClick={prevpage}></button>
+                            <h1>{currentPage}</h1>
+                            <button className="pageprev" onClick={nextpage}></button>
                         </div>
                     </ul>
-                    <div className="pagebtn">
-                        <button className="prevbtn-text" onClick={prevPage}>
-                            &lt;
-                        </button>
-                        <button className="nextbtn-text" onClick={nextPage}>
-                            &gt;
-                        </button>
-                    </div>
                 </div>
                 <div className="issuemain">
                     {/* 오른쪽 메인 영역 */}
@@ -229,10 +184,8 @@ function Issue() {
                         <label>
                             백로그 이름:
                             <select value={backlogname} onChange={handleBacklognameChange} >
-                                {backlogList.map(backlog => {
-                                    console.log(backlog);
-                                    return <option value={backlog.backlogNo}>{backlog.backlogName}</option>;
-                                }
+                                {backlogList.map(backlog =>
+                                    <option value={backlog.backlogNo}>{backlog.backlogName}</option>
                                 )}
                             </select>
                         </label>
@@ -300,10 +253,7 @@ function Issue() {
                     </label>
                     <br />
                     <Wan />
-                    <button type="submit" onClick={() => {
-                        update(); setIsModal2(false)
-                        window.location.reload();
-                    }}>수정</button>
+                    <button type="submit" onClick={() => { update(); setIsModal2(false) }}>수정</button>
                     <button onClick={() => { setShowModal(true) }}>삭제</button>
                     {showModal && (
                         <div className="modalaa">
@@ -313,7 +263,7 @@ function Issue() {
                                     deleted(oneissue);
                                     setIsModal2(false);
                                     setShowModal(false); // 모달 2개 모두 닫기
-                                    // window.location.reload(); // 페이지 새로고침
+                                    window.location.reload(); // 페이지 새로고침
                                 }}>확인</button>
 
                                 <button onClick={() => { setShowModal(false) }}>취소</button>
