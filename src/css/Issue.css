@@ -182,3 +182,41 @@
 .line2 {
     border-top: 1px solid black;
 }
+
+.pagenum {
+    display: inline-block;
+    margin: 5px;
+}
+
+.pagenum>span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    color: black;
+}
+
+.pagenum>span:hover {
+    background-color: #f0f0f0;
+
+}
+
+.prevbtn-text,
+.nextbtn-text {
+    background-color: #eee;
+    border: 1px solid #aaa;
+    color: black;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagebtn {
+    display: flex;
+    justify-content: space-between;
+}
