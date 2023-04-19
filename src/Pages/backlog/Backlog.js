@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import "../../css/backlog.css";
-import { getBacklog, postBacklog, putBacklog, deleteBacklog, searchBacklog } from '../../apis/backlog.js';
+import { getBacklog, postBacklog, putBacklog, deleteBacklog, searchBacklog } from '../../apis/backlogAPI.js';
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function Backlog() {
-  const [items, setItems] = useState([]);
-  const [oneitem, setOneitem] = useState({});
+  const { projectNo } = useParams();
+  const [oneitem, setOneitem] = useState({ projectNo });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setsearchValue] = useState('');
+
+  const dispatch = useDispatch();
+
+  const backlogReducer = useSelector(state => state.BacklogReducer);
+
+  const backlogList = backlogReducer.data;
+  const pageInfo = backlogReducer.pageInfo;
+
+  const pageNumber = [];
+  if (pageInfo) {
+    for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+      pageNumber.push(i);
+    }
+  }
 
   useEffect(
     () => {
-      getBacklog().then(data => { setItems(data.data); });
+      dispatch(getBacklog(projectNo, currentPage, searchValue));
     },
-    []
-
-
+    [currentPage]
   )
   // 모달 열기
   const handleOpenModal = () => {
@@ -28,30 +43,52 @@ function Backlog() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedItemIndex(-1);
+    window.location.reload();
   };
 
-  // 다음 페이지로 이동
+  const deleted = (oneitem) => {
+    dispatch(deleteBacklog(oneitem));
+  }
+
+
+
+  // // 다음 페이지로 이동
+  // const nextpage = () => {
+  //   if (currentPage + 1 <= pageInfo.endPage) {
+  //     setCurrentPage(currentPage + 10)
+  //   } else {
+  //     setCurrentPage(pageInfo.endPage + 1)
+  //   };
+  // };
+
+  // // 이전 페이지로 이동
+  // const prevpage = () => {
+  //   if (currentPage - 1 >= 1) {
+  //     setCurrentPage(currentPage - 1);
+  //   };
+  // };
+
+
   const nextpage = () => {
-    if (items.length / 5 >= page) setPage(page + 1);
-  };
+    const next = Math.min(currentPage + 10, pageInfo.maxPage - currentPage);
+    setCurrentPage(next);
+  }
 
-  // 다음 페이지로 이동
   const prevpage = () => {
-    if (page - 1 > 0) setPage(page - 1);
-  };
+    if (currentPage - 1 >= 1) {
+      setCurrentPage(Math.max(currentPage - 10, 1));
+    }
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (selectedItemIndex === -1) {
-      postBacklog(oneitem);
-      window.location.reload();
+      dispatch(postBacklog(oneitem));
     } else {
-      putBacklog(oneitem);
-      window.location.reload();
-
+      dispatch(putBacklog(oneitem));
     }
-    setOneitem({});
+    setOneitem({ projectNo });
     handleCloseModal();
   };
   // 선택된 항목의 정보를 가져와서 state에 할당하고 모달열기
@@ -62,19 +99,13 @@ function Backlog() {
 
   };
   //선택 항목 삭제
-  const handleDeleteItem = (index) => {
-
-    deleteBacklog(index);
-    window.location.reload();
-
-  };
 
   const search = () => {
-    searchBacklog(searchValue).then(data => setItems(data.data));
+    dispatch(searchBacklog(searchValue, projectNo));
 
   }
 
-  console.log(searchValue);
+
 
 
 
@@ -135,7 +166,7 @@ function Backlog() {
               </label>
               <br />
               <br />
-              <button className='button2' type="submit">{selectedItemIndex === -1 ? '추가' : '저장'}</button>
+              <button className='button2' type="submit">{selectedItemIndex === -1 ? '추가' : '저장 '}</button>
               <button className='button2' type="button" onClick={handleCloseModal}>
                 닫기
               </button>
@@ -157,30 +188,7 @@ function Backlog() {
       <div className='line' />
 
       {/* 검색창 스타일 */}
-      <form style={{ position: 'fixed', right: 0, width: "400px" }} className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control bg-light border-0 small"
-            placeholder="Search for..."
-            aria-label="Search"
-            aria-describedby="basic-addon2"
-            value={searchValue}
-            onChange={(e) => setsearchValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                search();
-              }
-            }}
-          />
-          <div className="input-group-append">
-            <button className="btn btn-primary" type="button" onClick={search}>
-              <i className="fas fa-search fa-sm"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+
       <form style={{ position: 'fixed', right: 0, width: "400px" }} className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div className="input-group">
           <input
@@ -225,9 +233,9 @@ function Backlog() {
           <br />
         </div>
         <div>
-          {items.slice((page - 1) * 5, page * 5).map((item) => (
+          {backlogList.map((item) => (
             <tr className='in' key={item.backlogNo}>
-              <td>{item.backlogNo}</td>
+
               <td>{item.backlogName}</td>
               <td>{item.backlogContent}</td>
               <td>{item.backlogStatus}</td>
@@ -236,23 +244,30 @@ function Backlog() {
                 <button className='button2' onClick={() => handleEditItem(item)}>
                   수정
                 </button>
-                <button className='button2' onClick={() => deleteBacklog(item.backlogNo)}>
-                  삭제
-                </button>
+                <button className='button2' onClick={() =>
+                  deleted(item, window.location.reload())
+                }>삭제</button>
               </td>
+
             </tr>
           ))}
         </div>
       </table>
       <br />
-      <button className='button2' onClick={prevpage}>   {/*이전버튼*/}
-        이전
-      </button>
-      <span>{page}</span>           {/*페이지 번호 보여주기*/}
-      <button className='button2' onClick={nextpage}>   {/*다음버튼*/}
-        다음
-      </button>
+      <div>
+        <button className='button2' onClick={prevpage}> 이전</button>
+        {pageNumber.map((num) => (
+          <li key={num} onClick={() => setCurrentPage(num)}>
+            <button
+              style={currentPage === num ? { backgroundColor: 'orange' } : null}
 
+            >
+              {num}
+            </button>
+          </li>
+        ))}
+        <button className='button2' onClick={nextpage}>다음</button>
+      </div>
     </div>
   );
 }
