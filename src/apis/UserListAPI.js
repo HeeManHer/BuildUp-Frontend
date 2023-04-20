@@ -1,5 +1,5 @@
 import {SET_USER, CHANGE_USER, SAVE_USER} from "../modules/user";
-import User from '../Pages/project/User.json';
+import {SET_AUTHORITY} from "../modules/authority";
 
 /*restapi 가지고오는 기본 방식*/
 export function setUserList(projectNo) {
@@ -11,7 +11,7 @@ export function setUserList(projectNo) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             }
         }).then(response => response.json());
         dispatch({ type: SET_USER, payload: result.data });
@@ -26,7 +26,7 @@ export async function addUserList(userList, projectNo) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             }
             ,body: JSON.stringify(userList)
         })
@@ -41,7 +41,7 @@ export async function projectTitleEdit(projectNo, projectTitle) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             }, body: JSON.stringify({projectNo, projectTitle})
         });
 }
@@ -54,9 +54,25 @@ console.log({projectNo, employeeNo, roleNo});
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             }, body: JSON.stringify({projectNo, employeeNo, roleNo})
         });
+}
+
+export function getAuthority() {
+    const URL="http://localhost:8888/api/v1/projects/authority";
+
+    return async function (dispatch, getState) {
+        const result = await fetch(URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            }
+        }).then(response => response.json());
+        dispatch({ type: SET_AUTHORITY, payload: result.data });
+    }
 }
 
 export function changeUserList(user) {

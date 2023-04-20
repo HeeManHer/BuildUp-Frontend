@@ -1,5 +1,19 @@
-function Header() {
+import { useNavigate } from "react-router-dom";
+import { decodeJwt } from '../../utils/tokenUtils';
 
+function Header() {
+    const token = decodeJwt(window.localStorage.getItem("accessToken"));
+    const navigate = useNavigate();
+    const logout = () => {
+        alert("로그아웃합니다");
+        window.localStorage.removeItem("accessToken");
+        navigate("/",{replace: true});
+    }
+    if(token === null) {
+        alert("로그인 해주세요");
+        navigate("/",{replace: true});
+    }
+    
     return (
         // <!-- Topbar -->
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -19,27 +33,16 @@ function Header() {
 
                 {/* 유저 정보 */}
                 <li className="nav-item dropdown no-arrow">
-                    <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span className="mr-2 d-none d-lg-inline text-gray-600 small">허희만</span>
+                    <a className="nav-link dropdown-toggle">
+                        <span className="mr-2 d-none d-lg-inline text-gray-600">{token.sub}</span>
                     </a>
-                    {/* <!-- Dropdown - User Information --> */}
-                    <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="userDropdown">
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            내정보
-                        </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            프로젝트
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                </li>
+                <div className="topbar-divider d-none d-sm-block"></div>
+                <li className="nav-item dropdown no-arrow" onClick={logout}>
+                        <a className="nav-link dropdown-toggle">
                             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             로그아웃
                         </a>
-                    </div>
                 </li>
             </ul>
         </nav>

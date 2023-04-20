@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getProject, postProject } from '../../apis/NewprojectAPICalls';
+import { decodeJwt } from '../../utils/tokenUtils';
 import "../../css/project.css";
 
 function NewProject() {
@@ -12,6 +13,7 @@ function NewProject() {
   const [inviteList, setInviteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
+  const token = decodeJwt(window.localStorage.getItem("accessToken"));
 
   const { projectNo } = useParams();
 

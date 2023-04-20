@@ -6,7 +6,7 @@ export async function getProject() {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             }
         }).then(response => response.json());
     }
@@ -20,7 +20,7 @@ export async function postProject(project) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             },
             body: JSON.stringify(project)
         });
@@ -34,7 +34,7 @@ export async function postProject(project) {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "*/*",
-                    "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                    // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
                 }
             }).then(response => response.json()).then(data=>data.data[0]);
         }
@@ -48,7 +48,7 @@ export async function postProject(project) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             },
         }).then(response => response.json());
         

@@ -25,7 +25,7 @@ function ProjectSideBar() {
 
             {/* 프로젝트*/}
             <li className="nav-item">
-                <NavLink to="/">
+                <NavLink to="/mypage/newproject">
                     <a className="nav-link">
                         <i className="fas fa-fw fa-cog"></i>
                         <span>프로젝트</span>

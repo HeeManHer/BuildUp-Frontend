@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import "../../css/project.css";
 
-import { addUserList, setUserList, changeUserList, deleteUserList, deleteProjectList, projectTitleEdit, authorityEdit } from '../../apis/UserListAPI';
+import { addUserList, setUserList, changeUserList, deleteUserList, deleteProjectList, projectTitleEdit, authorityEdit, getAuthority } from '../../apis/UserListAPI';
 import { getProjectDetail } from '../../apis/NewprojectAPICalls';
 
 function Manager() {
@@ -25,13 +25,13 @@ function Manager() {
 
     const userList = useSelector(state => state.userReducer);
     const selectList = userList.map((user) => ({roleNo: user.roleNo, roleName : user.roleName}));
-    const authority = userList.map((user) => ({roleNo: user.roleNo, roleName : user.role}));
-    
+    const authorityType = useSelector(state => state.authorityReducer);
     
     useEffect(
         () => {
             dispatch(setUserList(projectNo));
             getProjectDetail(projectNo).then(data => setProject(data));
+            dispatch(getAuthority());
         },
         []
     )
@@ -40,6 +40,7 @@ function Manager() {
     const handlerSelect = (user, e) => {
         setSelected(e.target.value);
         authorityEdit(projectNo, user.employeeNo, e.target.value);
+        window.location.reload();
     }
 
     /* 프로젝트 명 수정 버튼 */
@@ -68,7 +69,7 @@ function Manager() {
     const onClickProjectDeleteBtn = () => {
 
         dispatch(deleteProjectList(projectNo));
-        navigate("../../../");
+        navigate("/mypage/newproject");
     }
     
 
@@ -270,7 +271,7 @@ function Manager() {
                             <td>{user.employeeNo}</td>
                             <td>{user.employeeEmail}</td>
                             <td><select onChange={(e) => handlerSelect(user,e)} value={user.roleNo}>
-                                {selectList.map((user) => (
+                                {authorityType.map((user) => (
                                 <option value={user.roleNo}>{user.roleName}
                                 
                                 </option>
@@ -284,10 +285,8 @@ function Manager() {
             <br />
             <br />
             <div className="button">
-                <button type="button" className='button4' onClick={handleOpenModal}>추가</button>
-                <button type="button" className='button4'>저장</button>
-                <button type="button" className='button4'>취소</button>
-                <button type="button" className='button4' onClick={onClickDeleteBtn}>삭제</button>
+                <button type="button" className='button4' style={{marginLeft : "210px"}}onClick={handleOpenModal}>팀원추가</button>
+                <button type="button" className='button4' onClick={onClickDeleteBtn}>팀원삭제</button>
             </div>
         </div>
     );
