@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getComment, addComment, deleteComment, updateComment } from "../../apis/CommentAPI";
 import CommentReducer from "../../modules/comment";
 
+//댓글 리스트 시작
 function CommentList({issueNo}) {
 
   const [value, setValue] = useState('');
@@ -19,7 +20,7 @@ function CommentList({issueNo}) {
    [comments]
    );
 
-  // console.log(issueNo)
+  // console.log(issueNo) 작동하는지 확인용
 
   const handleClick = (index, event) => {
     setValue(event.target.innerHTML);
@@ -31,6 +32,7 @@ function CommentList({issueNo}) {
     setValue(value);
   };
 
+  //댓글 수정
   const updateKeyDown = (key, event) => {
     if (event.key !== 'Enter') return;
 
@@ -40,7 +42,8 @@ function CommentList({issueNo}) {
     dispatch(updateComment({...modifyComment, replyContent: value}));
     dispatch(getComment(issueNo));
   };
-  
+
+  //댓글 삭제
   const deleteList = (no) => {
     dispatch(deleteComment(no));
     dispatch(getComment(issueNo));
@@ -55,6 +58,7 @@ function CommentList({issueNo}) {
         <div className='comment-row' key={key} style={{ display: 'flex', alignItems: 'center' }}>
           <div className='comment-id' style={{ marginRight: '1rem' }}>{item.employeeNo}</div>
           <div className='comment-content' style={{ flex: 1 }}>
+            {/* 댓글 수정 */}
             {update === key ? (
               <input
                 type='text'
@@ -66,6 +70,7 @@ function CommentList({issueNo}) {
             ) : (
               <>
                 <span onClick={(event) => handleClick(key, event)}>{item.replyContent}</span>
+                {/* 댓글삭제 */}
                 <button
                 type="button"
                   className='btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm'
@@ -76,6 +81,8 @@ function CommentList({issueNo}) {
               </>
             )}
           </div>
+
+          {/* 댓글 날짜 */}
           <div className='comment-date' style={{ marginLeft: '1rem' }}>{(item.replyDate)}</div>
         </div>
       );

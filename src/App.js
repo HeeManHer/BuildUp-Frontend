@@ -37,16 +37,16 @@ function App() {
             <Route path="changepassword" element={<Changepassword/>} />
           </Route>
         </Route> */}
-        <Route path="/" element={<Firstpage/>}/>
-        <Route path="/auth" element={<LoginLayout/>}>
-          <Route path="login" element={<Login/>}/>
-          <Route path="login/findpassword" element={<Findpassword/>}/>          
+        <Route path="/" element={<Firstpage />} />
+        <Route path="/auth" element={<LoginLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="login/findpassword" element={<Findpassword />} />
         </Route>
 
-        <Route path="mypage" element={<MypageLayout/>}>
-        <Route index element={<MyPage/>} />
-	        <Route path="changepassword" element={<Changepassword/>}/>
-	        <Route path="newproject" element={<NewProject/>}/>
+        <Route path="mypage" element={<MypageLayout />}>
+          <Route index element={<MyPage />} />
+          <Route path="changepassword" element={<Changepassword />} />
+          <Route path="newproject" element={<NewProject />} />
         </Route>
 
 
