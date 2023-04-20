@@ -22,11 +22,12 @@ function Issue() {
     const [oneissue, setoneissue] = useState({ projectNo });
     const [showModal, setShowModal] = useState(false);
     const IssueReducer = useSelector(state => state.IssueReducer);
-    const backlogList = useSelector(state => state.BacklogReducer);
+    const backlogList = useSelector(state => state.BacklogReducer.data);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const currentIssues = IssueReducer.data;
     const PageInfo = IssueReducer.pageInfo;
 
+    console.log(backlogList);
     const dispatch = useDispatch();
     const save = () => {
         const saveIssue = {

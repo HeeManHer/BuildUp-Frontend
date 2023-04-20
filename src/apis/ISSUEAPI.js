@@ -84,7 +84,7 @@ export function GetBacklogListAPI(projectNo) {
                 "Accept": "*/*"
             },
         }).then(res => res.json());
-        dispatch({ type: GET_BACKLOG, payload: result.data });
+        dispatch({ type: GET_BACKLOG, payload: result });
     }
 }
 
