@@ -22,11 +22,12 @@ function Issue() {
     const [oneissue, setoneissue] = useState({ projectNo });
     const [showModal, setShowModal] = useState(false);
     const IssueReducer = useSelector(state => state.IssueReducer);
-    const backlogList = useSelector(state => state.BacklogReducer);
+    const backlogList = useSelector(state => state.BacklogReducer.data);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const currentIssues = IssueReducer.data;
     const PageInfo = IssueReducer.pageInfo;
 
+    console.log(backlogList);
     const dispatch = useDispatch();
     const save = () => {
         const saveIssue = {
@@ -168,7 +169,7 @@ function Issue() {
                     {/* 왼쪽 목록을 볼 수 있는 영역 */}
                     <header>이슈</header>
                     <ul>
-                        <br />
+                        {/* <br /> */}
                         {currentIssues.map(issue => (
                             <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}>
                                 <a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>{issue.issueName}</a>
@@ -299,7 +300,7 @@ function Issue() {
                         </select>
                     </label>
                     <br />
-                    <Wan issueNo={oneissue.issueNo}/>
+                    <Wan />
                     <button type="submit" onClick={() => {
                         update(); setIsModal2(false)
                         window.location.reload();
