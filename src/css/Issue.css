@@ -49,6 +49,7 @@
     width: 150px;
     height: 100vh;
     display: flex;
+    align-items: center;
     flex-direction: column;
     border: 1px solid cornflowerblue;
     background-color: white;
@@ -63,13 +64,14 @@
 .issuelist>ul>li {
     list-style-type: none;
     text-align: left;
-
+    line-height: 70px;
 }
 
 .issuelist>ul {
     display: flex;
     flex-direction: column;
     line-height: 70px;
+    padding: 0;
 }
 
 .head1 {
@@ -183,9 +185,10 @@
     border-top: 1px solid black;
 }
 
+
 .pagenum {
     display: inline-block;
-    margin: 5px;
+    margin: 3px;
 }
 
 .pagenum>span {
@@ -205,6 +208,10 @@
 
 }
 
+.pageset {
+    display: inline-block;
+}
+
 .prevbtn-text,
 .nextbtn-text {
     background-color: #eee;
@@ -219,4 +226,5 @@
 .pagebtn {
     display: flex;
     justify-content: space-between;
+    width: 80px;
 }
