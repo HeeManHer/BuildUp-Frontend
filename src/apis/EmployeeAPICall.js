@@ -17,7 +17,7 @@ export const callGetEmployeeAPI = ({employeeNo}) => {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
             }
         })
         .then(response => response.json());
@@ -53,7 +53,7 @@ export const callLoginAPI = ({form}) => {
         // result에 data가 없어서 안 뜨는 것 같음.
         console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
         if(result.status === 200){
-            window.localStorage.setItem('accessToken', result.data.accessToken);            
+            // window.localStorage.setItem('accessToken', result.data.accessToken);            
         }
         dispatch({ type: POST_LOGIN,  payload: result });
         
