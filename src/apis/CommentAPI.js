@@ -4,6 +4,7 @@ export function getComment(issueNo) {
 
     const RequestUrl = "http://localhost:8888/api/v1/issue/"+issueNo+"/comments";
 
+
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {

@@ -52,4 +52,3 @@ const IssueReducer = handleActions(
 );
 
 export default IssueReducer;
-

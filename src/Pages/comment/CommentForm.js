@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComment, addComment, deleteComment, updateComment } from "../../apis/CommentAPI";
 
+// 댓글 등록
 function CommentForm({ issueNo }) {
     const [comment, setComment] = useState({ issueNo: issueNo, employeeNo: '20230329', replyContent: "" });
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function CommentForm({ issueNo }) {
         setComment({ issueNo: issueNo, employeeNo: '20230329', replyContent: '' });
       };
 
-
+    // 댓글 등록 화면
     return (
         <li className='comment-form'>
             <form>
