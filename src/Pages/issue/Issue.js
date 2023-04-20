@@ -169,7 +169,7 @@ function Issue() {
                     {/* 왼쪽 목록을 볼 수 있는 영역 */}
                     <header>이슈</header>
                     <ul>
-                        <br />
+                        {/* <br /> */}
                         {currentIssues.map(issue => (
                             <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}>
                                 <a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>{issue.issueName}</a>
@@ -300,7 +300,7 @@ function Issue() {
                         </select>
                     </label>
                     <br />
-                    <Wan issueNo={oneissue.issueNo}/>
+                    <Wan />
                     <button type="submit" onClick={() => {
                         update(); setIsModal2(false)
                         window.location.reload();
