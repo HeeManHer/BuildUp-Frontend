@@ -1,19 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { decodeJwt } from '../../utils/tokenUtils';
+import { callLogoutAPI } from "../../apis/EmployeeAPICall";
+import { useDispatch } from "react-redux";
 
 function Header() {
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    if (token === null) {
+        alert("로그인 해주세요");
+        navigate("/", { replace: true });
+    }
+
     const logout = () => {
         alert("로그아웃합니다");
         window.localStorage.removeItem("accessToken");
-        navigate("/",{replace: true});
+        navigate("/", { replace: true });
+        dispatch(callLogoutAPI());
     }
-    if(token === null) {
-        alert("로그인 해주세요");
-        navigate("/",{replace: true});
-    }
-    
+
     return (
         // <!-- Topbar -->
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -39,10 +46,10 @@ function Header() {
                 </li>
                 <div className="topbar-divider d-none d-sm-block"></div>
                 <li className="nav-item dropdown no-arrow" onClick={logout}>
-                        <a className="nav-link dropdown-toggle">
-                            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            로그아웃
-                        </a>
+                    <a className="nav-link dropdown-toggle">
+                        <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        로그아웃
+                    </a>
                 </li>
             </ul>
         </nav>
