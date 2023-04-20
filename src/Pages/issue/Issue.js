@@ -300,7 +300,7 @@ function Issue() {
                         </select>
                     </label>
                     <br />
-                    <Wan />
+                    <Wan issueNo={oneissue.issueNo} />
                     <button type="submit" onClick={() => {
                         update(); setIsModal2(false)
                         window.location.reload();
