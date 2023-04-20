@@ -2,103 +2,103 @@ import SprintCreate from "./SprintCreate";
 import React, { useState, useEffect } from 'react';
 import { getSprint, insertSprint, updateSprint, patchSprint, deleteSprint } from '../../apis/SprintAPI.js';
 import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
+
 
 function SprintList() {
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [state, setState] = useState('');
-    const [startday, setStartday] = useState('');
-    const [endday, setEndday] = useState('');
-    const [issuename, setBIssuename] = useState('');
+    // const [title, setTitle] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [state, setState] = useState('');
+    // const [startday, setStartday] = useState('');
+    // const [endday, setEndday] = useState('');
+    // // const [issuename, setBIssuename] = useState('');
 
-    const [isModal1, setIsModal1] = useState(false);
-    const [hoveredIssue, setHoveredIssue] = useState(null);
-    const [onesprint, setonesprint] = useState({});
-    const [showModal, setShowModal] = useState(false);
-    // const issueList = useSelector(state => state.SprintReducer);
-    // const backlogList = useSelector(state => state.BacklogReducer);
+    // const [isModal1, setIsModal1] = useState(false);
+    // // const [hoveredIssue, setHoveredIssue] = useState(null);
+    // const [onesprint, setonesprint] = useState({});
+    // const [showModal, setShowModal] = useState(false);
+    // // const issueList = useSelector(state => state.SprintReducer);
 
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
-    const [itemsPerPage] = useState(5); // 페이지 당 보여줄 항목 수
-    const [pageCount, setPageCount] = useState(Math.ceil(sprintList.length / itemsPerPage)); // 전체 페이지 수
+    // const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
+    // const [itemsPerPage] = useState(5); // 페이지 당 보여줄 항목 수
+    // const [pageCount, setPageCount] = useState(Math.ceil(sprintList.length / itemsPerPage)); // 전체 페이지 수
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const sprintReducer = useSelector(state => state.SprintReducer);
-    const sprintList=sprintReducer.data;
+    // const sprintReducer = useSelector(state => state.SprintReducer);
+    // const sprintList=sprintReducer.data;
 
-    useEffect(() => {
-        dispatch(getSprint());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getSprint());
+    // }, []);
 
-    const save = () => {
-        const saveSprint = {
-            sprintName: title, sprintContent: description, sprintState: state, issueNo: issuename
-        };
+    // const save = () => {
+    //     const saveSprint = {
+    //         sprintName: title, sprintContent: description, sprintState: state,
+    //     };
 
-        dispatch(SaveIssueAPI(saveIssue));
-        setTitle('');
-        setDescription('');
-        setState('');
-        setStartday('');
-        setEndday('');
-        setIssuename('');
-        setIsModal1(false);
-    }
+    //     setTitle('');
+    //     setDescription('');
+    //     setState('');
+    //     setStartday('');
+    //     setEndday('');
+    //     // setIssuename('');
+    //     setIsModal1(false);
+    // }
 
-    const update = () => {
-        dispatch(UpdateIssueAPI(onesprint));
+    // const update = () => {
+    //     dispatch(UpdateSprintAPI(onesprint));
 
-    };
+    // };
 
-    const deleted = () => {
-        dispatch(deleteSprint(onesprint));
-    }
+    // const deleted = () => {
+    //     dispatch(deleteSprint(onesprint));
+    // }
 
-    const nextpage = () => {
-        setCurrentPage(currentPage + 1);
-    }
+    // const nextpage = () => {
+    //     setCurrentPage(currentPage + 1);
+    // }
 
-    const prevpage = () => {
-        setCurrentPage(currentPage - 1);
-    }
+    // const prevpage = () => {
+    //     setCurrentPage(currentPage - 1);
+    // }
 
-    const handleTitleChange = (event) => setTitle(event.target.value);
-    const handleDescriptionChange = (event) => setDescription(event.target.value);
-    const handleStateChange = (event) => setState(event.target.value);
-    const handleIssuegnameChange = (event) => setIssuename(event.target.value);
-    const handleStartdayChange = (event) => setStartDAte(event.target.value);
+    // const handleTitleChange = (event) => setTitle(event.target.value);
+    // const handleDescriptionChange = (event) => setDescription(event.target.value);
+    // const handleStateChange = (event) => setState(event.target.value);
+    // // const handleIssuegnameChange = (event) => setIssuename(event.target.value);
+    // const handleStartdayChange = (event) => setStartDate(event.target.value);
 
 
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    // const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    useEffect(
-        () => {
-            dispatch(getSprint());
-        },
-        []
-    );
+    // useEffect(
+    //     () => {
+    //         dispatch(getSprint());
+    //     },
+    //     []
+    // );
 
-    const openSprintCreateModal = () => {
-        setModalIsOpen(true);
-    };
+    // const openSprintCreateModal = () => {
+    //     setModalIsOpen(true);
+    // };
 
-    const handleCloseModal = () => {
-        setModalIsOpen(false);
-    };
+    // const handleCloseModal = () => {
+    //     setModalIsOpen(false);
+    // };
 
 
     return (
         <>
             <div className="newproject">
                 <h1></h1>
-                <button id="sprintCreateBtn" class="button1" onClick={openSprintCreateModal}>스프린트 생성</button>
+                {/* <button id="sprintCreateBtn" class="button1" onClick={openSprintCreateModal}>스프린트 생성</button> */}
             </div>
-            <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
+            {/* <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} /> */}
             <hr className="line" />
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
                 {sprintList.map(sprint=>(
 
                 <div style={{
@@ -157,7 +157,7 @@ function SprintList() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }
