@@ -51,6 +51,16 @@
 
 }
 
+.in2 {
+    display: flex;
+    width: 1680px;
+    align-items: center;
+    padding-left: 10px;
+    justify-content: space-between;
+
+}
+
+
 .blue {
     display: flex;
     background-color: #4e73df;
@@ -88,4 +98,17 @@
 
 .line3 {
     border-top: 1px solid black;
+}
+
+.pagebutton {
+    display: flex;
+    justify-content: center;
+
+}
+
+.pageno {
+    display: inline-block;
+    margin-right: 10px;
+
+
 }

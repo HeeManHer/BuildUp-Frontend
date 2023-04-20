@@ -26,7 +26,7 @@ function Backlog() {
       pageNumber.push(i);
     }
   }
-
+  //전체 백로그들 조회
   useEffect(
     () => {
       dispatch(getBacklog(projectNo, currentPage, searchValue));
@@ -46,46 +46,60 @@ function Backlog() {
     window.location.reload();
   };
 
+  //deleted 호출 delete api 전송
   const deleted = (oneitem) => {
     dispatch(deleteBacklog(oneitem));
   }
 
 
 
-  // // 다음 페이지로 이동
-  // const nextpage = () => {
-  //   if (currentPage + 1 <= pageInfo.endPage) {
-  //     setCurrentPage(currentPage + 10)
-  //   } else {
-  //     setCurrentPage(pageInfo.endPage + 1)
-  //   };
-  // };
-
-  // // 이전 페이지로 이동
-  // const prevpage = () => {
-  //   if (currentPage - 1 >= 1) {
-  //     setCurrentPage(currentPage - 1);
-  //   };
-  // };
-
-
+  // 다음 페이지로 이동
   const nextpage = () => {
-    const next = Math.min(currentPage + 10, pageInfo.maxPage - currentPage);
+    if (currentPage + 1 <= pageInfo.endPage) {
+      setCurrentPage(currentPage + 1)
+    } else {
+      setCurrentPage(pageInfo.endPage + 1)
+    };
+  };
+  // 10페이지 추가
+  const doublenextpage = () => {
+    const next = Math.min(currentPage + 10, pageInfo.maxPage);
     setCurrentPage(next);
   }
-
+  // 이전 페이지로 이동
   const prevpage = () => {
     if (currentPage - 1 >= 1) {
-      setCurrentPage(Math.max(currentPage - 10, 1));
-    }
-  }
+      setCurrentPage(currentPage - 1);
+    };
+  };
 
+  // 10페이지 뺴기
+  const doubleprevpage = () => {
+    if (currentPage - 10 >= 1) {
+      setCurrentPage(currentPage - 10, pageInfo.startPage);
+    };
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //handleSubmit이벤트 정의
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    //selectedItemIndex -1이면 추가
     if (selectedItemIndex === -1) {
       dispatch(postBacklog(oneitem));
     } else {
+      //아니면 수정
       dispatch(putBacklog(oneitem));
     }
     setOneitem({ projectNo });
@@ -214,12 +228,8 @@ function Backlog() {
         </div>
       </form>
 
-
-
-
       <br />
       <br />
-
 
       <table>
         <div>
@@ -236,10 +246,10 @@ function Backlog() {
           {backlogList.map((item) => (
             <tr className='in' key={item.backlogNo}>
 
-              <td>{item.backlogName}</td>
-              <td>{item.backlogContent}</td>
-              <td>{item.backlogStatus}</td>
-              <td>{item.backlogPriority}</td>
+              <td className='in2'>{item.backlogName}</td>
+              <td className='in2'>{item.backlogContent}</td>
+              <td className='in2'>{item.backlogStatus}</td>
+              <td className='in2'>{item.backlogPriority}</td>
               <td>
                 <button className='button2' onClick={() => handleEditItem(item)}>
                   수정
@@ -254,10 +264,12 @@ function Backlog() {
         </div>
       </table>
       <br />
-      <div>
-        <button className='button2' onClick={prevpage}> 이전</button>
+
+      <div className='pagebutton'>
+        <span> <button className='button2' onClick={doubleprevpage}> ◀◀ </button></span>
+        <span> <button className='button2' onClick={prevpage}> ◀ </button></span>
         {pageNumber.map((num) => (
-          <li key={num} onClick={() => setCurrentPage(num)}>
+          <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
             <button
               style={currentPage === num ? { backgroundColor: 'orange' } : null}
 
@@ -266,9 +278,11 @@ function Backlog() {
             </button>
           </li>
         ))}
-        <button className='button2' onClick={nextpage}>다음</button>
+
+        <span><button className='button2' onClick={nextpage}>▶</button></span>
+        <span><button className='button2' onClick={doublenextpage}>▶▶</button></span>
       </div>
-    </div>
+    </div >
   );
 }
 export default Backlog;
