@@ -10,7 +10,7 @@ export function getBacklog(projectNo, pageNo, searchValue) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             }
         }).then(response => response.json());
 
@@ -29,7 +29,7 @@ export function postBacklog(backlog) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             },
             body: JSON.stringify(backlog)
         }).then(response => response.json());
@@ -47,7 +47,7 @@ export function putBacklog(backlog) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             },
             body: JSON.stringify(backlog)
         }).then(response => response.json());
@@ -67,7 +67,7 @@ export function deleteBacklog(backlog) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             },
         })
     }
@@ -84,7 +84,7 @@ export function searchBacklog(searchValue, projectNo) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*",
-                "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             },
         }).then(response => response.json());
 
