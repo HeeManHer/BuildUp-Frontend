@@ -1,9 +1,13 @@
 .border {
   width: 500px;
+  
   align-items: absolute;
   margin: auto;
   margin-top: 200px;
 
+}
+.myname {
+  border: #0e1010;
 }
 
 .find-box {

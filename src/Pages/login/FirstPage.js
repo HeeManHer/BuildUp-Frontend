@@ -12,13 +12,14 @@ function Firstpage() {
 
     return(
         <>
-        <img src={첫페이지} style={{height:'750px'}}/>
         <div className="first-box">
+        {/* <img src={첫페이지} style={{height:'750px'}}/> */}
                 <button 
+                style={{border:'none'}}
                 className="start-btn"
                 onClick={onClickHandler}
                 >
-                시작하기
+                <img src={첫페이지} style={{height:'950px', width:'1900px'}}/>
                 </button> 
         </div>
         </>
