@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComment, addComment, deleteComment, updateComment } from "../../apis/CommentAPI";
+import { decodeJwt } from "../../utils/tokenUtils";
+import "../../css/Comment.css";
 
 // 댓글 등록
 function CommentForm({ issueNo }) {
-    const [comment, setComment] = useState({ issueNo: issueNo, employeeNo: '20230329', replyContent: "" });
+    const token = decodeJwt(window.localStorage.getItem("accessToken"));
+    const [comment, setComment] = useState({ issueNo: issueNo, employeeNo: token.sub, replyContent: "" });
     const dispatch = useDispatch();
 
     const handleSubmit = event => {
         event.preventDefault();
         dispatch(addComment(comment));
         dispatch(getComment(issueNo));
-        setComment({ issueNo: issueNo, employeeNo: '20230329', replyContent: '' });
+        setComment({ issueNo: issueNo, employeeNo: token.sub, replyContent: '' });
       };
 
     // 댓글 등록 화면
     return (
-        <li className='comment-form'>
+        <div className='comment-form'>
             <form>
                 <span className='ps_box'>
                     <input
@@ -35,7 +38,7 @@ function CommentForm({ issueNo }) {
                     <span className="text">등록</span>
                 </button>
             </form>
-        </li>
+        </div>
     );
 }
 
