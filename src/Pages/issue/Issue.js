@@ -169,7 +169,7 @@ function Issue() {
                     {/* 왼쪽 목록을 볼 수 있는 영역 */}
                     <header>이슈</header>
                     <ul>
-                        {/* <br /> */}
+                        <br />
                         {currentIssues.map(issue => (
                             <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}>
                                 <a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>{issue.issueName}</a>
@@ -295,7 +295,9 @@ function Issue() {
                         </select>
                     </label>
                     <br />
-                    <Wan issueNo={oneissue.issueNo} />
+                    {/* 이부분이 댓글기능에 이슈번호를 불러오는 부분 */}
+                    {/* 만약 이부분 없으면 CommentAPI.js에 getComment 부분이 안된다. */}
+                    <Wan issueNo={oneissue.issueNo}/>
                     <button className="submitbtn" type="submit" onClick={() => {
                         update(); setIsModal2(false)
                         window.location.reload();

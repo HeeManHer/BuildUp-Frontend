@@ -52,7 +52,6 @@ function Backlog() {
   }
 
 
-
   // 다음 페이지로 이동
   const nextpage = () => {
     if (currentPage + 1 <= pageInfo.endPage) {
@@ -80,18 +79,6 @@ function Backlog() {
     };
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
   //handleSubmit이벤트 정의
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -118,11 +105,6 @@ function Backlog() {
     dispatch(searchBacklog(searchValue, projectNo));
 
   }
-
-
-
-
-
 
   return (
     <div>
