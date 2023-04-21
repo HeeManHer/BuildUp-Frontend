@@ -29,7 +29,7 @@ function Mypage() {
         () => {    
             console.log('token', token.sub);
             if(token !== null) {
-                dispatch(callGetEmployeeAPI({	// 구매 정보 조회
+                dispatch(callGetEmployeeAPI({	
                     employeeNo: token.sub
                 }));            
             }
