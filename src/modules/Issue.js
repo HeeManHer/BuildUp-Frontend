@@ -22,6 +22,7 @@ const initialState =
 
 /* 액션 타입 설정 */
 export const CREATE_ISSUE = 'CREATE_ISSUE';
+export const GET_SPRINT_ISSUE = 'GET_SPRINT_ISSUE';
 export const UPDATE_ISSUE = 'UPDATE_ISSUE';
 export const SAVE_ISSUE = 'SAVE_ISSUE';
 export const DELETE_ISSUE = "DELETE_ISSUE";
@@ -30,6 +31,7 @@ export const SEARCH_ISSUE = "SEARCH_ISSUE";
 /*  액션 함수 */
 const actions = createActions({
     [CREATE_ISSUE]: () => { },
+    [GET_SPRINT_ISSUE]: () => { },
     [UPDATE_ISSUE]: () => { },
     [SAVE_ISSUE]: () => { },
     [DELETE_ISSUE]: () => { },
@@ -44,6 +46,7 @@ const IssueReducer = handleActions(
             return [...state, payload]
         },
         [CREATE_ISSUE]: (state, { payload }) => payload,
+        [GET_SPRINT_ISSUE]: (state, { payload }) => payload,
         [UPDATE_ISSUE]: (state, { payload }) => state.map(issue => issue.id == payload.id ? payload : issue),
         [DELETE_ISSUE]: (state, { payload }) => state.filter(issue => issue.id !== payload.id),
         [SEARCH_ISSUE]: (state, { payload }) => payload
