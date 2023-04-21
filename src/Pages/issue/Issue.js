@@ -133,33 +133,33 @@ function Issue() {
     return (
         <>
             <h1 className="head1">이슈
+
+                <form style={{ position: 'sticky', top: '100px', left: '1000px', width: "400px" }} class="issuesearch">
+                    <div class="input-group">
+
+                        {/* <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2" value={searchValue} onChange={e => setsearchValue(e.target.value)} /> */}
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            aria-label="Search" aria-describedby="basic-addon2"
+                            value={searchValue}
+                            onChange={e => setsearchValue(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    search();
+                                }
+                            }}
+                        />
+
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" onClick={search}>
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
                 <button className="createissue" onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
             </h1>
-            <form style={{ position: 'fixed', right: 0, width: "400px" }}
-                class="issuesearch">
-                <div class="input-group">
-
-                    {/* <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2" value={searchValue} onChange={e => setsearchValue(e.target.value)} /> */}
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2"
-                        value={searchValue}
-                        onChange={e => setsearchValue(e.target.value)}
-                        onKeyDown={e => {
-                            if (e.key === 'Enter') {
-                                search();
-                            }
-                        }}
-                    />
-
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" onClick={search}>
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-
-                </div>
-            </form>
 
 
             <h2 className="line" />
@@ -196,12 +196,7 @@ function Issue() {
                         </button>
                     </div>
                 </div>
-                <div className="issuemain">
-                    {/* 오른쪽 메인 영역 */}
-                    <header>{hoveredIssue ? hoveredIssue : 'Issue 목록'}</header>
-                    <p>Issue 내용</p>
-                    <hr className="line2" />
-                </div>
+
 
 
                 <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
@@ -242,19 +237,19 @@ function Issue() {
                             상태:
                             <select value={situation} onChange={handleSituationChange}>
                                 <option value="">선택</option>
-                                <option value="expected">예정</option>
-                                <option value="proceeding">진행중</option>
-                                <option value="success">완료</option>
+                                <option value="예정">예정</option>
+                                <option value="진행중">진행중</option>
+                                <option value="완료">완료</option>
                             </select>
                         </label>
                         <br />
                     </form>
-                    <button type="submit" onClick={() => {
+                    <button className="submit1btn" type="submit" onClick={() => {
                         save();
                         window.location.reload();
                     }}>생성</button>
 
-                    <button type="button" onClick={() => { setIsModal1(false) }}>닫기</button>
+                    <button className="canclebtn" type="button" onClick={() => { setIsModal1(false) }}>닫기</button>
                 </Modal>
             </div>
 
@@ -272,7 +267,7 @@ function Issue() {
                     <textarea className="descriptiontext" value={oneissue.issueContent} onChange={e => setoneissue({ ...oneissue, issueContent: e.target.value })} />
                     <br />
                     <label>
-                        우선순위:
+                        우선순위:&nbsp;
                         <select value={oneissue.issuePriority} onChange={e => setoneissue({ ...oneissue, issuePriority: e.target.value })}>
                             <option value="">선택</option>
                             <option value="긴급">긴급</option>
@@ -303,15 +298,15 @@ function Issue() {
                     {/* 이부분이 댓글기능에 이슈번호를 불러오는 부분 */}
                     {/* 만약 이부분 없으면 CommentAPI.js에 getComment 부분이 안된다. */}
                     <Wan issueNo={oneissue.issueNo}/>
-                    <button type="submit" onClick={() => {
+                    <button className="submitbtn" type="submit" onClick={() => {
                         update(); setIsModal2(false)
                         window.location.reload();
                     }}>수정</button>
-                    <button onClick={() => { setShowModal(true) }}>삭제</button>
+                    <button className="deletebtn" onClick={() => { setShowModal(true) }}>삭제</button>
                     {showModal && (
                         <div className="modalaa">
                             <div className="modal-content">
-                                <p className="deletemessage">정말로 삭제하시겠습니까?</p>
+                                <p className="deletemessage">{oneissue.issueName}을 삭제하시겠습니까?</p>
                                 <button onClick={() => {
                                     deleted(oneissue);
                                     setIsModal2(false);
