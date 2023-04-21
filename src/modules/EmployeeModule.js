@@ -1,6 +1,6 @@
 import { createActions, handleActions } from 'redux-actions';
 
-const initialState = [];
+const initialState = {};
 
 export const POST_LOGIN = 'login/POST_LOGIN';
 export const GET_EMPLOYEE = 'mypage/GET_EMPLOYEE';
