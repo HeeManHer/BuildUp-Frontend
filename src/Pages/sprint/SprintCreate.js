@@ -1,9 +1,104 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import "../../css/sprint.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { SetIssueAPI } from "../../apis/ISSUEAPI";
+import { useParams } from "react-router-dom";
+import { setUserList } from "../../apis/UserListAPI";
 
 function SprintCreate(props) {
-    const { modalIsOpen, handleCloseModal } = props;
+    const dispatch = useDispatch();
 
+    const { projectNo } = useParams();
+
+    const { modalIsOpen, handleCloseModal } = props;
+    const userList = useSelector(state => state.userReducer);
+    const issueReducer = useSelector(state => state.IssueReducer);
+
+    const issueList = issueReducer.data;
+    const pageInfo = issueReducer.pageInfo;
+
+    const [onesprint, setonesprint] = useState({sprintIssue: []});
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const pageNumber = [];
+    if (pageInfo) {
+        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            pageNumber.push(i);
+        }
+    }
+
+    useEffect(
+        () => {
+            dispatch(setUserList(projectNo));
+        },
+        []
+    );
+
+    useEffect(
+        () => {
+            dispatch(SetIssueAPI(projectNo, currentPage));
+        },
+        [currentPage]
+    );
+
+
+
+    const sprintInfo = (e) => {
+        setonesprint({
+            ...onesprint,
+            [e.target.name]: e.target.value
+        })
+    }
+
+const issueCheck=(e)=>{
+if(e.target.checked){
+    setonesprint({
+        ...onesprint,
+        sprintIssue:  [...onesprint.sprintIssue,{[e.target.name]:e.target.value}]
+    })
+}else{
+    setonesprint({
+        ...onesprint,
+        sprintIssue: onesprint.sprintIssue.filter(item=>item.issueNo !== e.target.value)
+    })
+}
+}
+
+const changeManager=(e)=>{
+    setonesprint({
+        ...onesprint,
+        sprintIssue:  onesprint.sprintIssue.map(item=>{
+            if(item.issueNo !== e.target.id){
+                return item;
+            }else{
+                return {
+                    ...item,[e.target.name]: e.target.value
+                }
+            }
+        })
+    })
+}
+
+
+    const nextpage = () => {
+        if (currentPage + 1 <= pageInfo.maxPage) {
+            setCurrentPage(currentPage + 1)
+        }
+    };
+
+    const prevpage = () => {
+        if (currentPage - 1 >= 1){
+            setCurrentPage(currentPage - 1)
+        }
+    };
+
+    console.log(onesprint);
+
+    const startsprint = () => {
+
+    }
 
     return (
         <div>
@@ -27,31 +122,28 @@ function SprintCreate(props) {
                     </h5>
                 </div>
                 <div style={{ margin: "20px 0", position: "relative" }}>
+
                     <div style={{ marginBottom: "20px" }}>
                         <h2>스프린트 생성</h2>
                     </div>
-                    <label style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", width: "120px", textAlign: "right" }}>스프린트 이름 : </label>
-                    <input type="text" style={{ width: "calc(80% - 120px)", display: "inline-block", verticalAlign: "top" }} />
+
+                    <label className="sprintcreatelabel">스프린트 이름 : </label>
+                    <input type="text" classname="sprintcreatetext1" name="sprintName" onChange={sprintInfo} />
                     <br />
-                    <label style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", width: "120px", textAlign: "right" }}>기간 설정 : </label>
-                    <input type="text" style={{ width: "calc(80% - 120px)", display: "inline-block", verticalAlign: "top" }} />
+
+                    <label className="sprintcreatelabel">시작 날짜 : </label>
+                    <input type="date" classname="sprintcreatetext1" name="sprintStartday" onChange={sprintInfo} />
                     <br />
-                    <label style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", width: "120px", textAlign: "right" }}>시작 날짜 : </label>
-                    <input type="text" style={{ width: "calc(80% - 120px)", display: "inline-block", verticalAlign: "top" }} />
+
+                    <label className="sprintcreatelabel">종료 날짜 : </label>
+                    <input type="date" classname="sprintcreatetext1" name="sprintEndday" onChange={sprintInfo} />
                     <br />
-                    <label style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", width: "120px", textAlign: "right" }}>종료 날짜 : </label>
-                    <input type="text" style={{ width: "calc(80% - 120px)", display: "inline-block", verticalAlign: "top" }} />
-                    <br />
-                    <label style={{ marginRight: "10px", display: "inline-block", verticalAlign: "top", width: "120px", textAlign: "right" }}>스프린트 내용 : </label>
-                    <input type="text" style={{
-                        width: "calc(80% - 120px)", height: "80px", display: "inline-block",
-                        verticalAlign: "top", marginBottom: "20px"
-                    }} />
-                    <br />
+
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <label id="issueList" style={{ marginRight: "10px", textAlign: "right" }}>
+                        <label classname="issueList">
                             이슈 목록 :
                         </label>
+
                         <table style={{ border: "1px solid black", width: "100%", height: "40px" }}>
                             <thead>
                                 <tr>
@@ -62,88 +154,51 @@ function SprintCreate(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <select>
-                                            <option value="담당자1">허희만</option>
-                                            <option value="담당자2">박완규</option>
-                                            <option value="담당자3">조평훈</option>
-                                            <option value="담당자4">남효정</option>
-                                            <option value="담당자5">이준성</option>
-                                            <option value="담당자6">최명건</option>
-                                            <option value="담당자7">염진호</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <select>
-                                            <option value="담당자1">허희만</option>
-                                            <option value="담당자2">박완규</option>
-                                            <option value="담당자3">조평훈</option>
-                                            <option value="담당자4">남효정</option>
-                                            <option value="담당자5">이준성</option>
-                                            <option value="담당자6">최명건</option>
-                                            <option value="담당자7">염진호</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <select>
-                                            <option value="담당자1">허희만</option>
-                                            <option value="담당자2">박완규</option>
-                                            <option value="담당자3">조평훈</option>
-                                            <option value="담당자4">남효정</option>
-                                            <option value="담당자5">이준성</option>
-                                            <option value="담당자6">최명건</option>
-                                            <option value="담당자7">염진호</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <input type="checkbox" />
-                                    </td>
-                                    <td style={{ border: "1px solid black" }}>이슈 이름</td>
-                                    <td style={{ border: "1px solid black" }}>이슈 내용</td>
-                                    <td style={{ border: "1px solid black" }}>
-                                        <select>
-                                            <option value="담당자1">허희만</option>
-                                            <option value="담당자2">박완규</option>
-                                            <option value="담당자3">조평훈</option>
-                                            <option value="담당자4">남효정</option>
-                                            <option value="담당자5">이준성</option>
-                                            <option value="담당자6">최명건</option>
-                                            <option value="담당자7">염진호</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                {issueList.map(issue =>
+                                    <tr>
+                                        <td style={{ border: "1px solid black" }}>
+                                            <input type="checkbox" name="issueNo" value={issue.issueNo} onChange={issueCheck}/>
+                                        </td>
+                                        <td style={{ border: "1px solid black" }}>{issue.issueName}</td>
+                                        <td style={{ border: "1px solid black" }}>{issue.issueContent}</td>
+                                        <td style={{ border: "1px solid black" }}>
+                                            <select name="employeeNo" id={issue.issueNo} value={null} onChange={changeManager}>
+                                                <option value=""></option>
+                                                {userList.map(user =>
+                                                    <option value={user.employeeNo}>{user.employeeName}</option>
+                                                )}
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                )}
+
                             </tbody>
                         </table>
+
+
+                        <div >
+                            <button className='button2' onClick={prevpage}> ◀ </button>
+                            {pageNumber.map((num) => (
+                                <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                                    <button
+                                        style={currentPage === num ? { backgroundColor: 'orange' } : null}
+                                    >
+                                        {num}
+                                    </button>
+                                </li>
+                            ))}
+                            <button className='button2' onClick={nextpage}>▶</button>
+                        </div>
                     </div>
                     <br />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }} >시작</button>
+                        <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }} 
+                        onclick={startsprint}>시작</button>
                         <button id="sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
                     </div>
                 </div>
-                
+
             </Modal>
         </div>
     );
