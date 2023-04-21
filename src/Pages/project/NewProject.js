@@ -30,7 +30,7 @@ function NewProject() {
   useEffect(
     () => {
       if (token !== null) {
-        dispatch(callGetEmployeeAPI({	// 구매 정보 조회
+        dispatch(callGetEmployeeAPI({   // 구매 정보 조회
           employeeNo: token.sub
         }));
       }

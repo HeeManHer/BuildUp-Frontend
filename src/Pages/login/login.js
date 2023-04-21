@@ -31,6 +31,8 @@ function Login() {
         if (loginEmployee.status === 200) {
             console.log("[Login] Login SUCCESS {}", loginEmployee);
             navigate("/mypage/newproject", { replace: true });
+        } else {
+            alert("아이디 혹은 비밀번호가 일치하지 않습니다.")
         }
     }
         , [loginEmployee]);

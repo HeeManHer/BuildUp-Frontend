@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getComment, addComment, deleteComment, updateComment } from "../../apis/CommentAPI";
 import CommentReducer from "../../modules/comment";
+import "../../css/Comment.css";
 
 //댓글 리스트 시작
 function CommentList({issueNo}) {
@@ -50,14 +51,13 @@ function CommentList({issueNo}) {
   };
 
 
-
   const rendList = () => {
     if (!comments) return null;
 
     return comments.map((item, key) => 
-        <div className='comment-row' key={key} style={{ display: 'flex', alignItems: 'center' }}>
-          <div className='comment-id' style={{ marginRight: '1rem' }}>{item.employeeNo}</div>
-          <div className='comment-content' style={{ flex: 1 }}>
+        <div className='comment-row' key={key}>
+          <div className='comment-id'> {item.employeeNo} </div>
+          <div className='comment-content'>
             {/* 댓글 수정 */}
             {update === key ? (
               <input
@@ -70,21 +70,23 @@ function CommentList({issueNo}) {
             ) : (
               <>
                 <span onClick={(event) => handleClick(key, event)}>{item.replyContent}</span>
-                {/* 댓글삭제 */}
-                <button
+              </>
+            )}
+          </div>
+
+          {/* 댓글 날짜 */}
+          <div className='comment-date'>{new Intl.DateTimeFormat('kr').format(new Date(item.replyDate))}
+             {/* 댓글삭제 */}
+             <button
                 type="button"
                   className='btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm'
                   onClick={()=>deleteList(item.replyNo)}
                 >
                   삭제
                 </button>
-              </>
-            )}
-          </div>
-
-          {/* 댓글 날짜 */}
-          <div className='comment-date' style={{ marginLeft: '1rem' }}>{(item.replyDate)}</div>
+                </div>
         </div>
+        
       );
   };
   return <div>{rendList()}</div>;

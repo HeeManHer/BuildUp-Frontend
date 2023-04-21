@@ -52,14 +52,13 @@ function Backlog() {
   }
 
 
-
   // 다음 페이지로 이동
   const nextpage = () => {
     if (currentPage + 1 <= pageInfo.endPage) {
-      setCurrentPage(currentPage + 1)
+      setCurrentPage(currentPage + 1);
     } else {
-      setCurrentPage(pageInfo.endPage + 1)
-    };
+      doublenextpage();
+    }
   };
   // 10페이지 추가
   const doublenextpage = () => {
@@ -70,27 +69,16 @@ function Backlog() {
   const prevpage = () => {
     if (currentPage - 1 >= 1) {
       setCurrentPage(currentPage - 1);
-    };
+    } else {
+      doubleprevpage();
+    }
   };
 
   // 10페이지 뺴기
   const doubleprevpage = () => {
-    if (currentPage - 10 >= 1) {
-      setCurrentPage(currentPage - 10, pageInfo.startPage);
-    };
+    const prev = Math.max(currentPage - 10, 1);
+    setCurrentPage(prev);
   };
-
-
-
-
-
-
-
-
-
-
-
-
 
   //handleSubmit이벤트 정의
   const handleSubmit = (event) => {
@@ -119,11 +107,6 @@ function Backlog() {
 
   }
 
-
-
-
-
-
   return (
     <div>
       <div style={{ display: isModalOpen ? 'block' : 'none' }}>
@@ -135,15 +118,18 @@ function Backlog() {
             right: 0,
             bottom: 0,
             background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 10
           }}
           onClick={handleCloseModal}
         />
-        <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+
+        <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 11 }}>
           <div style={{ background: '#fff', padding: 30, borderRadius: '10px', width: '600px', height: '600px' }}>
             <h2>{selectedItemIndex === -1 ? "" : ""}</h2>
             <h6 className="smalltitle">백로그 설정</h6>
             <hr className="line3" />
             <br />
+
             <form onSubmit={handleSubmit}>
               <h3 className="smalltitle2">백로그</h3>
 
@@ -189,9 +175,6 @@ function Backlog() {
         </div>
       </div>
 
-      <div>
-      </div>
-
       <div className='bar'>
         <h2>백로그</h2>
         <button className="button1" onClick={handleOpenModal}>백로그생성</button>
@@ -203,30 +186,28 @@ function Backlog() {
 
       {/* 검색창 스타일 */}
 
-      <form style={{ position: 'fixed', right: 0, width: "400px" }} className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control bg-light border-0 small"
-            placeholder="Search for..."
-            aria-label="Search"
-            aria-describedby="basic-addon2"
-            value={searchValue}
-            onChange={(e) => setsearchValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                search();
-              }
-            }}
-          />
-          <div className="input-group-append">
-            <button className="btn btn-primary" type="button" onClick={search}>
-              <i className="fas fa-search fa-sm"></i>
-            </button>
-          </div>
+      <div className="input-group" style={{ position: 'sticky', left: "1290px", width: "400px" }}>
+        <input
+          type="text"
+          className="form-control bg-light border-0 small"
+          placeholder="Search for..."
+          aria-label="Search"
+          aria-describedby="basic-addon2"
+          value={searchValue}
+          onChange={(e) => setsearchValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              search();
+            }
+          }}
+        />
+        <div className="input-group-append">
+          <button className="btn btn-primary" type="button" onClick={search}>
+            <i className="fas fa-search fa-sm"></i>
+          </button>
         </div>
-      </form>
+      </div>
 
       <br />
       <br />
@@ -265,24 +246,26 @@ function Backlog() {
       </table>
       <br />
 
-      <div className='pagebutton'>
+      <div className='pagebutton' >
         <span> <button className='button2' onClick={doubleprevpage}> ◀◀ </button></span>
         <span> <button className='button2' onClick={prevpage}> ◀ </button></span>
         {pageNumber.map((num) => (
           <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-            <button
-              style={currentPage === num ? { backgroundColor: 'orange' } : null}
+            <span
+              style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}
 
             >
               {num}
-            </button>
+            </span>
           </li>
         ))}
 
-        <span><button className='button2' onClick={nextpage}>▶</button></span>
+
+        <span style={{ marginLeft: ' 35px' }}><button className='button2' onClick={nextpage}>▶</button></span>
         <span><button className='button2' onClick={doublenextpage}>▶▶</button></span>
       </div>
     </div >
   );
 }
 export default Backlog;
+

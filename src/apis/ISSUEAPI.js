@@ -23,7 +23,7 @@ export function SetIssueAPI(projectNo, pageNumber) {
 export function SaveIssueAPI(issue) {
 
     const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues";
-    console.log(JSON.stringify(issue));
+    // console.log(JSON.stringify(issue));
 
     return async function (dispatch, getState) {
 

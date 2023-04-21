@@ -7,9 +7,23 @@ import { useEffect } from "react";
 
 function Header() {
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
-
+    const employee = useSelector(state => state.employeeReducer);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const employeeDetail = employee.data;
+    // const employeeName = token.sub;
+
+    useEffect(
+        () => {    
+            console.log('token', token.sub);
+            if(token !== null) {
+                dispatch(callGetEmployeeAPI({	
+                    employeeNo: token.sub
+                }));            
+            }
+        }
+        ,[]
+    );
 
     const employeeReducer = useSelector(state => state.employeeReducer);
     const employee = employeeReducer.data;
@@ -36,6 +50,8 @@ function Header() {
         navigate("/", { replace: true });
         dispatch(callLogoutAPI());
     }
+
+
 
     return (
         // <!-- Topbar -->

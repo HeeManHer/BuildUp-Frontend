@@ -1,8 +1,8 @@
-function SprintCreate() {
+function SprintIssue() {
 
     return (
         <>
         </>
     );
 }
-export default SprintCreate;
+export default SprintIssue;
