@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { decodeJwt } from '../../utils/tokenUtils';
 import "../../css/project.css";
 
 import { addUserList, setUserList, changeUserList, deleteUserList, deleteProjectList, projectTitleEdit, authorityEdit, getAuthority } from '../../apis/UserListAPI';
 import { getProjectDetail } from '../../apis/NewprojectAPICalls';
+import { callGetEmployeeAPI } from '../../apis/EmployeeAPICall';
 
 function Manager() {
-    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
+
     const { projectNo } = useParams();
-    
+
     const [project, setProject] = useState('');
     const [deleteUser, setDeleteUser] = useState([]);
     const [inviteText, setInviteText] = useState('');
@@ -22,11 +24,26 @@ function Manager() {
     const [edit, setEdit] = useState(false);
     const [projectTitle, setProjectTitle] = useState('');
     const [selected, setSelected] = useState([]);
+    const token = decodeJwt(window.localStorage.getItem("accessToken"));
 
     const userList = useSelector(state => state.userReducer);
-    const selectList = userList.map((user) => ({roleNo: user.roleNo, roleName : user.roleName}));
+    const selectList = userList.map((user) => ({ roleNo: user.roleNo, roleName: user.roleName }));
     const authorityType = useSelector(state => state.authorityReducer);
-    
+
+    const employeeReducer = useSelector(state => state.employeeReducer);
+    const employee = employeeReducer.data;
+
+    useEffect(
+        () => {
+            if (token !== null) {
+                dispatch(callGetEmployeeAPI({	// 구매 정보 조회
+                    employeeNo: token.sub
+                }));
+            }
+        }
+        , []
+    );
+
     useEffect(
         () => {
             dispatch(setUserList(projectNo));
@@ -45,16 +62,16 @@ function Manager() {
 
     /* 프로젝트 명 수정 버튼 */
     const onClickProjectTitleEditBtn = () => {
-        setEdit(true);        
+        setEdit(true);
         setProjectTitle(project.projectTitle);
     }
-    
+
 
     /* input text로 바뀜 */
     const handleInputChange = (e) => {
         setProjectTitle(e.target.value);
     }
-    
+
 
     /* 프로젝트 명 저장 버튼 */
     const handleProjectTitleUpdate = (e) => {
@@ -71,11 +88,11 @@ function Manager() {
         dispatch(deleteProjectList(projectNo));
         navigate("/mypage/newproject");
     }
-    
+
 
     /* 모달 열기(추가) 버튼 */
     const handleOpenModal = () => {
-        setIsModalOpen(true);            
+        setIsModalOpen(true);
     };
 
 
@@ -87,7 +104,7 @@ function Manager() {
         setInviteText('');
     }
 
-    
+
     /* 팀원 초대에서 textChange */
     const handleInviteTextChange = (event) => {
         setInviteText(event.target.value);
@@ -180,7 +197,7 @@ function Manager() {
                             <br />
                             <br />
                             <label className="manager">
-                                담당자 : {project.employeeName}
+                                담당자 : {employee && employee.employeeName}
                             </label>
                             <br />
                             <br />
@@ -270,13 +287,13 @@ function Manager() {
                             <td>{user.employeeName}</td>
                             <td>{user.employeeNo}</td>
                             <td>{user.employeeEmail}</td>
-                            <td><select onChange={(e) => handlerSelect(user,e)} value={user.roleNo}>
+                            <td><select onChange={(e) => handlerSelect(user, e)} value={user.roleNo}>
                                 {authorityType.map((user) => (
-                                <option value={user.roleNo}>{user.roleName}
-                                
-                                </option>
+                                    <option value={user.roleNo}>{user.roleName}
+
+                                    </option>
                                 ))}
-                                </select>
+                            </select>
                             </td>
                         </tr>
                     ))}
@@ -285,7 +302,7 @@ function Manager() {
             <br />
             <br />
             <div className="button">
-                <button type="button" className='button4' style={{marginLeft : "210px"}}onClick={handleOpenModal}>팀원추가</button>
+                <button type="button" className='button4' style={{ marginLeft: "210px" }} onClick={handleOpenModal}>팀원추가</button>
                 <button type="button" className='button4' onClick={onClickDeleteBtn}>팀원삭제</button>
             </div>
         </div>

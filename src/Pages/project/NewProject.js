@@ -3,24 +3,45 @@ import { NavLink, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getProject, postProject } from '../../apis/NewprojectAPICalls';
 import { decodeJwt } from '../../utils/tokenUtils';
 import "../../css/project.css";
+import { callGetEmployeeAPI } from '../../apis/EmployeeAPICall';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function NewProject() {
+  const dispatch = useDispatch();
   const Navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
-  const [manager, setManager] = useState('');
   const [inviteText, setInviteText] = useState('');
   const [inviteList, setInviteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   const token = decodeJwt(window.localStorage.getItem("accessToken"));
 
+
+
+  const employeeReducer = useSelector(state => state.employeeReducer);
+  const employee = employeeReducer.data;
+  const [manager, setManager] = useState(employee && employee.employeeName);
+
   const { projectNo } = useParams();
+
+
+  useEffect(
+    () => {
+      if (token !== null) {
+        dispatch(callGetEmployeeAPI({	// 구매 정보 조회
+          employeeNo: token.sub
+        }));
+      }
+    }
+    , []
+  );
 
   /* 리덕스 안썼을때 useState를 가지고 오는 방법 */
   useEffect(
     () => {
-      getProject().then(data => { console.log(data); setItems(data.data);});
+      getProject().then(data => { console.log(data); setItems(data.data); });
     },
     []
   )
@@ -52,14 +73,14 @@ function NewProject() {
       employeeName: [
         {
           roleNo: 1,
-          employeeName: manager
+          employeeName: employee && employee.employeeName
         },
         ...inviteList
       ]
     };
 
 
-    if (title && manager) { // 값이 모두 채워져 있는 경우에만 생성 가능
+    if (title && employee && employee.employeeName) { // 값이 모두 채워져 있는 경우에만 생성 가능
       if (selectedItemIndex === -1) {
         postProject(newItem);
       } else {
@@ -126,16 +147,7 @@ function NewProject() {
               <br />
               <br />
               <label className="manager">
-                담당자 : <select value={items.employeeNo} onChange={(event) => setManager(event.target.value)}>
-                  <option value="">선택</option>
-                  <option value="허희만">허희만</option>
-                  <option value="남효정">남효정</option>
-                  <option value="조평훈">조평훈</option>
-                  <option value="이준성">이준성</option>
-                  <option value="최명건">최명건</option>
-                  <option value="박완규">박완규</option>
-                  <option value="염진호">염진호</option>
-                </select>
+                담당자 :{employee && employee.employeeName}
               </label>
               <br />
               <br />
