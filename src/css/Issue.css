@@ -21,6 +21,53 @@
     font-weight: 900;
 }
 
+.submitbtn {
+
+    width: 10%;
+    border-radius: 50px;
+    background-color: #4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+.deletebtn {
+
+    width: 10%;
+    border-radius: 50px;
+    background-color: #4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+.submit1btn {
+    width: 10%;
+    border-radius: 50px;
+    background-color: #4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
+.canclebtn {
+
+    width: 10%;
+    border-radius: 50px;
+    background-color: #4e73df;
+    border-style: none;
+    margin-right: 40px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+}
+
 .btnIssue {
     display: flex;
     justify-content: space-between;
@@ -28,12 +75,11 @@
 
 }
 
-.container1 {
+asdasdasdasd .container1 {
     display: flex;
     height: 100%;
     width: 100%;
-    border: 1px solid black;
-    ;
+
 }
 
 
@@ -103,7 +149,7 @@
 
 .modalcreate {
     border: 1px solid black;
-    width: 20%;
+    width: 30%;
     height: 50%;
     background-color: #fff;
     border-radius: 8px;
@@ -117,8 +163,8 @@
 
 .modalsub {
     border: 1px solid black;
-    width: 40%;
-    height: 70%;
+    width: 50%;
+    height: 80%;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
