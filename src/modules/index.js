@@ -9,7 +9,7 @@ import SprintReducer from "./sprint";
 import employeebtnReducer from "./employeebtn";
 
 const rootReducer = combineReducers({
-    IssueReducer, userReducer, authorityReducer, BacklogReducer, employeeReducer,SprintReducer, CommentReducer,employeebtnReducer
+    IssueReducer, userReducer, authorityReducer, BacklogReducer, employeeReducer, SprintReducer, CommentReducer, employeebtnReducer
 });
 
 export default rootReducer;
