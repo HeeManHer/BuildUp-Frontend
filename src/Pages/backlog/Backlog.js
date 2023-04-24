@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../../css/backlog.css";
 import { getBacklog, postBacklog, putBacklog, deleteBacklog, searchBacklog } from '../../apis/backlogAPI.js';
+import { EmployeebtnAPI } from '../../apis/EmployeebtnAPI.js';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,6 +15,8 @@ function Backlog() {
   const [searchValue, setsearchValue] = useState('');
 
   const dispatch = useDispatch();
+
+  const auth = useSelector(state => state.employeebtnReducer);
 
   const backlogReducer = useSelector(state => state.BacklogReducer);
 
@@ -33,7 +36,7 @@ function Backlog() {
     },
     [currentPage]
   )
-  // 모달 열기
+  // 모달 열기 
   const handleOpenModal = () => {
     setSelectedItemIndex(-1);
     setIsModalOpen(true);
@@ -63,7 +66,7 @@ function Backlog() {
   // 10페이지 추가
   const doublenextpage = () => {
     const next = Math.min(currentPage + 10, pageInfo.maxPage);
-    setCurrentPage(next);
+    setCurrentPage(next + 1);
   }
   // 이전 페이지로 이동
   const prevpage = () => {
@@ -177,6 +180,7 @@ function Backlog() {
 
       <div className='bar'>
         <h2>백로그</h2>
+        [token.auth[0]] == 1 &&
         <button className="button1" onClick={handleOpenModal}>백로그생성</button>
       </div>
 
@@ -223,10 +227,10 @@ function Backlog() {
           </li>
           <br />
         </div>
+
         <div>
           {backlogList.map((item) => (
             <tr className='in' key={item.backlogNo}>
-
               <td className='in2'>{item.backlogName}</td>
               <td className='in2'>{item.backlogContent}</td>
               <td className='in2'>{item.backlogStatus}</td>
@@ -239,7 +243,6 @@ function Backlog() {
                   deleted(item, window.location.reload())
                 }>삭제</button>
               </td>
-
             </tr>
           ))}
         </div>
@@ -251,10 +254,7 @@ function Backlog() {
         <span> <button className='button2' onClick={prevpage}> ◀ </button></span>
         {pageNumber.map((num) => (
           <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-            <span
-              style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}
-
-            >
+            <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
               {num}
             </span>
           </li>
