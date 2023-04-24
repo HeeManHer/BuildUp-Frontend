@@ -1,8 +1,24 @@
+import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import { EmployeebtnAPI } from '../../apis/EmployeebtnAPI';
+import { useDispatch } from 'react-redux';
+import { decodeJwt } from '../../utils/tokenUtils';
 
 function ProjectSideBar() {
 
+
+    const dispatch = useDispatch();
     const { projectNo } = useParams();
+
+    const token = decodeJwt(window.localStorage.getItem("accessToken"));
+    console.log(token);
+    const employeeNo = token.sub;
+
+    useEffect(() => {
+        dispatch(EmployeebtnAPI(projectNo, employeeNo))
+    });
+
+
     return (
         // Sidebar
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -53,7 +69,7 @@ function ProjectSideBar() {
 
             {/* 백로그 */}
             <li className="nav-item">
-                <NavLink to={"/project/"+ projectNo +"/backlog"}>
+                <NavLink to={"/project/" + projectNo + "/backlog"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-folder"></i>
                         <span>백로그</span>
@@ -64,7 +80,7 @@ function ProjectSideBar() {
             {/* 이슈 */}
             <li className="nav-item">
 
-                <NavLink to={"/project/"+ projectNo +"/issue"}>
+                <NavLink to={"/project/" + projectNo + "/issue"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>이슈</span>
@@ -74,7 +90,7 @@ function ProjectSideBar() {
 
             {/* 스프린트 */}
             <li className="nav-item">
-                <NavLink to={"/project/"+ projectNo +"/sprint"}>
+                <NavLink to={"/project/" + projectNo + "/sprint"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-table"></i>
                         <span>스프린트</span>
@@ -84,7 +100,7 @@ function ProjectSideBar() {
 
             {/* 프로젝트 관리 */}
             <li className="nav-item">
-                <NavLink to={"/project/"+ projectNo +"/Manager"}>
+                <NavLink to={"/project/" + projectNo + "/Manager"}>
                     <a className="nav-link">
                         <i className="fas fa-fw fa-table"></i>
                         <span>프로젝트 관리</span>

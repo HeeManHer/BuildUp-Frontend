@@ -260,8 +260,8 @@ asdasdasdasd .container1 {
 
 .prevbtn-text,
 .nextbtn-text {
-    background-color: #eee;
-    border: 1px solid #aaa;
+    background-color: #4e73df;
+    border: 1px solid white;
     color: black;
     padding: 5px 10px;
     font-size: 16px;
@@ -273,4 +273,12 @@ asdasdasdasd .container1 {
     display: flex;
     justify-content: space-between;
     width: 80px;
+}
+
+.line1 {
+    border: solid #4e73df 2px;
+}
+
+.line2 {
+    border: solid #4e73df 2px;
 }

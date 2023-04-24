@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { SetIssueAPI } from "../../apis/ISSUEAPI";
 import { useParams } from "react-router-dom";
 import { setUserList } from "../../apis/UserListAPI";
+import { postSprint } from "../../apis/SprintAPI";
+
 
 function SprintCreate(props) {
     const dispatch = useDispatch();
@@ -19,7 +21,7 @@ function SprintCreate(props) {
     const issueList = issueReducer.data;
     const pageInfo = issueReducer.pageInfo;
 
-    const [onesprint, setonesprint] = useState({sprintIssue: []});
+    const [onesprint, setonesprint] = useState({ projectNo, sprintIssue: [] });
     const [currentPage, setCurrentPage] = useState(1);
 
     const pageNumber = [];
@@ -52,34 +54,34 @@ function SprintCreate(props) {
         })
     }
 
-const issueCheck=(e)=>{
-if(e.target.checked){
-    setonesprint({
-        ...onesprint,
-        sprintIssue:  [...onesprint.sprintIssue,{[e.target.name]:e.target.value}]
-    })
-}else{
-    setonesprint({
-        ...onesprint,
-        sprintIssue: onesprint.sprintIssue.filter(item=>item.issueNo !== e.target.value)
-    })
-}
-}
+    const issueCheck = (e) => {
+        if (e.target.checked) {
+            setonesprint({
+                ...onesprint,
+                sprintIssue: [...onesprint.sprintIssue, { [e.target.name]: e.target.value }]
+            })
+        } else {
+            setonesprint({
+                ...onesprint,
+                sprintIssue: onesprint.sprintIssue.filter(item => item.issueNo !== e.target.value)
+            })
+        }
+    }
 
-const changeManager=(e)=>{
-    setonesprint({
-        ...onesprint,
-        sprintIssue:  onesprint.sprintIssue.map(item=>{
-            if(item.issueNo !== e.target.id){
-                return item;
-            }else{
-                return {
-                    ...item,[e.target.name]: e.target.value
+    const changeManager = (e) => {
+        setonesprint({
+            ...onesprint,
+            sprintIssue: onesprint.sprintIssue.map(item => {
+                if (item.issueNo !== e.target.id) {
+                    return item;
+                } else {
+                    return {
+                        ...item, [e.target.name]: e.target.value
+                    }
                 }
-            }
+            })
         })
-    })
-}
+    }
 
 
     const nextpage = () => {
@@ -89,15 +91,19 @@ const changeManager=(e)=>{
     };
 
     const prevpage = () => {
-        if (currentPage - 1 >= 1){
+        if (currentPage - 1 >= 1) {
             setCurrentPage(currentPage - 1)
         }
     };
 
-    console.log(onesprint);
+    // console.log(onesprint);
 
-    const startsprint = () => {
-
+    const startsprint = async () => {
+        if (onesprint.sprintName !== undefined) {
+            await postSprint(onesprint);
+            handleCloseModal(false);
+            window.location.reload();
+        }
     }
 
     return (
@@ -127,22 +133,19 @@ const changeManager=(e)=>{
                         <h2>스프린트 생성</h2>
                     </div>
 
-                    <label className="sprintcreatelabel">스프린트 이름 : </label>
+                    <label className="sprintcreatelabel">스프린트 이름 </label>
                     <input type="text" classname="sprintcreatetext1" name="sprintName" onChange={sprintInfo} />
                     <br />
 
-                    <label className="sprintcreatelabel">시작 날짜 : </label>
+                    <label className="sprintcreatelabel">시작 날짜 </label>
                     <input type="date" classname="sprintcreatetext1" name="sprintStartday" onChange={sprintInfo} />
                     <br />
 
-                    <label className="sprintcreatelabel">종료 날짜 : </label>
+                    <label className="sprintcreatelabel">종료 날짜 </label>
                     <input type="date" classname="sprintcreatetext1" name="sprintEndday" onChange={sprintInfo} />
                     <br />
 
                     <div style={{ display: "flex", alignItems: "center" }}>
-                        <label classname="issueList">
-                            이슈 목록 :
-                        </label>
 
                         <table style={{ border: "1px solid black", width: "100%", height: "40px" }}>
                             <thead>
@@ -157,7 +160,7 @@ const changeManager=(e)=>{
                                 {issueList.map(issue =>
                                     <tr>
                                         <td style={{ border: "1px solid black" }}>
-                                            <input type="checkbox" name="issueNo" value={issue.issueNo} onChange={issueCheck}/>
+                                            <input type="checkbox" name="issueNo" value={issue.issueNo} onChange={issueCheck} />
                                         </td>
                                         <td style={{ border: "1px solid black" }}>{issue.issueName}</td>
                                         <td style={{ border: "1px solid black" }}>{issue.issueContent}</td>
@@ -172,29 +175,25 @@ const changeManager=(e)=>{
                                     </tr>
 
                                 )}
-
                             </tbody>
                         </table>
-
-
-                        <div >
-                            <button className='button2' onClick={prevpage}> ◀ </button>
-                            {pageNumber.map((num) => (
-                                <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-                                    <button
-                                        style={currentPage === num ? { backgroundColor: 'orange' } : null}
-                                    >
-                                        {num}
-                                    </button>
-                                </li>
-                            ))}
-                            <button className='button2' onClick={nextpage}>▶</button>
                         </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <button className='button2' onClick={prevpage}> ◀ </button>
+                        {pageNumber.map((num) => (
+                            <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                                <button style={currentPage === num ? { backgroundColor: 'orange' } : null}>
+                                    {num}
+                                </button>
+                            </li>
+                        ))}
+                        <button className='button2' onClick={nextpage}>▶</button>
+                    
                     </div>
                     <br />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }} 
-                        onclick={startsprint}>시작</button>
+                        <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }}
+                            onClick={startsprint}>시작</button>
                         <button id="sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
                     </div>
                 </div>

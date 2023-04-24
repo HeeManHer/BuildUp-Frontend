@@ -10,7 +10,8 @@
 
 .button {
     float: right;
-    margin-right: 50px;
+    /* margin-right: 50px; */
+    margin: auto;
 }
 .button1 {
     width: 170px;
@@ -28,25 +29,44 @@
     border-radius: 15px;
     background-color:#4e73df;
     border-style: none;
+
     margin-top: 10px;
     margin-right: 40px;
+    /* margin-bottom: 100px; */
+
     font-weight:bold;
     color: white;
     padding: 5px;
+    display: inline-block;
 }
 
-.button3 {
+.button33 {
+    margin-left: 320px;
     width: 90px;
     border-radius: 15px;
     background-color:#4e73df;
     border-style: none;
-    margin-left: 320px;
+
+
     font-weight:bold;
     color: white;
     padding: 5px;
+    display: inline-block;
 }
 
 .button4 {
+    width: 90px;
+    border-radius: 15px;
+    background-color:#4e73df;
+    border-style: none;
+    /* margin-left: 250px; */
+    font-weight:bold;
+    color: white;
+    padding: 5px;
+    margin-left: 100px;
+}
+
+.button44 {
     width: 90px;
     border-radius: 15px;
     background-color:#4e73df;
@@ -55,6 +75,7 @@
     font-weight:bold;
     color: white;
     padding: 5px;
+    /* margin: auto; */
 }
 
 .button5{
