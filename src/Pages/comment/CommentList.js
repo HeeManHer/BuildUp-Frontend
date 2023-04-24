@@ -57,7 +57,7 @@ function CommentList({ issueNo }) {
 
   const rendList = () => {
     if (!comments) return null;
-
+    
     return comments.map((item, key) =>
       <div className='comment-row' key={key}>
         <div className='comment-id'> {item.employeeNo} </div>
@@ -76,7 +76,6 @@ function CommentList({ issueNo }) {
               <span onClick={(event) => handleClick(key, event)}>{item.replyContent}</span>
             </>
           )}
-
         </div>
 
         {/* 댓글 날짜 */}

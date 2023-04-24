@@ -20,9 +20,7 @@ const Modal = (props) => {
           <main>{props.children}</main>
           <footer>
             {/* 취소버튼 없애려면 여기만 버튼 태그만 제거하면 됩니다. */}
-            <button className="close" onClick={close}>
-              취소
-            </button>
+           
             <button className="close" onClick={close}>
               확인
             </button>
