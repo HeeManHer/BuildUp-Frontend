@@ -12,7 +12,7 @@ function NewProject() {
 
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
-  
+
   const [inviteText, setInviteText] = useState('');
   const [inviteList, setInviteList] = useState([]);
 
