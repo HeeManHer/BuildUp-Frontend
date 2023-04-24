@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getComment, addComment, deleteComment, updateComment } from "../../apis/CommentAPI";
 import CommentReducer from "../../modules/comment";
 import "../../css/Comment.css";
+import { decodeJwt } from "../../utils/tokenUtils";
 
 //댓글 리스트 시작
 function CommentList({issueNo}) {
 
+  const token = decodeJwt(window.localStorage.getItem("accessToken"));
+
   const [value, setValue] = useState('');
   const [update, setUpdate] = useState(null);
-
 
   const comments = useSelector(state => state.CommentReducer);
 
@@ -74,11 +76,13 @@ function CommentList({issueNo}) {
                 <span onClick={(event) => handleClick(key, event)}>{item.replyContent}</span>
               </>
             )}
+          
           </div>
 
           {/* 댓글 날짜 */}
           <div className='comment-date'>{new Intl.DateTimeFormat('kr').format(new Date(item.replyDate))}
              {/* 댓글삭제 */}
+             {token.sub === item.employeeNo ?
              <button
                 type="button"
                   className='btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm'
@@ -86,7 +90,10 @@ function CommentList({issueNo}) {
                 >
                   삭제
                 </button>
-                </div>
+                :
+                <></>
+              }
+              </div>
         </div>
         
       );
