@@ -19,10 +19,10 @@ function CommentList({ issueNo }) {
 
   useEffect(
     () => {
-      dispatch(getComment(issueNo));
-    },
-    []
-  );
+    dispatch(getComment(issueNo));
+  },
+   []
+   );
 
   // console.log(issueNo) 작동하는지 확인용
 
