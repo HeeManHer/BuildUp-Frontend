@@ -29,10 +29,10 @@ function Manager() {
     const userList = useSelector(state => state.userReducer);
     const selectList = userList.map((user) => ({ roleNo: user.roleNo, roleName: user.roleName }));
     const authorityType = useSelector(state => state.authorityReducer);
-    
+
     const authReducer = useSelector(state => state.employeebtnReducer);
-    const auth = authReducer.map(auth=>{
-        if(auth.typeNo==1) return auth.authorityState
+    const auth = authReducer.map(auth => {
+        if (auth.typeNo == 1) return auth.authorityState
     })
     console.log(authReducer);
     console.log(auth);
@@ -191,12 +191,12 @@ function Manager() {
                 />
                 <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                     <div style={{ background: '#fff', padding: 30, borderRadius: '10px', width: '600px', height: '600px' }}>
-                        <h6 className="smalltitle">팀원 추가</h6>
+                        <h6 className="smalltitle" >팀원 추가</h6>
                         <hr className="line3" />
                         <br />
                         <form onSubmit={handleSubmit}>
 
-                            <h3 className="smalltitle2">팀원 추가</h3>
+                            <h3 className="smalltitle2" >팀원 추가</h3>
                             <br />
                             <br />
                             <label className="title">
@@ -216,8 +216,8 @@ function Manager() {
                                             type="text"
                                             value={inviteText}
                                             onChange={handleInviteTextChange}
-                                            style={{ width: "395px" }} />
-                                        <button className="btn btn-success btn-icon-split btn-sm" type="button" onClick={handleInviteAdd}>추가</button>
+                                            style={{ width: "350px" }} />
+                                        <button className="btn btn-success btn-icon-split btn-sm" class="btn btn-outline-success" type="button" onClick={handleInviteAdd}>추가</button>
                                     </label>
                                     <div className="row" style={{ overflow: "auto", height: "150px" }}>
                                         {inviteList.map((invite, index) => (
@@ -239,38 +239,38 @@ function Manager() {
                                 </div>
                                 <br />
                             </div>
-                            <button className="button2" type="submit" >{selectedItemIndex === -1 ? "추가" : "Save"}</button>
-                            <button className="button33" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}</button>
+                            <button className="button2" class="btn btn-outline-primary" type="submit" >{selectedItemIndex === -1 ? "추가" : "Save"}</button>
+                            <button className="button33" class="btn btn-outline-danger" style={{ marginLeft: "50px" }} type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div className="newproject">
                 <h1>프로젝트 관리/<span id="size">{project.projectTitle}</span></h1>
-                {auth.indexOf('D')>=0 && <button className="button1" onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>}
+                {auth.indexOf('D') >= 0 && <button className="button1" class="btn btn-outline-danger" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>}
             </div>
             <hr className="line" />
-            <div className="projectname">
+            <div className="projectname" >
                 {edit ? (
                     <form onSubmit={handleProjectTitleUpdate}>
                         <input type="text" value={projectTitle} onChange={handleInputChange} />
-                        {auth.indexOf('U')>=0 && <button className="button5" type="submit">수정</button>}
+                        {auth.indexOf('U') >= 0 && <button className="button5" type="submit">수정</button>}
                     </form>
                 ) : (
-                    <>
-                        <h3>프로젝트 명 : </h3>
+                    < >
+                        <h3 >프로젝트 명 : </h3>
                         <br />
-                        <h6 id="name">{project.projectTitle}</h6>
-                        {token.auth[0] == 1 && auth.indexOf('U')>=0 &&
-                        <button className="button5" onClick={onClickProjectTitleEditBtn}>
-                            수정
-                        </button>}
+                        <h6 id="name" >{project.projectTitle}</h6>
+                        {token.auth[0] == 1 && auth.indexOf('U') >= 0 &&
+                            <button className="button5" class="btn btn-outline-primary btn-sm " style={{ marginLeft: "20px", height: "35px" }} onClick={onClickProjectTitleEditBtn}>
+                                수정
+                            </button>}
                     </>
                 )}
             </div>
 
             <br />
-            <table className="user-table" width="90%">
+            <table className="user-table" class="table table-striped table-hover" width="90%">
                 <thead>
                     <tr>
                         <th></th>
@@ -280,10 +280,10 @@ function Manager() {
                         <th>권한</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {userList.map((user) => (
-                        <tr key={user.no}>
-                            <td>
+                        <tr key={user.no} >
+                            <td >
                                 <input
                                     type="checkbox"
                                     name="delete"
@@ -296,15 +296,15 @@ function Manager() {
                             <td>{user.employeeName}</td>
                             <td>{user.employeeNo}</td>
                             <td>{user.employeeEmail}</td>
-                            <td>
-                            {auth.indexOf('U')>=0 ?
-                                <select onChange={(e) => handlerSelect(user, e)} value={user.roleNo}>
-                                {authorityType.map((user) => (
-                                    <option value={user.roleNo}>{user.roleName}</option>
-                                ))}
-                            </select>:<>
-                            {user.roleName}
-                            </>
+                            <td >
+                                {auth.indexOf('U') >= 0 ?
+                                    <select onChange={(e) => handlerSelect(user, e)} value={user.roleNo}>
+                                        {authorityType.map((user) => (
+                                            <option value={user.roleNo}>{user.roleName}</option>
+                                        ))}
+                                    </select> : <>
+                                        {user.roleName}
+                                    </>
                                 }
                             </td>
                         </tr>
@@ -314,11 +314,11 @@ function Manager() {
             <br />
             <br />
             <div className="button">
-                {auth.indexOf('U')>=0 &&
-                <button type="button" className="button4" onClick={handleOpenModal}>팀원추가</button>}
-                {auth.indexOf('D')>=0 &&
-                <button type="button" className="button44" onClick={onClickDeleteBtn}>팀원삭제</button>}
-                </div>
+                {auth.indexOf('U') >= 0 &&
+                    <button type="button" className="button4" class="btn btn-outline-primary" onClick={handleOpenModal}>팀원추가</button>}
+                {auth.indexOf('D') >= 0 &&
+                    <button type="button" className="button44" class="btn btn-outline-danger" onClick={onClickDeleteBtn}>팀원삭제</button>}
+            </div>
         </div>
     );
 }

@@ -8,30 +8,30 @@ import { deleteSprint } from "../../apis/SprintAPI";
 
 function SprintOne() {
 
-const {sprintNo}=useParams();
-const { projectNo } = useParams();
-const dispatch = useDispatch();
-const navigate = useNavigate();
+    const { sprintNo } = useParams();
+    const { projectNo } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
-const sprint=useSelector(state=>state.SprintReducer);
+    const sprint = useSelector(state => state.SprintReducer);
 
-useEffect(
-    ()=>{
-dispatch(getSprintDetail(sprintNo));
-    },
-    []
-)
-console.log(sprint);  
+    useEffect(
+        () => {
+            dispatch(getSprintDetail(sprintNo));
+        },
+        []
+    )
+    console.log(sprint);
 
-const sprintDelete = () => {
+    const sprintDelete = () => {
         deleteSprint(sprintNo);
         navigate("../")
-}
+    }
 
-const gosprintList = () => {
+    const gosprintList = () => {
         navigate("../")
-}
+    }
 
     return (
         <>
@@ -44,23 +44,23 @@ const gosprintList = () => {
             </div>
             <hr className="line" />
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                {Array.isArray(sprint.boardIssue) &&  sprint.boardIssue.map(board=>
-                    <div /*key={index}*/ className="sprintlistboard1">  
+                {Array.isArray(sprint.boardIssue) && sprint.boardIssue.map(board =>
+                    <div /*key={index}*/ className="sprintlistboard1">
                         <div className="sprintlistboard2">
-                            <div className="sprintboard">
+                            <div className="sprintboard" >
                                 <div className="sprinttboard">
                                     <span style={{ fontWeight: "bold" }}>{board.issueState}</span>
                                 </div>
                             </div>
                             <div className="sprintlistline"></div>
-                            {Array.isArray(board.sprintIssue)&&
+                            {Array.isArray(board.sprintIssue) &&
                                 board.sprintIssue.map(issue =>
-                                    <div style={{ position: 'relative', margin: '10px', padding: '10px', border: '1px solid black' }}>
+                                    <div style={{ position: 'relative', margin: '10px', padding: '10px', border: '1px solid black', color: 'black' }}>
                                         <span>{issue.issueName}</span>
                                         <br />
-                                        <span style={{ fontSize: '9px' }}>담당자 : {issue.employeeName ?issue.employeeName:'없음' }</span>
+                                        <span style={{ fontSize: '9px' }}>담당자 : {issue.employeeName ? issue.employeeName : '없음'}</span>
                                     </div>
-                            )}
+                                )}
                         </div>
                     </div>
                 )

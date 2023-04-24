@@ -63,14 +63,13 @@
 
 .blue {
     display: flex;
-    background-color: #4e73df;
     border: 1px solid black;
     width: 1680px;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 10px;
     padding-left: 10px;
     justify-content: space-between;
-    color: black;
+    color: #4e73df;
 }
 
 .smalltitle {

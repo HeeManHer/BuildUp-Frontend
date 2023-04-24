@@ -174,9 +174,9 @@ function Backlog() {
               <br />
               <br />
               {selectedItemIndex === -1 ?
-                <button className='button2' type="submit"> '추가' </button>
-                : auth.indexOf('U') >= 0 && <button className='button2' type="submit"> 저장</button>}
-              <button className='button2' type="button" onClick={handleCloseModal}>
+                <button className='button2' class="btn btn-outline-primary" type="submit"> '추가' </button>
+                : auth.indexOf('U') >= 0 && <button className='button2' class="btn btn-outline-primary" type="submit"> 저장</button>}
+              <button className='button2' class="btn btn-outline-danger" style={{ marginLeft: "50px" }} type="button" onClick={handleCloseModal}>
                 닫기
               </button>
             </form>
@@ -187,7 +187,7 @@ function Backlog() {
       <div className='bar'>
         <h2>백로그</h2>
         {auth.indexOf('C') >= 0 && (
-          <button className="button1" onClick={handleOpenModal}>백로그생성</button>
+          <button className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={handleOpenModal}>백로그생성</button>
         )}
 
 
@@ -225,46 +225,45 @@ function Backlog() {
       <br />
       <br />
 
-      <table>
-        <div>
-          <li className='blue'>       {/*메뉴바*/}
-            <h4>제목</h4>
-            <h4>내용</h4>
-            <h4>상태</h4>
-            <h4>우선순위</h4>
-            <div></div>
-          </li>
-          <br />
-        </div>
+      <table className="user-table" class="table table-striped table-hover" width="90%">
+        <thead>       {/*메뉴바*/}
+          <tr>
+            <th>제목</th>
+            <th>내용</th>
+            <th>상태</th>
+            <th>우선순위</th>
+            <th></th>
+          </tr>
+        </thead>
 
-        <div>
+        <tbody >
           {backlogList.map((item) => (
-            <tr className='in' key={item.backlogNo}>
-              <td className='in2'>{item.backlogName}</td>
-              <td className='in2'>{item.backlogContent}</td>
-              <td className='in2'>{item.backlogStatus}</td>
-              <td className='in2'>{item.backlogPriority}</td>
-              <td>
-                <button className='button2' onClick={() => handleEditItem(item)}>
+            <tr key={item.backlogNo}>
+              <td >{item.backlogName}</td>
+              <td >{item.backlogContent}</td>
+              <td >{item.backlogStatus}</td>
+              <td >{item.backlogPriority}</td>
+              <td >
+                <button className='button2' class="btn btn-outline-primary btn-sm" style={{ position: 'sticky', top: '100px', right: '100px', width: "100px" }} onClick={() => handleEditItem(item)}>
                   조회
                 </button>
                 {auth.indexOf('D') >= 0 && (
-                  <button className='button2' onClick={() =>
+                  <button className='button2' class="btn btn-outline-danger btn-sm" style={{ position: 'sticky', top: '100px', right: '100px', width: "100px" }} onClick={() =>
                     deleted(item, window.location.reload())
                   }>삭제</button>
                 )}
               </td>
             </tr>
           ))}
-        </div>
+        </tbody>
       </table>
       <br />
 
       <div className='pagebutton' >
-        <span> <button className='button2' onClick={doubleprevpage}> ◀◀ </button></span>
-        <span> <button className='button2' onClick={prevpage}> ◀ </button></span>
+        <span style={{ marginLeft: ' 35px', padding: "10px" }}> <button className='button2' class="btn btn-outline-primary" onClick={doubleprevpage}> ◀◀ </button></span>
+        <span > <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button></span>
         {pageNumber.map((num) => (
-          <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+          <li style={{ marginLeft: ' 35px', padding: "10px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
             <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
               {num}
             </span>
@@ -272,8 +271,8 @@ function Backlog() {
         ))}
 
 
-        <span style={{ marginLeft: ' 35px' }}><button className='button2' onClick={nextpage}>▶</button></span>
-        <span><button className='button2' onClick={doublenextpage}>▶▶</button></span>
+        <span style={{ marginLeft: ' 35px', padding: "10px" }}><button className='button2' class="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
+        <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
       </div>
     </div >
   );

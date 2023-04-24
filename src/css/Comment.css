@@ -22,8 +22,7 @@
 }
 
 .comment-date {
-    flex: auto;
-    margin-Left: 100px; 
+    flex: 1 ;
 }
 
 .pagebutton {
@@ -43,7 +42,6 @@
 
 .comment-please {
     margin-top: 100; 
-    padding: auto;
 }
 
 

@@ -2,11 +2,11 @@
 import '../../css/page.css';
 import Modal from './ChangeModal';
 import '../../css/loginModal.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import{
+import {
     callPutEmployeeAPI
 } from '../../apis/EmployeeAPICall';
 
@@ -30,31 +30,31 @@ function Changepassword() {
     // const [newPwd, setNewPwd] = useState('');
     // const [checkNewPwd, setCheckNewPwd] = useState('');
 
-    const[modalOpen, setModalOpen] = useState(false);
-    const[check, setCheck] = useState();
-    const[pwd, setPwd] = useState({employeeNo:token.sub});
+    const [modalOpen, setModalOpen] = useState(false);
+    const [check, setCheck] = useState();
+    const [pwd, setPwd] = useState({ employeeNo: token.sub });
 
     /* 내가 해야 될 것 
         1. 현재 비밀번호를 입력 하면 그것이 지금 내가 사용하는 비밀번호와 같은 지 확인 해야됨.
         2. 새 비밀번호를 입력하고, 다시 한 번 입력한 값이 일치하는 지 확인
         3. 2번의 값이 확인되면 새 비밀번호를 database에 update 하기 
-     */ 
+     */
 
 
-    const[checkmessage, setCheckMessage]  = useState();
+    const [checkmessage, setCheckMessage] = useState();
 
 
 
     const ModifyPwd = (e) => {
 
         setPwd({
-            ...pwd, 
+            ...pwd,
             [e.target.name]: e.target.value
         })
 
     }
 
-   
+
 
     const openModal = () => {
         callPutEmployeeAPI(pwd).then(res => setCheckMessage(res.data))
@@ -66,11 +66,11 @@ function Changepassword() {
     };
 
     return (
-        <div className="border">
+        <div className="border2">
             <h2>비밀번호 변경</h2>
             <div className="now">
                 <label>현재 비밀번호 : </label>
-                <input type="password" name="employeePassword" placeholder="현재 비밀번호를 입력하세요" onChange={ModifyPwd}/>
+                <input type="password" name="employeePassword" placeholder="현재 비밀번호를 입력하세요" onChange={ModifyPwd} />
             </div>
             <br />
             <br />
@@ -85,14 +85,14 @@ function Changepassword() {
                 <input type="password" placeholder="새 비밀번호 확인" onChange={e => e.target.value === pwd.newPassword ? setCheck(true) : setCheck(false)} />
             </div>
             <label>
-                {pwd.newPassword == undefined || check == undefined ? <></>:    check ? '일치합니다.' : '일치하지 않습니다.'}
+                {pwd.newPassword == undefined || check == undefined ? <></> : check ? '일치합니다.' : '일치하지 않습니다.'}
 
             </label>
-            <br/>
+            <br />
             <React.Fragment>
-            <button onClick={openModal}>수정하기</button>
-            <Modal open={modalOpen} close={closeModal} header={checkmessage}>
-            </Modal>
+                <button class="btn btn-outline-primary" onClick={openModal}>수정하기</button>
+                <Modal open={modalOpen} close={closeModal} header={checkmessage}>
+                </Modal>
             </React.Fragment>
         </div>
     );

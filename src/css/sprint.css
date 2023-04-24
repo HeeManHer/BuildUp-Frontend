@@ -2,6 +2,7 @@
 .sprintlistissue {
     margin: 10px;
     padding: 10px;
+    color: black;
     border: 1px solid black;
 }
 
@@ -41,14 +42,16 @@
     align-Items: center;
     justify-Content: space-between;
     padding: 10px;
+    color: black;
 }
 
 .sprintname {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 5px;
 }
 
 .sprintdate {
+    color: black;
     margin: 20px 10px;
 }
 

@@ -82,7 +82,7 @@ function CommentList({issueNo}) {
           {/* 댓글 날짜 */}
           <div className='comment-date'>{new Intl.DateTimeFormat('kr').format(new Date(item.replyDate))}
              {/* 댓글삭제 */}
-             {token.sub === item.employeeNo ?
+             {token.sub == item.employeeNo ? 
              <button
                 type="button"
                   className='btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm'
