@@ -159,7 +159,7 @@ function NewProject() {
               </div>
               <div>
                 <button className="button2" type="submit" class="btn btn-outline-primary" >{selectedItemIndex === -1 ? "생성" : "Save"}</button>
-                <button className="button33" type="button" class="btn btn-outline-danger" style={{ marginLeft: "50px"}}onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
+                <button className="button33" type="button" class="btn btn-outline-danger" style={{ marginLeft: "50px" }} onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
                 </button>
               </div>
             </form>
@@ -168,15 +168,16 @@ function NewProject() {
       </div>
       <div className="newproject">
         <h1>프로젝트</h1>
-        {token.auth[0] == 1 &&
-          <button className="button1" class="btn btn-outline-primary" style= {{position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={handleOpenModal}>프로젝트 생성</button>
+        {
+          token.auth[0] == 1 &&
+          <button className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={handleOpenModal}>프로젝트 생성</button>
         }
       </div>
       <hr className="line" />
       <div className="project2">
         {Array.isArray(items) && items.map((item, index) => (
-          <div  style= {{ padding: "10px" }}>
-            <div className="build" class="btn btn-outline-primary"  style= {{ maginLeft: "100px", width: "300px" }}><p>Build Up</p>
+          <div style={{ padding: "10px" }}>
+            <div className="build" class="btn btn-outline-primary" style={{ maginLeft: "100px", width: "300px" }}><p>Build Up</p>
               <hr className="line2" />
               <NavLink to={`/project/${item.projectNo}/Manager`}>
                 <div className="title2" style={{ height: '80px' }}><h4>{item.projectTitle}</h4></div>

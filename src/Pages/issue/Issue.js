@@ -172,6 +172,7 @@ function Issue() {
                     <tbody>
                         {currentIssues.map((issue) => (
                             <tr key={projectNo}>
+                                {/* <td>{issue.issueNo}</td> */}
                                 <td >{issue.issueName.length > 10 ? issue.issueName.substring(1, 10) + "..." : issue.issueName}</td>
                                 {/* <td >{issue.issueContent}</td> */}
                                 <td >{issue.issueContent.length > 10 ? issue.issueContent.substring(1, 10) + "..." : issue.issueContent}</td>
@@ -210,7 +211,7 @@ function Issue() {
                 </div>
 
             </div >
-            
+
             <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
                 <h6 className="smalltitle">이슈</h6>
                 <hr className="line3" />

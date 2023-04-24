@@ -16,6 +16,11 @@ function SprintList() {
     const pageInfo = sprintReducer.pageInfo;
     const [currentPage, setCurrentPage] = useState(1);
 
+    const authorityReducer = useSelector(state => state.employeebtnReducer);
+    const auth = authorityReducer.map(auth => {
+        if (auth.typeNo == 3) return auth.authorityState
+    })
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -55,7 +60,9 @@ function SprintList() {
         <>
             <div className="newproject">
                 <h1>스프린트 목록</h1>
-                <button id="sprintCreateBtn" className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={openSprintCreateModal}>스프린트 생성</button>
+                {auth.indexOf('C') >= 0 &&
+                    <button id="sprintCreateBtn" className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={openSprintCreateModal}>스프린트 생성</button>
+                }
             </div>
             <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
             <hr className="line" />

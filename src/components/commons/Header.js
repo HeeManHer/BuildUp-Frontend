@@ -15,17 +15,17 @@ function Header() {
     // const employeeName = token.sub;
 
     useEffect(
-        () => {    
-            console.log('token', token.sub);
-            if(token !== null) {
-                dispatch(callGetEmployeeAPI({	
+        () => {
+            console.log('token', token);
+            if (token !== null) {
+                dispatch(callGetEmployeeAPI({
                     employeeNo: token.sub
-                }));            
+                }));
             }
         }
-        ,[]
+        , []
     );
-    
+
     if (token === null) {
         alert("로그인 해주세요");
         navigate("/", { replace: true });

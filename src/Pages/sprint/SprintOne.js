@@ -25,58 +25,60 @@ function SprintOne() {
     const navigate = useNavigate();
     const [isModal1, setIsModal1] = useState(false);
     const [isModal2, setIsModal2] = useState(false);
-    const [oneIssue, setOneIssue] = useState({ projectNo });
+    const [oneIssue, setoneIssue] = useState({ projectNo });
     const [showModal, setShowModal] = useState(false);
     const [textareaValue, setTextareaValue] = useState('');
 
 
     const sprint = useSelector(state => state.SprintReducer);
     const backlogList = useSelector(state => state.BacklogReducer.data);
-    const authorityReducer = useSelector(state => state.employeebtnReducer);
     const issueReducer = useSelector(state => state.IssueReducer.data);
+    const authorityReducer = useSelector(state => state.employeebtnReducer);
+    const auth = authorityReducer.map(auth => {
+        if (auth.typeNo == 3) return auth.authorityState
+    })
+
+    console.log(sprint)
 
     useEffect(
         () => {
-            setOneIssue(issueReducer[0]);
+            dispatch(getSprintDetail(sprintNo));
+
+            const storedValue = localStorage.getItem('textareaValue');
+            if (storedValue) {
+                setTextareaValue(storedValue);
+            }
+        },
+        []
+    )
+
+    useEffect(
+        () => {
+            setoneIssue(issueReducer[0]);
         },
         [issueReducer]
     )
-
-    useEffect(() => {
-        // Local Storage에서 값 가져오기
-        const storedValue = localStorage.getItem('textareaValue');
-        if (storedValue) {
-            setTextareaValue(storedValue);
-        }
-    }, []);
 
     // Local Storage에 값 저장하기
     useEffect(() => {
         localStorage.setItem('textareaValue', textareaValue);
     }, [textareaValue]);
 
-    const auth = authorityReducer.map(auth => {
-        if (auth.typeNo == 3) return auth.authorityState
-    })
+
 
 
     const update = () => {
         dispatch(UpdateIssueAPI(oneIssue));
 
     };
-    const deleted = (oneissue) => {
+    const deleted = (oneIssue) => {
         dispatch(DeleteIssueAPI(oneIssue));
+
     }
 
 
-    useEffect(
-        () => {
-            dispatch(getSprintDetail(sprintNo));
-        },
-        []
-    )
     console.log(sprint);
-    
+
     const sprintDelete = () => {
         deleteSprint(sprintNo);
         navigate("../")
@@ -104,8 +106,12 @@ function SprintOne() {
             <div className="newproject" dispaly="flex" justifyContent="space-between" >
                 <h1 onClick={gosprintList}>스프린트/<span id="size">{sprint.sprintName}</span></h1>
                 <div display="flex">
-                    <button id="sprintDeleteBtn" className="button1" margin-left="auto" onClick={sprintDelete}>스프린트 삭제</button>
-                    <button id="sprintEndBtn" className="button1" margin-left="auto" onClick={sprintClear}>스프린트 완료</button>
+                    {auth.indexOf('U') >= 0 &&
+                        <button id="sprintDeleteBtn" className="button1" class="btn btn-outline-danger" style={{ position: 'sticky', marginRight: '20px', top: '100px', right: '10px', width: "200px" }} margin-left="auto" onClick={sprintDelete}>스프린트 삭제</button>
+                    }
+                    {auth.indexOf('D') >= 0 && sprint.state !== '완료' &&
+                        <button id="sprintEndBtn" className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', marginLeft: '20px', top: '100px', right: '10px', width: "200px" }} margin-left="auto" onClick={sprintClear}>스프린트 완료</button>
+                    }
                 </div>
             </div>
             <hr className="line" />
@@ -153,22 +159,23 @@ function SprintOne() {
 
             {oneIssue !== undefined ?
                 <Modal className="modalsub" isOpen={isModal2} onRequestClose={() => { setIsModal2(false) }}>
-                    <h2>이슈 수정</h2>
-                    <hr className="line2" />
+                    <h6 className="smalltitle">이슈</h6>
+                    <hr className="line3" />
+                    <h3 className="smalltitle2">이슈 수정</h3>
                     <form onSubmit={handleSubmit}>
                         <label>
-                            제목:
-                            <input type="text" value={oneIssue.issueName} onChange={e => setOneIssue({ ...oneIssue, issueName: e.target.value })} name="title" />
+                            제목 : <input type="text" value={oneIssue.issueName} onChange={e => setoneIssue({ ...oneIssue, issueName: e.target.value })} name="title"
+                                style={{ width: '450px' }}
+                            />
                         </label>
                         <br />
                         <label>
-                            설명:
-                        </label>
-                        <textarea className="descriptiontext" value={oneIssue.issueContent} onChange={e => setOneIssue({ ...oneIssue, issueContent: e.target.value })} />
+                            설명 : </label>
+                        <textarea className="descriptiontext" value={oneIssue.issueContent} onChange={e => setoneIssue({ ...oneIssue, issueContent: e.target.value })} />
                         <br />
                         <label>
-                            우선순위:&nbsp;
-                            <select value={oneIssue.issuePriority} onChange={e => setOneIssue({ ...oneIssue, issuePriority: e.target.value })}>
+                            우선순위 : &nbsp;
+                            <select value={oneIssue.issuePriority} onChange={e => setoneIssue({ ...oneIssue, issuePriority: e.target.value })}>
                                 <option value="">선택</option>
                                 <option value="긴급">긴급</option>
                                 <option value="보통">보통</option>
@@ -177,8 +184,7 @@ function SprintOne() {
                         </label>
                         <br />
                         <label>
-                            백로그 이름:
-                            <select value={oneIssue.backlogNo} onChange={e => setOneIssue({ ...oneIssue, backlogNo: e.target.value })} >
+                            백로그 이름 : <select value={oneIssue.backlogNo} onChange={e => setoneIssue({ ...oneIssue, backlogNo: e.target.value })} >
                                 {backlogList.map(backlog =>
                                     <option value={backlog.backlogNo}>{backlog.backlogName}</option>
                                 )}
@@ -186,8 +192,7 @@ function SprintOne() {
                         </label>
                         <br />
                         <label>
-                            상태:
-                            <select value={oneIssue.issueStatus} onChange={e => setOneIssue({ ...oneIssue, issueStatus: e.target.value })} >
+                            상태 : <select value={oneIssue.issueStatus} onChange={e => setoneIssue({ ...oneIssue, issueStatus: e.target.value })} >
                                 <option value="">선택</option>
                                 <option value="expected">예정</option>
                                 <option value="proceeding">진행중</option>
@@ -195,35 +200,39 @@ function SprintOne() {
                             </select>
                         </label>
                         <br />
+                        <br />
                         {/* 이부분이 댓글기능에 이슈번호를 불러오는 부분 */}
                         {/* 만약 이부분 없으면 CommentAPI.js에 getComment 부분이 안된다. */}
                         <Wan issueNo={oneIssue.issueNo} />
                         {auth.indexOf('U') >= 0 && (
-                            <button className="submitbtn" type="submit" onClick={() => {
+                            <button className="button2" type="submit" class="btn btn-outline-primary" onClick={() => {
                                 update(); setIsModal2(false)
                                 window.location.reload();
 
                             }}>수정</button>
                         )}
                         {auth.indexOf('D') >= 0 && (
-                            <button className="deletebtn" onClick={() => { setShowModal(true) }}>삭제</button>
+                            <button className="button2" class="btn btn-outline-danger" style={{ marginLeft: "20px" }} onClick={() => { setShowModal(true) }}>삭제</button>
                         )}
                         {showModal && (
                             <div className="modalaa">
                                 <div className="modal-content">
-                                    <p className="deletemessage">{oneIssue.issueName}을 삭제하시겠습니까?</p>
-                                    <button onClick={() => {
-                                        deleted(oneIssue);
-                                        setIsModal2(false);
-                                        setShowModal(false); // 모달 2개 모두 닫기
-                                        window.location.reload(); // 페이지 새로고침
-                                    }}>확인</button>
+                                    <header className="deletemessage">{oneIssue.issueName}을 삭제하시겠습니까?</header>
+                                    <main></main>
+                                    <footer>
+                                        <button className="modalbtn" class="btn btn-outline-primary" onClick={() => {
+                                            deleted(oneIssue);
+                                            setIsModal2(false);
+                                            setShowModal(false); // 모달 2개 모두 닫기
+                                            window.location.reload(); // 페이지 새로고침
+                                        }}>확인</button>
 
-                                    <button onClick={() => { setShowModal(false) }}>취소</button>
+                                        <button className="modalbtn" class="btn btn-outline-danger" onClick={() => { setShowModal(false) }}>취소</button>
+                                    </footer>
                                 </div>
                             </div>
                         )}
-                        {/* <button onClick={() => { setIsModal2(false); deleted(oneissue) }}>삭제</button> */}
+
                     </form>
                 </Modal>
                 : <></>}

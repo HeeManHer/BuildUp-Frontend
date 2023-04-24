@@ -19,10 +19,10 @@ function CommentList({ issueNo }) {
 
   useEffect(
     () => {
-    dispatch(getComment(issueNo));
-  },
-   []
-   );
+      dispatch(getComment(issueNo));
+    },
+    []
+  );
 
   // console.log(issueNo) 작동하는지 확인용
 
@@ -57,7 +57,7 @@ function CommentList({ issueNo }) {
 
   const rendList = () => {
     if (!comments) return null;
-    
+
     return comments.map((item, key) =>
       <div className='comment-row' key={key}>
         <div className='comment-id'> {item.employeeNo} </div>
@@ -81,7 +81,7 @@ function CommentList({ issueNo }) {
         {/* 댓글 날짜 */}
         <div className='comment-date'>{new Intl.DateTimeFormat('kr').format(new Date(item.replyDate))}
           {/* 댓글삭제 */}
-          {token.sub === item.employeeNo ?
+          {token.sub == item.employeeNo ?
             <button
               type="button"
               className='btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm'

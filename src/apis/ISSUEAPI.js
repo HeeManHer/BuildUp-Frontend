@@ -2,8 +2,11 @@ import { GET_BACKLOG } from "../modules/Backlog";
 import { CREATE_ISSUE, DELETE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE, SEARCH_ISSUE } from "../modules/Issue";
 import Issue from "../Pages/issue/Issue.json";
 
-export function SetIssueAPI(projectNo, pageNumber) {
+export function SetIssueAPI(projectNo, pageNumber, searchValue) {
     let RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues?offset=" + pageNumber;
+    if (searchValue !== undefined) {
+        RequestUrl += `&search=${searchValue}`;
+    }
 
     return async function (dispatch, getState) {
 
