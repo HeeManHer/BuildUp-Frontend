@@ -25,20 +25,6 @@ function Header() {
         ,[]
     );
 
-    const employeeReducer = useSelector(state => state.employeeReducer);
-    const employee = employeeReducer.data;
-
-    useEffect(
-        () => {
-            if (token !== null) {
-                dispatch(callGetEmployeeAPI({	// 구매 정보 조회
-                    employeeNo: token.sub
-                }));
-            }
-        }
-        , []
-    );
-
     if (token === null) {
         alert("로그인 해주세요");
         navigate("/", { replace: true });

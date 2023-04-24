@@ -54,8 +54,10 @@ function App() {
           <Route path=":projectNo" >
             <Route path="backlog" element={<Backlog />} />
             <Route path="issue" element={<Issue />} />
-            <Route path="sprint" element={<SprintList />} />
-            <Route path="sprintOne" element={<SprintOne />} />
+            <Route path="sprint" >
+              <Route index element={<SprintList />} />
+              <Route path=":sprintNo" element={<SprintOne />} />
+            </Route>
             <Route path="Manager" element={<Manager />} />
           </Route>
         </Route>
