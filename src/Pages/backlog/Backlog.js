@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import "../../css/backlog.css";
 import { getBacklog, postBacklog, putBacklog, deleteBacklog, searchBacklog } from '../../apis/backlogAPI.js';
-import { EmployeebtnAPI } from '../../apis/EmployeebtnAPI.js';
+// import { EmployeebtnAPI } from '../../apis/EmployeebtnAPI.js';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-
+import { decodeJwt } from '../../utils/tokenUtils';
 
 function Backlog() {
   const { projectNo } = useParams();
@@ -13,11 +13,13 @@ function Backlog() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setsearchValue] = useState('');
-
+  const token = decodeJwt(window.localStorage.getItem("accessToken"));
   const dispatch = useDispatch();
 
-  const auth = useSelector(state => state.employeebtnReducer);
-
+  const authorityReducer = useSelector(state => state.employeebtnReducer);
+  const auth = authorityReducer.map(auth => {
+    if (auth.typeNo == 2) return auth.authorityState
+  })
   const backlogReducer = useSelector(state => state.BacklogReducer);
 
   const backlogList = backlogReducer.data;
@@ -29,13 +31,14 @@ function Backlog() {
       pageNumber.push(i);
     }
   }
+  console.log(auth);
   //전체 백로그들 조회
   useEffect(
     () => {
-      dispatch(getBacklog(projectNo, currentPage, searchValue));
+      dispatch(getBacklog(projectNo, currentPage, searchValue))
     },
     [currentPage]
-  )
+  );
   // 모달 열기 
   const handleOpenModal = () => {
     setSelectedItemIndex(-1);
@@ -76,6 +79,7 @@ function Backlog() {
       doubleprevpage();
     }
   };
+
 
   // 10페이지 뺴기
   const doubleprevpage = () => {
@@ -169,7 +173,9 @@ function Backlog() {
               </label>
               <br />
               <br />
-              <button className='button2' type="submit">{selectedItemIndex === -1 ? '추가' : '저장 '}</button>
+              {selectedItemIndex === -1 ?
+                <button className='button2' type="submit"> '추가' </button>
+                : auth.indexOf('U') >= 0 && <button className='button2' type="submit"> 저장</button>}
               <button className='button2' type="button" onClick={handleCloseModal}>
                 닫기
               </button>
@@ -180,8 +186,11 @@ function Backlog() {
 
       <div className='bar'>
         <h2>백로그</h2>
-        [token.auth[0]] == 1 &&
-        <button className="button1" onClick={handleOpenModal}>백로그생성</button>
+        {auth.indexOf('C') >= 0 && (
+          <button className="button1" onClick={handleOpenModal}>백로그생성</button>
+        )}
+
+
       </div>
 
       <br />
@@ -237,11 +246,13 @@ function Backlog() {
               <td className='in2'>{item.backlogPriority}</td>
               <td>
                 <button className='button2' onClick={() => handleEditItem(item)}>
-                  수정
+                  조회
                 </button>
-                <button className='button2' onClick={() =>
-                  deleted(item, window.location.reload())
-                }>삭제</button>
+                {auth.indexOf('D') >= 0 && (
+                  <button className='button2' onClick={() =>
+                    deleted(item, window.location.reload())
+                  }>삭제</button>
+                )}
               </td>
             </tr>
           ))}
