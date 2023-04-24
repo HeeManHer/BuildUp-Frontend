@@ -4,6 +4,7 @@ import { callGetEmployeeAPI, callLogoutAPI } from "../../apis/EmployeeAPICall";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import employeeReducer from "../../modules/EmployeeModule";
 
 function Header() {
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
@@ -25,19 +26,7 @@ function Header() {
         ,[]
     );
 
-    const employeeReducer = useSelector(state => state.employeeReducer);
-    const employee = employeeReducer.data;
-
-    useEffect(
-        () => {
-            if (token !== null) {
-                dispatch(callGetEmployeeAPI({	// 구매 정보 조회
-                    employeeNo: token.sub
-                }));
-            }
-        }
-        , []
-    );
+    // 
 
     if (token === null) {
         alert("로그인 해주세요");
@@ -73,7 +62,7 @@ function Header() {
                 {/* 유저 정보 */}
                 <li className="nav-item dropdown no-arrow">
                     <a className="nav-link dropdown-toggle">
-                        <span className="mr-2 d-none d-lg-inline text-gray-600">{employee && employee.employeeName}</span>
+                        <span className="mr-2 d-none d-lg-inline text-gray-600">{employeeDetail && employeeDetail.employeeName}</span>
                     </a>
                 </li>
                 <div className="topbar-divider d-none d-sm-block"></div>

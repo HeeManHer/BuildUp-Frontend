@@ -5,11 +5,13 @@ const initialState = {};
 export const POST_LOGIN = 'login/POST_LOGIN';
 export const GET_EMPLOYEE = 'mypage/GET_EMPLOYEE';
 export const POST_FINDPWD = 'login/POST_FINDPWD';
+export const PUT_EMPLOYEE = 'changepassword/PUT_EMPLOYEE';
 
 const actions = createActions({
     [POST_LOGIN]: () => {},
     [GET_EMPLOYEE]: () => {},
-    [POST_FINDPWD]: () => {}
+    [POST_FINDPWD]: () => {},
+    [PUT_EMPLOYEE]: () => {}
 });
 
 const employeeReducer = handleActions({
@@ -22,6 +24,9 @@ const employeeReducer = handleActions({
     },
 
     [POST_FINDPWD]: (state, {payload}) => {
+        return payload;
+    },
+    [PUT_EMPLOYEE]: (state, {payload}) => {
         return payload;
     },
 },
