@@ -1,5 +1,5 @@
-export async function getProject() {
-    const URL = "http://localhost:8888/api/v1/projects";
+export async function getProject(employeeNo) {
+    const URL = "http://localhost:8888/api/v1/"+ employeeNo +"/projects";
 
     return await fetch(URL, {
         method: "GET",
@@ -7,6 +7,7 @@ export async function getProject() {
             "Content-Type": "application/json",
             "Accept": "*/*",
             // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            
         }
     }).then(response => response.json());
 }
