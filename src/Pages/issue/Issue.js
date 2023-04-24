@@ -7,6 +7,7 @@ import "../../css/Issue.css";
 import { NavLink, useParams } from 'react-router-dom';
 import Wan from '../comment/Wan';
 import { decodeJwt } from '../../utils/tokenUtils';
+import 로그인창 from '../../img/로그인창.png';
 
 
 function Issue() {
@@ -69,14 +70,6 @@ function Issue() {
         dispatch(DeleteIssueAPI(oneissue));
     }
 
-    // const nextpage = () => {
-    //     setCurrentPage(currentPage + 1);
-    // }
-
-    // const prevpage = () => {
-    //     setCurrentPage(currentPage - 1);
-    // }
-
     const search = () => {
         dispatch(SearchIssueAPI(searchValue, projectNo));
     }
@@ -88,11 +81,6 @@ function Issue() {
     const handlePriorityChange = (event) => setPriority(event.target.value);
     const handleBacklognameChange = (event) => setBacklogname(event.target.value);
     const handleSituationChange = (event) => setSituation(event.target.value);
-
-    // const handlePageChange = (pageNumber) => {
-    //     dispatch(SetIssueAPI(projectNo, pageNumber))
-    //     setCurrentPage(pageNumber + 1);
-    // };
 
     const pageNumber = [];
     if (PageInfo) {
@@ -107,11 +95,6 @@ function Issue() {
         },
         [currentPage]
     );
-    // const nextPage = () => {
-    //     if (currentPage + 1 <= PageInfo.maxPage) {
-    //         setCurrentPage(currentPage + 5);
-    //     }
-    // }
 
     const nextPage = () => {
         const next = Math.min(currentPage + 5, PageInfo.maxPage);
@@ -142,22 +125,19 @@ function Issue() {
     }
 
     return (
+
         <>
             <h1 className="head1">이슈
 
-
                 {auth.indexOf('C') >= 0 && (
-                    <button className="createissue"  class="btn btn-outline-primary" style={{ position: 'absolute',right: '20px' ,height: "50px", width: "200px"}}onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
+                    <button className="createissue" class="btn btn-outline-primary" style={{ position: 'sticky', right: '20px', height: "50px", width: "200px" }} onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
                 )}
             </h1>
 
 
             <h2 className="line" />
-            <form style={{ position: 'absolute', top: '180px', left: '1500px', width: "400px" }} class="issuesearch">
-                <div class="input-group">
-
-                    {/* <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2" value={searchValue} onChange={e => setsearchValue(e.target.value)} /> */}
+            <form>
+                <div class="input-group" style={{ position: 'sticky', top: '225px', left: '1500px', width: "400px" }}>
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2"
                         value={searchValue}
@@ -177,96 +157,114 @@ function Issue() {
                 </div>
             </form>
             <div className="container1">
-                <div className="issuelist">
+                <table className="user-table" class="table table-striped table-hover" width="90%">
+                    <thead>
+                        <tr>
+                            {/* <th>이슈번호</th> */}
+                            <th>제목</th>
+                            <th>내용</th>
+                            <th>상태</th>
+                            <th>우선순위</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <br />
+                    <tbody>
+                        {currentIssues.map((issue) => (
+                            <tr key={projectNo}>
+                                <td >{issue.issueName.length > 10 ? issue.issueName.substring(1, 10) + "..." : issue.issueName}</td>
+                                {/* <td >{issue.issueContent}</td> */}
+                                <td >{issue.issueContent.length > 10 ? issue.issueContent.substring(1, 10) + "..." : issue.issueContent}</td>
+                                <td >{issue.issuePriority}</td>
+                                <td >{issue.issueStatus}</td>
+                                <td>
+                                    <button className='button2' class="btn btn-outline-primary" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>
+                                        조회
+                                    </button>
 
-                    {/* 왼쪽 목록을 볼 수 있는 영역 */}
-                    <header className="issueheader">목록</header>
-
-                    <ul>
-                        <br />
-                        {currentIssues.map(issue => (
-                            <li onMouseEnter={(e) => handleIssueHover(e, issue.title)}>
-                                <a href="#" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>{issue.issueName}</a>
-                            </li>
+                                </td>
+                            </tr>
                         ))}
-                        <div className="pageset">
+                    </tbody>
+                </table>
 
-                            {pageNumber.map((num) => (
-                                <li className="pagenum" key={num} onClick={() => setCurrentPage(num)}>
-                                    <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
-                                        {num}
-                                    </span>
-                                </li>
-                            ))}
+                <div className="pageset">
 
-                        </div>
-                    </ul>
                     <div className="pagebtn">
                         <button className="prevbtn-text" class="btn btn-outline-primary" onClick={prevPage}>
                             &lt;
                         </button>
-                        <button className="nextbtn-text" class="btn btn-outline-primary" onClick={nextPage}>
+                        {pageNumber.map((num) => (
+                            <li className="pagenum" key={num} onClick={() => setCurrentPage(num)}>
+                                <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
+                                    {num}
+                                </span>
+                            </li>
+                        ))}
+
+                        <button className="nextbtn-text" class="btn btn-outline-primary" onClick={nextPage} >
                             &gt;
                         </button>
                     </div>
+
                 </div>
 
+            </div >
+            
+            <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
+                <h6 className="smalltitle">이슈</h6>
+                <hr className="line3" />
+                <h3 className="smalltitle2">이슈 생성</h3>
 
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        제목 : <input type="text" value={title} onChange={handleTitleChange} name="title" style={{ width: '450px' }} /></label>
+                    <br />
+                    <br />
+                    <label>
+                        설명 : </label>
+                    <textarea className="descriptiontext" value={description} onChange={handleDescriptionChange} />
+                    <br />
+                    <br />
+                    <label>
+                        우선순위 : <select value={priority} onChange={handlePriorityChange}>
+                            <option value="">선택</option>
+                            <option value="High">높음</option>
+                            <option value="Middle">보통</option>
+                            <option value="Low">낮음</option>
+                        </select>
+                    </label>
+                    <br />
+                    <br />
+                    <label>
+                        백로그 이름 : <select value={backlogname} onChange={handleBacklognameChange} >
+                            {backlogList.map(backlog => {
+                                console.log(backlog);
+                                return <option value={backlog.backlogNo}>{backlog.backlogName}</option>;
+                            }
+                            )}
+                        </select>
+                    </label>
+                    <br />
+                    <br />
+                    <label>
+                        상태 : <select value={situation} onChange={handleSituationChange}>
+                            <option value="">선택</option>
+                            <option value="예정">예정</option>
+                            <option value="진행중">진행중</option>
+                            <option value="완료">완료</option>
+                        </select>
+                    </label>
+                    <br />
+                </form>
+                <button className="button2" type="submit" class="btn btn-outline-primary" onClick={() => {
+                    save();
+                    window.location.reload();
+                }}>생성</button>
 
-                <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
-                    <h6 className="smalltitle">이슈</h6>
-                    <hr className="line3" />
-                    <h3 className="smalltitle2">이슈 생성</h3>
+                <button className="button2" type="button" class="btn btn-outline-danger" style={{ marginLeft: "20px" }} onClick={() => { setIsModal1(false) }}>닫기</button>
+            </Modal>
 
-                    <form onSubmit={handleSubmit}>
-                        <label>
-                            제목 : <input type="text" value={title} onChange={handleTitleChange} name="title" style={{ width: '450px' }} /></label>
-                        <br />
-                        <br />
-                        <label>
-                            설명 : </label>
-                        <textarea className="descriptiontext" value={description} onChange={handleDescriptionChange} />
-                        <br />
-                        <br />
-                        <label>
-                            우선순위 : <select value={priority} onChange={handlePriorityChange}>
-                                <option value="">선택</option>
-                                <option value="High">높음</option>
-                                <option value="Middle">보통</option>
-                                <option value="Low">낮음</option>
-                            </select>
-                        </label>
-                        <br />
-                        <br />
-                        <label>
-                            백로그 이름 : <select value={backlogname} onChange={handleBacklognameChange} >
-                                {backlogList.map(backlog => {
-                                    console.log(backlog);
-                                    return <option value={backlog.backlogNo}>{backlog.backlogName}</option>;
-                                }
-                                )}
-                            </select>
-                        </label>
-                        <br />
-                        <br />
-                        <label>
-                            상태 : <select value={situation} onChange={handleSituationChange}>
-                                <option value="">선택</option>
-                                <option value="예정">예정</option>
-                                <option value="진행중">진행중</option>
-                                <option value="완료">완료</option>
-                            </select>
-                        </label>
-                        <br />
-                    </form>
-                    <button className="button2" type="submit" class="btn btn-outline-primary" onClick={() => {
-                        save();
-                        window.location.reload();
-                    }}>생성</button>
-
-                    <button className="button2" type="button" class="btn btn-outline-danger" style={{marginLeft: "20px"}} onClick={() => { setIsModal1(false) }}>닫기</button>
-                </Modal>
-            </div>
 
             <Modal className="modalsub" isOpen={isModal2} onRequestClose={() => { setIsModal2(false) }}>
                 <h6 className="smalltitle">이슈</h6>
@@ -334,7 +332,7 @@ function Issue() {
                                         deleted(oneissue);
                                         setIsModal2(false);
                                         setShowModal(false); // 모달 2개 모두 닫기
-                                        // window.location.reload(); // 페이지 새로고침
+                                        window.location.reload(); // 페이지 새로고침
                                     }}>확인</button>
 
                                     <button className="modalbtn" class="btn btn-outline-danger" onClick={() => { setShowModal(false) }}>취소</button>
@@ -342,7 +340,7 @@ function Issue() {
                             </div>
                         </div>
                     )}
-                    {/* <button onClick={() => { setIsModal2(false); deleted(oneissue) }}>삭제</button> */}
+
                 </form>
             </Modal>
         </>

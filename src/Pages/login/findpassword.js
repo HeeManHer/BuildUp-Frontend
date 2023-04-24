@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
-    callLoginAPI1
+    callPOSTFindEmployeeAPI
 } from '../../apis/EmployeeAPICall'
 
 import { POST_LOGIN } from '../../modules/EmployeeModule';
@@ -27,10 +27,10 @@ function Findpassword() {
 
     useEffect(() => {
 
-        if (loginEmployee.status === 200) {
+        if (loginEmployee.message === "정보가 일치합니다") {
             console.log("[Login] Login SUCCESS {}", loginEmployee);
             navigate("./afterchange", { replace: true });
-        } else if (loginEmployee.status !== 200) {
+        } else {
             alert("정보를 찾을 수 없습니다.")
         }
     }
@@ -55,7 +55,7 @@ function Findpassword() {
 
     // 로그인 버튼 클릭시 디스패처 실행 및 메인 페이지로 이동
     const onClickLoginHandler = () => {
-        dispatch(callLoginAPI1({	// 로그인
+        dispatch(callPOSTFindEmployeeAPI({	// 로그인
             form: form
 
         }),
@@ -80,7 +80,7 @@ function Findpassword() {
             <hr />
             <div className="id">
                 <label>사번 : </label>
-                <input type="text" name="employeeId" onChange={onChangeHandler} />
+                <input type="text" name="employeeNo" onChange={onChangeHandler} />
             </div>
             <br />
             <br />
@@ -89,7 +89,7 @@ function Findpassword() {
                 <label>이메일 : </label>
                 <input type="email" name="employeeEmail" onChange={onChangeHandler} />
             </div>
-            <button class="btn btn-outline-primary" onClick={onClickLoginHandler}>임시비밀번호 전송</button>
+            <button onClick={onClickLoginHandler}>비밀번호 재설정</button>
         </div>
     );
 

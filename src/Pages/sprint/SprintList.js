@@ -76,7 +76,7 @@ function SprintList() {
                                 ~
                                 {new Intl.DateTimeFormat('kr').format(new Date(sprint.sprintEndday ? sprint.sprintEndday : 1))}</span>
                             <div className="sprintlistline"></div>
-                            {Array.isArray(sprint.sprintIssue) && sprint.sprintIssue && sprint.sprintIssue.map(issue =>
+                            {Array.isArray(sprint.sprintIssue) && sprint.sprintIssue && sprint.sprintIssue.slice(0, 3).map(issue =>
                                 <div className="sprintlistissue" style={{ border: '1px solid cornflowerblue' }}>
                                     <span>{issue.issueName}</span>
                                     <br />

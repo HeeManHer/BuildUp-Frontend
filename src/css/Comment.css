@@ -1,24 +1,24 @@
 .comment {
-    color:black;
+    color: black;
     background-color: white;
     border: 1px solid black;
-    height: 150px;
+    height: 100px;
     overflow: scroll;
     overflow-y: auto;
     overflow-x: auto;
 }
 
-.comment-row{
-    display: flex; 
+.comment-row {
+    display: flex;
     align-items: center;
 }
 
-.comment-id{
+.comment-id {
     margin-Right: 1rem;
 }
 
-.comment-content{
-    flex: 1 ;
+.comment-content {
+    flex: 1;
 }
 
 .comment-date {
@@ -36,12 +36,10 @@
     margin-right: 10px;
 }
 
-.btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm{
+.btn btn-danger btn-icon-split icon text-white-50 fas fa-trash btn-sm {
     float: left;
 }
 
 .comment-please {
     margin-top: 100; 
 }
-
-

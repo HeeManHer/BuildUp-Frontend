@@ -5,6 +5,7 @@ import '../../css/loginModal.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { callGetEmployeeAPI, callLogoutAPI } from "../../apis/EmployeeAPICall";
 
 import {
     callPutEmployeeAPI
@@ -55,14 +56,26 @@ function Changepassword() {
     }
 
 
-
     const openModal = () => {
-        callPutEmployeeAPI(pwd).then(res => setCheckMessage(res.data))
-        setModalOpen(true);
+        if(check){
+            
+            callPutEmployeeAPI(pwd).then(res => setCheckMessage(res.data))
+            setModalOpen(true);
+        } else {
+           alert("비밀번호가 일치하지 않습니다.")
+        }
+        
     };
 
     const closeModal = () => {
-        setModalOpen(false);
+        if(checkmessage == "비밀번호 변경 성공 !!") {
+            window.localStorage.removeItem("accessToken");
+            setModalOpen(false);
+            navigate("/", { replace: true });
+            dispatch(callLogoutAPI());
+        } else {
+            setModalOpen(false);
+        }
     };
 
     return (

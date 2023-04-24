@@ -32,11 +32,7 @@
     justify-content: space-between;
 }
 
-/*파란 라인 선*/
-.line {
-    border: solid #4e73df 5px;
-    width: 100%;
-}
+
 
 /*인덱스에 들어가는 정보스타일*/
 .in {
@@ -58,18 +54,6 @@
     padding-left: 10px;
     justify-content: space-between;
 
-}
-
-
-.blue {
-    display: flex;
-    border: 1px solid black;
-    width: 1680px;
-    align-items: center;
-    border-radius: 10px;
-    padding-left: 10px;
-    justify-content: space-between;
-    color: #4e73df;
 }
 
 .smalltitle {

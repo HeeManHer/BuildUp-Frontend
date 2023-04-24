@@ -31,6 +31,8 @@ export const callGetEmployeeAPI = ({employeeNo}) => {
     };
 }
 
+
+
 export const callLoginAPI = ({form}) => {
     const requestURL = `http://localhost:8888/auth/login`;
 
@@ -117,13 +119,62 @@ export  const  callPutEmployeeAPI = async (modifyPwd) => {
             body: JSON.stringify(modifyPwd)
         })
         .then(response => response.json());
-
-        
-
-        
         
     
 }
+
+
+
+export  const  callPutFindEmployeeAPI = async (modifyPwd) => {
+    const requestURL = `http://localhost:8888/api/v1/password`;
+    
+            // 클라이언트 fetch mode : no-cors 사용시 application/json 방식으로 요청이 불가능
+            // 서버에서 cors 허용을 해주어야 함
+
+    return await fetch(requestURL, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            },
+            body: JSON.stringify(modifyPwd)
+        })
+        .then(response => response.json());
+}
+
+
+
+export const callPOSTFindEmployeeAPI = ({form}) => {
+    const requestURL = `http://localhost:8888/api/v1/member`;
+
+    return async (dispatch, getState) => {
+
+        // 클라이언트 fetch mode : no-cors 사용시 application/json 방식으로 요청이 불가능
+        // 서버에서 cors 허용을 해주어야 함
+        const result = await fetch(requestURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            }
+            ,body: JSON.stringify({
+                employeeNo: form.employeeNo,
+                employeeName: form.employeeName,
+                employeeEmail: form.employeeEmail
+            })
+        })
+
+        .then(response => response.json());
+
+        // console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
+
+        dispatch({ type: GET_EMPLOYEE,  payload: result });
+        
+    };
+}
+
 export const callLoginAPI1 = ({form}) => {
     const requestURL = `http://localhost:8888/auth/login`;
 

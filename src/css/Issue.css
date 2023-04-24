@@ -75,8 +75,9 @@
 
 }
 
-asdasdasdasd .container1 {
-    display: flex;
+.container1 {
+    background-size: auto;
+    background-repeat: no-repeat;
     height: 100%;
     width: 100%;
 
@@ -123,8 +124,9 @@ asdasdasdasd .container1 {
 
 .head1 {
     display: flex;
-    margin-left: 20px;
+    margin-left: 10px;
     color: #002060;
+    position: sticky;
     width: 100%;
     height: 50px;
     justify-content: space-between;
@@ -320,7 +322,9 @@ asdasdasdasd .container1 {
 }
 
 .pageset {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .prevbtn-text,
