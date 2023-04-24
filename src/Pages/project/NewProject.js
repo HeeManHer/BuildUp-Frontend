@@ -12,7 +12,7 @@ function NewProject() {
 
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
-
+  
   const [inviteText, setInviteText] = useState('');
   const [inviteList, setInviteList] = useState([]);
 
@@ -25,7 +25,6 @@ function NewProject() {
   const employee = employeeReducer.data;
 
   const { projectNo } = useParams();
-
 
   /* 리덕스 안썼을때 useState를 가지고 오는 방법 */
   useEffect(
