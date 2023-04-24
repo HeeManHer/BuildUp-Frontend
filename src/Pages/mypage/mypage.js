@@ -30,7 +30,8 @@ function Mypage() {
             console.log('token', token.sub);
             if(token !== null) {
                 dispatch(callGetEmployeeAPI({	
-                    employeeNo: token.sub
+                    employeeNo: token.sub,
+                    
                 }));            
             }
         }

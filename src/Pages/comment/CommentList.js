@@ -10,6 +10,7 @@ function CommentList({issueNo}) {
   const [value, setValue] = useState('');
   const [update, setUpdate] = useState(null);
 
+
   const comments = useSelector(state => state.CommentReducer);
 
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function CommentList({issueNo}) {
     if (event.key !== 'Enter') return;
 
     const modifyComment = comments[key];
+    
 
     setUpdate();
     dispatch(updateComment({...modifyComment, replyContent: value}));

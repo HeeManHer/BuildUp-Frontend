@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 
 function NewProject() {
   const dispatch = useDispatch();
+
   const Navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
@@ -17,8 +18,6 @@ function NewProject() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   const token = decodeJwt(window.localStorage.getItem("accessToken"));
-
-
 
   const employeeReducer = useSelector(state => state.employeeReducer);
   const employee = employeeReducer.data;
@@ -30,7 +29,7 @@ function NewProject() {
   useEffect(
     () => {
       if (token !== null) {
-        dispatch(callGetEmployeeAPI({   // 구매 정보 조회
+        dispatch(callGetEmployeeAPI({   
           employeeNo: token.sub
         }));
       }
@@ -41,7 +40,7 @@ function NewProject() {
   /* 리덕스 안썼을때 useState를 가지고 오는 방법 */
   useEffect(
     () => {
-      getProject().then(data => { console.log(data); setItems(data.data); });
+      getProject(token.sub).then(data => { console.log(data); setItems(data.data); });
     },
     []
   )
@@ -58,12 +57,12 @@ function NewProject() {
   }
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);             //true일때 생성가능함
+    setIsModalOpen(true);            
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedItemIndex(-1);         //false면 생성불가능함
+    setSelectedItemIndex(-1);        
   };
 
   const handleSubmit = (event) => {
@@ -156,7 +155,7 @@ function NewProject() {
                   팀원 초대 : <input type="text" value={inviteText} onChange={handleInviteTextChange} style={{ width: '395px' }} />
                   <button className="btn btn-success btn-icon-split btn-sm" type="button" onClick={handleInviteAdd}>추가</button>
                 </label>
-                <div className='row' style={{ overflow: 'auto', height: '150px' }}>
+                <div className="row" style={{ overflow: 'auto', height: '150px' }}>
 
                   {inviteList.map((invite, index) => (
                     <div key={index} style={{ border: '1px solid black', padding: '5px', margin: '5px', display: 'flex', height: '40px' }}>
@@ -169,20 +168,24 @@ function NewProject() {
                 </div>
                 <br />
               </div>
-              <button className='button2' type="submit" >{selectedItemIndex === -1 ? '생성' : 'Save'}</button>
-              <button className="button3" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
+              <div>
+              <button className="button2" type="submit" >{selectedItemIndex === -1 ? "생성" : "Save"}</button>
+              <button className="button33" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
               </button>
+              </div>
             </form>
           </div>
         </div>
       </div>
-      <div className='newproject'>
+      <div className="newproject">
         <h1>프로젝트</h1>
+        {token.auth[0] == 1 && 
         <button className="button1" onClick={handleOpenModal}>프로젝트 생성</button>
+        }
       </div>
       <hr className="line" />
       <div className="project2">
-        {items.map((item, index) => (
+        {Array.isArray(items) && items.map((item, index) => (
           <div>
             <div className="build"><p>Build Up</p>
               <hr className="line2" />
