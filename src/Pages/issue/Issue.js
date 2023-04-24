@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { SetIssueAPI, SaveIssueAPI, UpdateIssueAPI, DeleteIssueAPI, GetBacklogListAPI, SearchIssueAPI } from "../../apis/ISSUEAPI";
+// import { EmployeebtnAPI } from "../../apis/"
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
 import "../../css/Issue.css";
 import { NavLink, useParams } from 'react-router-dom';
 import Wan from '../comment/Wan';
+import { decodeJwt } from '../../utils/tokenUtils';
 
 
 function Issue() {
@@ -23,17 +25,21 @@ function Issue() {
     const [showModal, setShowModal] = useState(false);
     const IssueReducer = useSelector(state => state.IssueReducer);
     const backlogList = useSelector(state => state.BacklogReducer.data);
+    const auth = useSelector(state => state.employeebtnReducer);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const currentIssues = IssueReducer.data;
     const PageInfo = IssueReducer.pageInfo;
 
     console.log(backlogList);
+    const token = decodeJwt(window.localStorage.getItem("accessToken"));
+
     const dispatch = useDispatch();
     const save = () => {
         const saveIssue = {
             issueName: title, issueContent: description, issuePriority: priority, issueStatus: situation, backlogNo: backlogname, projectNo
         };
 
+        const token = decodeJwt(window.localStorage.getItem("accessToken"));
 
 
 
@@ -45,6 +51,8 @@ function Issue() {
         setBacklogname('');
         setIsModal1(false);
     }
+
+
 
 
     const update = () => {
@@ -92,7 +100,7 @@ function Issue() {
 
     useEffect(
         () => {
-            dispatch(SetIssueAPI(projectNo, currentPage));
+            dispatch(SetIssueAPI(projectNo, currentPage, searchValue));
         },
         [currentPage]
     );
@@ -201,6 +209,7 @@ function Issue() {
 
                 <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
                     <h2>이슈 생성</h2>
+                    <hr className="line1" />
                     <form onSubmit={handleSubmit}>
                         <label>
                             제목:
@@ -255,6 +264,7 @@ function Issue() {
 
             <Modal className="modalsub" isOpen={isModal2} onRequestClose={() => { setIsModal2(false) }}>
                 <h2>이슈 수정</h2>
+                <hr className="line2" />
                 <form onSubmit={handleSubmit}>
                     <label>
                         제목:
@@ -297,7 +307,7 @@ function Issue() {
                     <br />
                     {/* 이부분이 댓글기능에 이슈번호를 불러오는 부분 */}
                     {/* 만약 이부분 없으면 CommentAPI.js에 getComment 부분이 안된다. */}
-                    <Wan issueNo={oneissue.issueNo}/>
+                    <Wan issueNo={oneissue.issueNo} />
                     <button className="submitbtn" type="submit" onClick={() => {
                         update(); setIsModal2(false)
                         window.location.reload();

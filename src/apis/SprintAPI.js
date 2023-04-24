@@ -1,10 +1,29 @@
 import { GET_SPRINT_ISSUE } from "../modules/Issue";
 import { GET_SPRINT } from "../modules/sprint";
 
-export function getSprint(projectNo) {
+export function getSprint(projectNo,currentPage) {
     // console.log(projectNo);
 
-    const URL = `http://localhost:8888/api/v1/${projectNo}/sprints`;
+    const URL = `http://localhost:8888/api/v1/${projectNo}/sprints?offset=${currentPage}`;
+
+    return async (dispatch, getState) => {
+        const result = await fetch(URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*",
+                // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
+            }
+        }).then(response => response.json());
+        
+        dispatch({ type: GET_SPRINT, payload: result.data });
+    }
+}
+
+export function getSprintDetail(sprintNo) {
+    // console.log(projectNo);
+
+    const URL = `http://localhost:8888/api/v1/sprints'+'${sprintNo}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(URL, {
@@ -39,10 +58,10 @@ export function getIssue(projectNo) {
 }
 
 export async function postSprint(sprint) {
-
+console.log(sprint);
     const URL = 'http://localhost:8888/api/v1/sprints';
 
-    return await fetch(URL, {
+     await fetch(URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -51,7 +70,7 @@ export async function postSprint(sprint) {
         },
         body: JSON.stringify(sprint)
     });
-
+console.log('hello');
 }
 
 export async function putSprint(sprint) {

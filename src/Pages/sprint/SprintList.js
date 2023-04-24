@@ -4,7 +4,7 @@ import "../../css/sprint.css";
 import { getSprint, insertSprint, postSprint, deleteSprint, getIssue } from '../../apis/SprintAPI.js';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function SprintList() {
     const { projectNo } = useParams();
@@ -13,30 +13,34 @@ function SprintList() {
     // const [onesprint, setonesprint] = useState({});
     const sprintReducer = useSelector(state => state.SprintReducer);
     const sprintList = sprintReducer.data;
-    const pageinfo = sprintReducer.pageInfo;
+    const pageInfo = sprintReducer.pageInfo;
+    const [currentPage, setCurrentPage] = useState(1);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getSprint(projectNo));
-    }, []);
+        dispatch(getSprint(projectNo, currentPage));
+    }, [currentPage]);
 
-    // const update = () => {
-    //     dispatch(postSprint(onesprint));
-    // };
+    const pageNumber = [];
+    if (pageInfo) {
+        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            pageNumber.push(i);
+        }
+    }
 
-    // const deleted = () => {
-    //     dispatch(deleteSprint(onesprint));
-    // }
-    // console.log(issueList)
+    const nextpage = () => {
+        if (currentPage + 1 <= pageInfo.maxPage) {
+            setCurrentPage(currentPage + 1)
+        }
+    };
 
-    // const nextpage = () => {
-    //     setCurrentPage(currentPage + 1);
-    // }
-
-    // const prevpage = () => {
-    //     setCurrentPage(currentPage - 1);
-    // }
+    const prevpage = () => {
+        if (currentPage - 1 >= 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     const openSprintCreateModal = () => {
         setModalIsOpen(true);
@@ -47,7 +51,7 @@ function SprintList() {
     };
 
     return (
-        
+
         <>
             <div className="newproject">
                 <h1>스프린트 목록</h1>
@@ -56,9 +60,8 @@ function SprintList() {
             <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
             <hr className="line" />
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                {sprintList&&sprintList.map((sprint, index) =>  (
-
-                    <div key={index} className="sprintlistboard1">
+                {sprintList && sprintList.map((sprint, index) => (
+                    <div key={index} className="sprintlistboard1" onClick={() => navigate("./" + sprint.sprintNo)}>
                         <div className="sprintlistboard2">
                             <div className="sprintlistboard3">
                                 <div className="sprintname">
@@ -69,22 +72,33 @@ function SprintList() {
                                 </div>
                             </div>
                             <span className="sprintdate">
-                                {new Intl.DateTimeFormat('kr').format(new Date(sprint.sprintStartday? sprint.sprintStartday:1))}
+                                {new Intl.DateTimeFormat('kr').format(new Date(sprint.sprintStartday ? sprint.sprintStartday : 1))}
                                 ~
-                                {new Intl.DateTimeFormat('kr').format(new Date(sprint.sprintEndday? sprint.sprintEndday:1))}</span>
+                                {new Intl.DateTimeFormat('kr').format(new Date(sprint.sprintEndday ? sprint.sprintEndday : 1))}</span>
                             <div className="sprintlistline"></div>
-                            {Array.isArray(sprint.sprintIssue)&& sprint.sprintIssue &&sprint.sprintIssue.map(issue => 
-                                    <div className="sprintlistissue">
+                            {Array.isArray(sprint.sprintIssue) && sprint.sprintIssue && sprint.sprintIssue.map(issue =>
+                                <div className="sprintlistissue">
                                     <span>{issue.issueName}</span>
                                     <br />
                                     <span style={{}}>담당자 : {issue.employeeName}</span>
-                                </div> 
-                                )}
+                                </div>
+                            )}
                         </div>
                     </div>
-                ))}
-            </div>
-        </>
+                    ))}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <button className='button2' onClick={prevpage}> ◀ </button>
+                        {pageNumber.map((num) => (
+                            <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                                <button style={currentPage === num ? { backgroundColor: 'orange' } : null}>
+                                    {num}
+                                </button>
+                            </li>
+                        ))}
+                        <button className='button2' onClick={nextpage}>▶</button>
+                    </div>
+                </>
     );
 }
 
