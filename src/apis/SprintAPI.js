@@ -1,7 +1,7 @@
 import { GET_SPRINT_ISSUE } from "../modules/Issue";
 import { GET_SPRINT } from "../modules/sprint";
 
-export function getSprint(projectNo,currentPage) {
+export function getSprint(projectNo, currentPage) {
     // console.log(projectNo);
 
     const URL = `http://localhost:8888/api/v1/${projectNo}/sprints?offset=${currentPage}`;
@@ -15,7 +15,7 @@ export function getSprint(projectNo,currentPage) {
                 // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             }
         }).then(response => response.json());
-        
+
         dispatch({ type: GET_SPRINT, payload: result.data });
     }
 }
@@ -23,7 +23,7 @@ export function getSprint(projectNo,currentPage) {
 export function getSprintDetail(sprintNo) {
     // console.log(projectNo);
 
-    const URL = `http://localhost:8888/api/v1/sprints'+'${sprintNo}`;
+    const URL = `http://localhost:8888/api/v1/sprints/${sprintNo}`;
 
     return async (dispatch, getState) => {
         const result = await fetch(URL, {
@@ -34,7 +34,7 @@ export function getSprintDetail(sprintNo) {
                 // "Authorization": "Bearer " + window.localStorage.getItem("accessToken")
             }
         }).then(response => response.json());
-        
+
         dispatch({ type: GET_SPRINT, payload: result.data });
     }
 }
@@ -53,15 +53,15 @@ export function getIssue(projectNo) {
             }
         }).then(response => response.json());
         // console.log(result);
-        dispatch({ type: GET_SPRINT_ISSUE, payload: result});
+        dispatch({ type: GET_SPRINT_ISSUE, payload: result });
     }
 }
 
 export async function postSprint(sprint) {
-console.log(sprint);
+    console.log(sprint);
     const URL = 'http://localhost:8888/api/v1/sprints';
 
-     await fetch(URL, {
+    await fetch(URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -70,7 +70,6 @@ console.log(sprint);
         },
         body: JSON.stringify(sprint)
     });
-console.log('hello');
 }
 
 export async function putSprint(sprint) {

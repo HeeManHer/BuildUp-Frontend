@@ -5,9 +5,7 @@ export async function getProject(employeeNo) {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "*/*",
-            // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
-            
+            "Accept": "*/*"
         }
     }).then(response => response.json());
 }
@@ -20,8 +18,7 @@ export async function postProject(project) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "*/*",
-            // "Authorization": "Bearer " + window.localStorage.getItem("accessToken") 
+            "Accept": "*/*"
         },
         body: JSON.stringify(project)
     });

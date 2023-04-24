@@ -18,6 +18,8 @@ import Findpassword from "./Pages/login/findpassword";
 import ContactUs from "./Pages/login/email";
 // import firstpage from "./Pages/login/FirstPage";
 import Firstpage from "./Pages/login/FirstPage";
+import Afterchange from "./Pages/login/afterchange";
+
 
 
 
@@ -41,6 +43,7 @@ function App() {
         <Route path="/auth" element={<LoginLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="login/findpassword" element={<Findpassword />} />
+          <Route path="login/findpassword/afterchange" element={<Afterchange />} />
         </Route>
 
         <Route path="mypage" element={<MypageLayout />}>
