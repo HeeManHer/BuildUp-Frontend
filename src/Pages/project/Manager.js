@@ -222,7 +222,7 @@ function Manager() {
                                                     height: "40px"
                                                 }}>
                                                 <div>{invite.employeeName}</div>
-                                                <button className='btn btn-danger btn-icon-split icon text-white fas fa-trash btn-sm'
+                                                <button className="btn btn-danger btn-icon-split icon text-white fas fa-trash btn-sm"
                                                     type="button"
                                                     style={{ marginLeft: "20px" }}
                                                     onClick={() => { handleInviteRemove(index) }}>삭제</button></div>
@@ -231,15 +231,17 @@ function Manager() {
                                 </div>
                                 <br />
                             </div>
-                            <button className='button2' type="submit" >{selectedItemIndex === -1 ? '추가' : 'Save'}</button>
-                            <button className="button3" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}</button>
+                            <button className="button2" type="submit" >{selectedItemIndex === -1 ? "추가" : "Save"}</button>
+                            <button className="button33" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div className="newproject">
                 <h1>프로젝트 관리/<span id="size">{project.projectTitle}</span></h1>
+                {token.auth[0] == 1 &&
                 <button className="button1" onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>
+                }
             </div>
             <hr className="line" />
             <div className="projectname">
@@ -253,9 +255,10 @@ function Manager() {
                         <h3>프로젝트 명 : </h3>
                         <br />
                         <h6 id="name">{project.projectTitle}</h6>
+                        {token.auth[0] == 1 &&
                         <button className="button5" onClick={onClickProjectTitleEditBtn}>
                             수정
-                        </button>
+                        </button>}
                     </>
                 )}
             </div>
@@ -287,6 +290,7 @@ function Manager() {
                             <td>{user.employeeName}</td>
                             <td>{user.employeeNo}</td>
                             <td>{user.employeeEmail}</td>
+                            {token.auth[0] == 1 &&
                             <td><select onChange={(e) => handlerSelect(user, e)} value={user.roleNo}>
                                 {authorityType.map((user) => (
                                     <option value={user.roleNo}>{user.roleName}
@@ -294,7 +298,12 @@ function Manager() {
                                     </option>
                                 ))}
                             </select>
-                            </td>
+                            </td>}
+                            {token.auth[0] != 1 && (authorityType.map((user) => (user.roleNo))) !== 1 &&
+                            <td><option value={user.roleNo}>{user.roleName}
+
+                            </option></td>}
+
                         </tr>
                     ))}
                 </tbody>
@@ -302,9 +311,11 @@ function Manager() {
             <br />
             <br />
             <div className="button">
-                <button type="button" className='button4' style={{ marginLeft: "210px" }} onClick={handleOpenModal}>팀원추가</button>
-                <button type="button" className='button4' onClick={onClickDeleteBtn}>팀원삭제</button>
-            </div>
+                {token.auth[0] == 1 && 
+                <button type="button" className="button4" onClick={handleOpenModal}>팀원추가</button>}
+                {token.auth[0] == 1 && 
+                <button type="button" className="button44" onClick={onClickDeleteBtn}>팀원삭제</button>}
+                </div>
         </div>
     );
 }

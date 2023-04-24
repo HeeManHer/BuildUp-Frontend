@@ -24,8 +24,7 @@ function Header() {
         }
         ,[]
     );
-
-
+    
     if (token === null) {
         alert("로그인 해주세요");
         navigate("/", { replace: true });
