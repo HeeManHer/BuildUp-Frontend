@@ -49,7 +49,7 @@ const gosprintList = () => {
                         <div className="sprintlistboard2">
                             <div className="sprintboard">
                                 <div className="sprinttboard">
-                                    <span style={{ fontWeight: "bold" }}>{board.boardName}</span>
+                                    <span style={{ fontWeight: "bold" }}>{board.issueState}</span>
                                 </div>
                             </div>
                             <div className="sprintlistline"></div>
@@ -65,7 +65,7 @@ const gosprintList = () => {
                     </div>
                 )
                 }
-                <div /*key={index}*/ className="sprintlistboard1">
+                {/* <div key={index} className="sprintlistboard1">
                     <div className="sprintlistboard2">
                         <div className="sprintboard">
                             <div className="sprinttboard">
@@ -79,7 +79,7 @@ const gosprintList = () => {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </>
