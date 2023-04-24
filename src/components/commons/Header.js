@@ -4,6 +4,7 @@ import { callGetEmployeeAPI, callLogoutAPI } from "../../apis/EmployeeAPICall";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import employeeReducer from "../../modules/EmployeeModule";
 
 function Header() {
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
@@ -24,6 +25,7 @@ function Header() {
         }
         ,[]
     );
+    
     if (token === null) {
         alert("로그인 해주세요");
         navigate("/", { replace: true });
