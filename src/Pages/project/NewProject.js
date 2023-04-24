@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { getProject, postProject } from '../../apis/NewprojectAPICalls';
 import { decodeJwt } from '../../utils/tokenUtils';
 import "../../css/project.css";
+import { callGetEmployeeAPI } from '../../apis/EmployeeAPICall';
 
 function NewProject() {
   const dispatch = useDispatch();
-  const Navigate = useNavigate();
-  
+  const navigate = useNavigate();
+
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
-  const [manager, setManager] = useState('');
   const [inviteText, setInviteText] = useState('');
   const [inviteList, setInviteList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
-  
+
   const token = decodeJwt(window.localStorage.getItem("accessToken"));
 
   const employeeReducer = useSelector(state => state.employeeReducer);
@@ -28,7 +29,7 @@ function NewProject() {
   useEffect(
     () => {
       if (token !== null) {
-        dispatch(callGetEmployeeAPI({   
+        dispatch(callGetEmployeeAPI({
           employeeNo: token.sub
         }));
       }
@@ -56,12 +57,12 @@ function NewProject() {
   }
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);            
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedItemIndex(-1);        
+    setSelectedItemIndex(-1);
   };
 
   const handleSubmit = (event) => {
@@ -177,9 +178,9 @@ function NewProject() {
                 <br />
               </div>
               <div>
-              <button className="button2" type="submit" >{selectedItemIndex === -1 ? "생성" : "Save"}</button>
-              <button className="button33" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
-              </button>
+                <button className="button2" type="submit" >{selectedItemIndex === -1 ? "생성" : "Save"}</button>
+                <button className="button33" type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
+                </button>
               </div>
             </form>
           </div>
@@ -187,8 +188,8 @@ function NewProject() {
       </div>
       <div className="newproject">
         <h1>프로젝트</h1>
-        {token.auth[0] == 1 && 
-        <button className="button1" onClick={handleOpenModal}>프로젝트 생성</button>
+        {token.auth[0] == 1 &&
+          <button className="button1" onClick={handleOpenModal}>프로젝트 생성</button>
         }
       </div>
       <hr className="line" />
