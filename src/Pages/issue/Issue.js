@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SetIssueAPI, SaveIssueAPI, UpdateIssueAPI, DeleteIssueAPI, GetBacklogListAPI, SearchIssueAPI } from "../../apis/ISSUEAPI";
-// import { EmployeebtnAPI } from "../../apis/"
+import { EmployeebtnAPI } from "../../apis/EmployeebtnAPI.js"
 import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
 import "../../css/Issue.css";
@@ -25,14 +25,17 @@ function Issue() {
     const [showModal, setShowModal] = useState(false);
     const IssueReducer = useSelector(state => state.IssueReducer);
     const backlogList = useSelector(state => state.BacklogReducer.data);
-    const auth = useSelector(state => state.employeebtnReducer);
+
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
     const currentIssues = IssueReducer.data;
     const PageInfo = IssueReducer.pageInfo;
 
-    console.log(backlogList);
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
 
+    const authorityReducer = useSelector(state => state.employeebtnReducer);
+    const auth = authorityReducer.map(auth => {
+        if (auth.typeNo == 3) return auth.authorityState
+    })
     const dispatch = useDispatch();
     const save = () => {
         const saveIssue = {
@@ -142,35 +145,37 @@ function Issue() {
         <>
             <h1 className="head1">이슈
 
-                <form style={{ position: 'sticky', top: '100px', left: '1000px', width: "400px" }} class="issuesearch">
-                    <div class="input-group">
 
-                        {/* <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2" value={searchValue} onChange={e => setsearchValue(e.target.value)} /> */}
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2"
-                            value={searchValue}
-                            onChange={e => setsearchValue(e.target.value)}
-                            onKeyDown={e => {
-                                if (e.key === 'Enter') {
-                                    search();
-                                }
-                            }}
-                        />
-
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" onClick={search}>
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                </form>
-                <button className="createissue" onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
+                {auth.indexOf('C') >= 0 && (
+                    <button className="createissue" onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
+                )}
             </h1>
 
 
             <h2 className="line" />
+            <form style={{ position: 'sticky', top: '100px', left: '1500px', width: "400px" }} class="issuesearch">
+                <div class="input-group">
+
+                    {/* <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2" value={searchValue} onChange={e => setsearchValue(e.target.value)} /> */}
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2"
+                        value={searchValue}
+                        onChange={e => setsearchValue(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key === 'Enter') {
+                                search();
+                            }
+                        }}
+                    />
+
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onClick={search}>
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <div className="container1">
                 <div className="issuelist">
 
@@ -308,11 +313,16 @@ function Issue() {
                     {/* 이부분이 댓글기능에 이슈번호를 불러오는 부분 */}
                     {/* 만약 이부분 없으면 CommentAPI.js에 getComment 부분이 안된다. */}
                     <Wan issueNo={oneissue.issueNo} />
-                    <button className="submitbtn" type="submit" onClick={() => {
-                        update(); setIsModal2(false)
-                        window.location.reload();
-                    }}>수정</button>
-                    <button className="deletebtn" onClick={() => { setShowModal(true) }}>삭제</button>
+                    {auth.indexOf('U') >= 0 && (
+                        <button className="submitbtn" type="submit" onClick={() => {
+                            update(); setIsModal2(false)
+                            window.location.reload();
+
+                        }}>수정</button>
+                    )}
+                    {auth.indexOf('D') >= 0 && (
+                        <button className="deletebtn" onClick={() => { setShowModal(true) }}>삭제</button>
+                    )}
                     {showModal && (
                         <div className="modalaa">
                             <div className="modal-content">

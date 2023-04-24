@@ -29,6 +29,14 @@ function Manager() {
     const userList = useSelector(state => state.userReducer);
     const selectList = userList.map((user) => ({ roleNo: user.roleNo, roleName: user.roleName }));
     const authorityType = useSelector(state => state.authorityReducer);
+    
+    const authReducer = useSelector(state => state.employeebtnReducer);
+    const auth = authReducer.map(auth=>{
+        if(auth.typeNo==1) return auth.authorityState
+    })
+    console.log(authReducer);
+    console.log(auth);
+
 
     const employeeReducer = useSelector(state => state.employeeReducer);
     const employee = employeeReducer.data;
@@ -239,23 +247,21 @@ function Manager() {
             </div>
             <div className="newproject">
                 <h1>프로젝트 관리/<span id="size">{project.projectTitle}</span></h1>
-                {token.auth[0] == 1 &&
-                <button className="button1" onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>
-                }
+                {auth.indexOf('D')>=0 && <button className="button1" onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>}
             </div>
             <hr className="line" />
             <div className="projectname">
                 {edit ? (
                     <form onSubmit={handleProjectTitleUpdate}>
                         <input type="text" value={projectTitle} onChange={handleInputChange} />
-                        <button className="button5" type="submit">수정</button>
+                        {auth.indexOf('U')>=0 && <button className="button5" type="submit">수정</button>}
                     </form>
                 ) : (
                     <>
                         <h3>프로젝트 명 : </h3>
                         <br />
                         <h6 id="name">{project.projectTitle}</h6>
-                        {token.auth[0] == 1 &&
+                        {token.auth[0] == 1 && auth.indexOf('U')>=0 &&
                         <button className="button5" onClick={onClickProjectTitleEditBtn}>
                             수정
                         </button>}
@@ -290,20 +296,17 @@ function Manager() {
                             <td>{user.employeeName}</td>
                             <td>{user.employeeNo}</td>
                             <td>{user.employeeEmail}</td>
-                            {token.auth[0] == 1 &&
-                            <td><select onChange={(e) => handlerSelect(user, e)} value={user.roleNo}>
+                            <td>
+                            {auth.indexOf('U')>=0 ?
+                                <select onChange={(e) => handlerSelect(user, e)} value={user.roleNo}>
                                 {authorityType.map((user) => (
-                                    <option value={user.roleNo}>{user.roleName}
-
-                                    </option>
+                                    <option value={user.roleNo}>{user.roleName}</option>
                                 ))}
-                            </select>
-                            </td>}
-                            {token.auth[0] != 1 && (authorityType.map((user) => (user.roleNo))) !== 1 &&
-                            <td><option value={user.roleNo}>{user.roleName}
-
-                            </option></td>}
-
+                            </select>:<>
+                            {user.roleName}
+                            </>
+                                }
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -311,9 +314,9 @@ function Manager() {
             <br />
             <br />
             <div className="button">
-                {token.auth[0] == 1 && 
+                {auth.indexOf('U')>=0 &&
                 <button type="button" className="button4" onClick={handleOpenModal}>팀원추가</button>}
-                {token.auth[0] == 1 && 
+                {auth.indexOf('D')>=0 &&
                 <button type="button" className="button44" onClick={onClickDeleteBtn}>팀원삭제</button>}
                 </div>
         </div>

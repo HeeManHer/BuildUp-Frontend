@@ -12,8 +12,10 @@ function NewProject() {
 
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState('');
+
   const [inviteText, setInviteText] = useState('');
   const [inviteList, setInviteList] = useState([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
@@ -21,26 +23,13 @@ function NewProject() {
 
   const employeeReducer = useSelector(state => state.employeeReducer);
   const employee = employeeReducer.data;
-  const [manager, setManager] = useState(employee && employee.employeeName);
 
   const { projectNo } = useParams();
-
-
-  useEffect(
-    () => {
-      if (token !== null) {
-        dispatch(callGetEmployeeAPI({
-          employeeNo: token.sub
-        }));
-      }
-    }
-    , []
-  );
 
   /* 리덕스 안썼을때 useState를 가지고 오는 방법 */
   useEffect(
     () => {
-      getProject(token.sub).then(data => { console.log(data); setItems(data.data); });
+      getProject(token.sub).then(data => setItems(data.data));
     },
     []
   )
@@ -72,14 +61,12 @@ function NewProject() {
       employeeName: [
         {
           roleNo: 1,
-          employeeName: manager
+          employeeName: employee.employeeName
         },
         ...inviteList
       ]
     };
-
-
-    if (title && manager) { // 값이 모두 채워져 있는 경우에만 생성 가능
+    if (title) { // 값이 모두 채워져 있는 경우에만 생성 가능
       if (selectedItemIndex === -1) {
         postProject(newItem);
       } else {
@@ -88,7 +75,6 @@ function NewProject() {
         setItems(updatedItems);
       }
       setTitle('');
-      setManager('');
       setInviteText('');
       setInviteList([]);
       handleCloseModal();
@@ -101,20 +87,22 @@ function NewProject() {
   };
 
 
-  const handleEditItem = (index) => {
-    setSelectedItemIndex(index);
-    const selectedItem = items[index];
-    setTitle(selectedItem.title);
-    setManager(selectedItem.manager);
-    setInviteText(selectedItem.inviteText);
-    handleOpenModal();
-  };
+  // const handleEditItem = (index) => {
+  //   setSelectedItemIndex(index);
+  //   const selectedItem = items[index];
+  //   setTitle(selectedItem.title);
+  //   setManager(selectedItem.manager);
+  //   setInviteText(selectedItem.inviteText);
+  //   handleOpenModal();
+  // };
 
-  const handleDeleteItem = (index) => {
-    const updatedItems = [...items];
-    updatedItems.splice(index, 1);
-    setItems(updatedItems);
-  };
+  // const handleDeleteItem = (index) => {
+  //   const updatedItems = [...items];
+  //   updatedItems.splice(index, 1);
+  //   setItems(updatedItems);
+  // };
+
+
 
   return (
     <div>
@@ -146,16 +134,7 @@ function NewProject() {
               <br />
               <br />
               <label className="manager">
-                담당자 : <select value={items.employeeNo} onChange={(event) => setManager(event.target.value)}>
-                  <option value="">선택</option>
-                  <option value="허희만">허희만</option>
-                  <option value="남효정">남효정</option>
-                  <option value="조평훈">조평훈</option>
-                  <option value="이준성">이준성</option>
-                  <option value="최명건">최명건</option>
-                  <option value="박완규">박완규</option>
-                  <option value="염진호">염진호</option>
-                </select>
+                담당자 : {employee && employee.employeeName}
               </label>
               <br />
               <br />
@@ -206,7 +185,7 @@ function NewProject() {
           </div>
         ))}
       </div>
-    </div>
+    </div >
   );
 }
 export default NewProject;
