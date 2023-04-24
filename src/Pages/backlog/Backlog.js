@@ -16,6 +16,7 @@ function Backlog() {
   const token = decodeJwt(window.localStorage.getItem("accessToken"));
   const dispatch = useDispatch();
 
+  // 권한 2번이 백로그라 백로그권한 crud만 전체에서 뽑아서 가져오기
   const authorityReducer = useSelector(state => state.employeebtnReducer);
   const auth = authorityReducer.map(auth => {
     if (auth.typeNo == 2) return auth.authorityState
@@ -25,13 +26,14 @@ function Backlog() {
   const backlogList = backlogReducer.data;
   const pageInfo = backlogReducer.pageInfo;
 
+  //페이징 처리
   const pageNumber = [];
   if (pageInfo) {
     for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
       pageNumber.push(i);
     }
   }
-  console.log(auth);
+
   //전체 백로그들 조회
   useEffect(
     () => {
@@ -57,7 +59,6 @@ function Backlog() {
     dispatch(deleteBacklog(oneitem));
   }
 
-
   // 다음 페이지로 이동
   const nextpage = () => {
     if (currentPage + 1 <= pageInfo.endPage) {
@@ -66,11 +67,13 @@ function Backlog() {
       doublenextpage();
     }
   };
+
   // 10페이지 추가
   const doublenextpage = () => {
     const next = Math.min(currentPage + 10, pageInfo.maxPage);
     setCurrentPage(next);
   }
+
   // 이전 페이지로 이동
   const prevpage = () => {
     if (currentPage - 1 >= 1) {
@@ -79,7 +82,6 @@ function Backlog() {
       doubleprevpage();
     }
   };
-
 
   // 10페이지 뺴기
   const doubleprevpage = () => {
@@ -100,12 +102,12 @@ function Backlog() {
     setOneitem({ projectNo });
     handleCloseModal();
   };
+
   // 선택된 항목의 정보를 가져와서 state에 할당하고 모달열기
   const handleEditItem = (item) => {
     setSelectedItemIndex(1);
     setOneitem(item);
     setIsModalOpen(true);
-
   };
   //선택 항목 삭제
 
@@ -130,41 +132,41 @@ function Backlog() {
           onClick={handleCloseModal}
         />
 
+        {/* 모달창 표시 */}
         <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 11 }}>
           <div style={{ background: '#fff', padding: 30, borderRadius: '10px', width: '600px', height: '600px' }}>
             <h2>{selectedItemIndex === -1 ? "" : ""}</h2>
-            <h6 className="smalltitle">백로그 설정</h6>
+            <h6 className="smalltitle">백로그</h6>
             <hr className="line3" />
-            <br />
 
             <form onSubmit={handleSubmit}>
-              <h3 className="smalltitle2">백로그</h3>
-
-
-              <label className="title">
-                제목:
-                <input value={oneitem.backlogName} onChange={(event) => setOneitem({ ...oneitem, backlogName: event.target.value })} style={{ width: '395px' }} />
+              <h3 className="smalltitle2">백로그 생성</h3>
+              <br />
+              <label className="invite">
+                {/* 모달 제목 */}
+                제목 : <input value={oneitem.backlogName} onChange={(event) => setOneitem({ ...oneitem, backlogName: event.target.value })} style={{ width: '450px' }} />
               </label>
               <br />
               <br />
-              <label className="title">
-                내용
-                <br />
-                <textarea value={oneitem.backlogContent} onChange={(event) => setOneitem({ ...oneitem, backlogContent: event.target.value })} style={{ width: '500px', height: '200px' }} />
-              </label>
+              {/* 모달 설명 */}
+              <label className="invite">내용 : </label>
+              <textarea value={oneitem.backlogContent} onChange={(event) => setOneitem({ ...oneitem, backlogContent: event.target.value })} style={{ width: '495px', height: '150px', marginLeft: '20px', resize: 'none' }} />
               <br />
-              <label className='title'>
-                상태 :     <select value={oneitem.backlogStatus} onChange={(event) => setOneitem({ ...oneitem, backlogStatus: event.target.value })}>
+              <br />
+              <label className='invite'>
+                {/* 모달안에 상태 선택박스 */}
+                상태 : <select value={oneitem.backlogStatus} onChange={(event) => setOneitem({ ...oneitem, backlogStatus: event.target.value })}>
                   <option value="">선택</option>
                   <option value="예정">예정</option>
                   <option value="진행 중">진행 중</option>
                   <option value="완료">완료</option>
                 </select>
               </label>
+
               <br />
-              <label className='manager'>
-                우선순위 :
-                <select value={oneitem.backlogPriority} onChange={(event) => setOneitem({ ...oneitem, backlogPriority: event.target.value })}>
+              <label className='invite'>
+                {/* 모달안에 우선순위 선택박스 */}
+                우선순위 : <select value={oneitem.backlogPriority} onChange={(event) => setOneitem({ ...oneitem, backlogPriority: event.target.value })}>
                   <option value="">선택</option>
                   <option value="긴급">긴급</option>
                   <option value="보통">보통</option>
@@ -173,8 +175,9 @@ function Backlog() {
               </label>
               <br />
               <br />
+              {/* selectedItemIndex가 -1이면 생성 아니면 권한비교해서 저장 */}
               {selectedItemIndex === -1 ?
-                <button className='button2' type="submit"> '추가' </button>
+                <button className='button2' type="submit"> 생성 </button>
                 : auth.indexOf('U') >= 0 && <button className='button2' type="submit"> 저장</button>}
               <button className='button2' type="button" onClick={handleCloseModal}>
                 닫기
@@ -184,21 +187,17 @@ function Backlog() {
         </div>
       </div>
 
-      <div className='bar'>
-        <h2>백로그</h2>
+      <div className='newproject'>
+        <h1>백로그</h1>
+        {/* 권한 비교해서 권한이 맞으면 백로그 생성 모달창 열기 */}
         {auth.indexOf('C') >= 0 && (
           <button className="button1" onClick={handleOpenModal}>백로그생성</button>
         )}
-
-
       </div>
 
-      <br />
-
-      <div className='line' />
+      <hr className='line' />
 
       {/* 검색창 스타일 */}
-
       <div className="input-group" style={{ position: 'sticky', left: "1290px", width: "400px" }}>
         <input
           type="text"
@@ -215,13 +214,13 @@ function Backlog() {
             }
           }}
         />
+
         <div className="input-group-append">
           <button className="btn btn-primary" type="button" onClick={search}>
             <i className="fas fa-search fa-sm"></i>
           </button>
         </div>
       </div>
-
       <br />
       <br />
 
@@ -238,16 +237,19 @@ function Backlog() {
         </div>
 
         <div>
+          {/* 가져오기 */}
           {backlogList.map((item) => (
             <tr className='in' key={item.backlogNo}>
-              <td className='in2'>{item.backlogName}</td>
-              <td className='in2'>{item.backlogContent}</td>
-              <td className='in2'>{item.backlogStatus}</td>
-              <td className='in2'>{item.backlogPriority}</td>
+              <td>{item.backlogName && item.backlogName.length > 10 ? item.backlogName.substring(0, 10) + "..." : item.backlogName}</td>
+              <td>{item.backlogContent && item.backlogContent.length > 10 ? item.backlogContent.substring(0, 10) + "..." : item.backlogContent}</td>
+              <td >{item.backlogStatus}</td>
+              <td>{item.backlogPriority}</td>
               <td>
+                {/* 모달내용 조회 */}
                 <button className='button2' onClick={() => handleEditItem(item)}>
                   조회
                 </button>
+                {/* 권한비교해서 맞으면 삭제 */}
                 {auth.indexOf('D') >= 0 && (
                   <button className='button2' onClick={() =>
                     deleted(item, window.location.reload())
@@ -260,6 +262,7 @@ function Backlog() {
       </table>
       <br />
 
+      {/* 뒤로가기 앞으로가기 10페이지뒤로 10페이지 앞으로 버튼 */}
       <div className='pagebutton' >
         <span> <button className='button2' onClick={doubleprevpage}> ◀◀ </button></span>
         <span> <button className='button2' onClick={prevpage}> ◀ </button></span>
@@ -271,12 +274,12 @@ function Backlog() {
           </li>
         ))}
 
-
         <span style={{ marginLeft: ' 35px' }}><button className='button2' onClick={nextpage}>▶</button></span>
         <span><button className='button2' onClick={doublenextpage}>▶▶</button></span>
       </div>
     </div >
   );
 }
+
 export default Backlog;
 
