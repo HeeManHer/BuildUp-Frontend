@@ -192,7 +192,7 @@ function SprintCreate(props) {
                     </div>
                     <br />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <button id="sprintStart" style={{ width: "100px", height: "40px", float: "left" }}
+                        <button style={{ width: "100px", height: "40px", float: "left" }}
                             onClick={startsprint}>시작</button>
                         <button id="sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
                     </div>
