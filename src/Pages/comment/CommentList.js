@@ -21,7 +21,7 @@ function CommentList({issueNo}) {
     () => {
     dispatch(getComment(issueNo));
   },
-   [comments]
+   []
    );
 
   // console.log(issueNo) 작동하는지 확인용
