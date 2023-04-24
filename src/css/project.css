@@ -2,10 +2,10 @@
     display: flex;
     margin-left: 20px;
     color: #002060;
-    width:100%;
+    width: 100%;
     height: 50px;
     justify-content: space-between;
-    
+
 }
 
 .button {
@@ -13,13 +13,14 @@
     /* margin-right: 50px; */
     margin: auto;
 }
+
 .button1 {
     width: 170px;
     border-radius: 50px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
     margin-right: 40px;
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 10px;
 }
@@ -27,14 +28,14 @@
 .button2 {
     width: 90px;
     border-radius: 15px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
 
     margin-top: 10px;
     margin-right: 40px;
     /* margin-bottom: 100px; */
 
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 5px;
     display: inline-block;
@@ -44,11 +45,11 @@
     margin-left: 320px;
     width: 90px;
     border-radius: 15px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
 
 
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 5px;
     display: inline-block;
@@ -57,10 +58,10 @@
 .button4 {
     width: 90px;
     border-radius: 15px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
     /* margin-left: 250px; */
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 5px;
     margin-left: 100px;
@@ -69,29 +70,29 @@
 .button44 {
     width: 90px;
     border-radius: 15px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
     margin-left: 10px;
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 5px;
     /* margin: auto; */
 }
 
-.button5{
-    width:50px;
+.button5 {
+    width: 50px;
     border-radius: 15px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
     margin-left: 10px;
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 5px;
 }
 
 .Create {
     margin-left: 20px;
-    border : solid #4e73df 4px;
+    border: solid #4e73df 4px;
     width: 200px;
     height: 200px;
 }
@@ -110,30 +111,30 @@
 }
 
 .smalltitle {
-    color:#002040;
+    color: #002040;
     margin-bottom: -10px;
     font-weight: bold;
 }
 
 .smalltitle2 {
-    color:black;
+    color: black;
     font-weight: bolder;
 }
 
 .title {
-    color:black;
+    color: black;
     margin-left: 50px;
     font-weight: bold;
 }
 
 .title2 {
-    color:#4e73df;
+    color: #4e73df;
     text-align: center;
     font-weight: bold;
 }
 
 .title3 {
-    color:#002040;
+    color: #002040;
     text-align: center;
     font-size: x-small;
 }
@@ -145,7 +146,7 @@
 }
 
 .invite {
-     color: black;
+    color: black;
     margin-left: 15px;
     font-weight: bold;
 }
@@ -153,6 +154,7 @@
 .invite2 {
     margin-left: 97px;
 }
+
 /*프로젝트 생성된 화면*/
 .build {
     -webkit-text-stroke: 2px #4e73df;
@@ -174,16 +176,16 @@
 
 .projectname {
     margin-top: 40px;
-    color:black;
+    color: black;
     display: flex;
     /* width: 20%; */
-    font-weight:bolder;
+    font-weight: bolder;
     margin-left: 80px;
 }
 
 .teamlist {
     margin-left: 25px;
-    color:#002040;
+    color: #002040;
 }
 
 #size {
@@ -193,23 +195,23 @@
 }
 
 #name {
-    font-size:medium;
-    color:#002040;
-    border: 3px solid #4e73df;
+    font-size: medium;
+    color: #002040;
+    border: 1px solid #4e73df;
     border-radius: 30px;
     padding: 5px;
     width: 200px;
     margin-left: 20px;
     font-weight: bold;
-    
+
 }
 
 .new {
     border-radius: 50px;
-    background-color:#4e73df;
+    background-color: #4e73df;
     border-style: none;
     margin-right: 40px;
-    font-weight:bold;
+    font-weight: bold;
     color: white;
     padding: 10px;
 }
@@ -217,7 +219,7 @@
 .projectlist {
     display: flex;
     text-align: center;
-    
+
 }
 
 .project2 {
@@ -231,7 +233,7 @@
     border-radius: 20px;
 }
 
-.modal{
+.modal {
     border-radius: 20px;
     border: 3px solid #4e73df;
 }

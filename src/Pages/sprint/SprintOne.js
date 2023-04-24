@@ -50,7 +50,6 @@ function SprintOne() {
         }
     }, []);
 
-
     // Local Storage에 값 저장하기
     useEffect(() => {
         localStorage.setItem('textareaValue', textareaValue);
@@ -77,7 +76,7 @@ function SprintOne() {
         []
     )
     console.log(sprint);
-
+    
     const sprintDelete = () => {
         deleteSprint(sprintNo);
         navigate("../")
@@ -123,7 +122,7 @@ function SprintOne() {
                             <div style={{ height: '85%', overflowY: 'auto' }}>
                                 {Array.isArray(board.sprintIssue) &&
                                     board.sprintIssue.map(issue =>
-                                        <div style={{ position: 'relative', margin: '10px', padding: '10px', border: '1px solid black' }}
+                                        <div style={{ position: 'relative', margin: '10px', padding: '10px', border: '1px solid black', color: 'black' }}
                                             onClick={() => { setIsModal2(true); dispatch(SearchIssueAPI(issue.issueNo, projectNo)); dispatch(GetBacklogListAPI(projectNo)) }}>
                                             <span>{issue.issueName}</span>
                                             <br />

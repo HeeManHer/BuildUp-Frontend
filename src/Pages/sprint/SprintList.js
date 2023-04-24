@@ -55,7 +55,7 @@ function SprintList() {
         <>
             <div className="newproject">
                 <h1>스프린트 목록</h1>
-                <button id="sprintCreateBtn" className="button1" onClick={openSprintCreateModal}>스프린트 생성</button>
+                <button id="sprintCreateBtn" className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={openSprintCreateModal}>스프린트 생성</button>
             </div>
             <SprintCreate modalIsOpen={modalIsOpen} handleCloseModal={handleCloseModal} />
             <hr className="line" />
@@ -65,10 +65,10 @@ function SprintList() {
                         <div className="sprintlistboard2">
                             <div className="sprintlistboard3">
                                 <div className="sprintname">
-                                    <span>{sprint.sprintName}</span>
+                                    <span class="btn btn-outline-primary" >{sprint.sprintName}  </span>
                                 </div>
-                                <div className="sprintname">
-                                    <span>{sprint.sprintState}</span>
+                                <div class="btn btn-outline-primary" className="sprintname">
+                                    <span class="btn btn-outline-primary">{sprint.sprintState}</span>
                                 </div>
                             </div>
                             <span className="sprintdate">
@@ -77,7 +77,7 @@ function SprintList() {
                                 {new Intl.DateTimeFormat('kr').format(new Date(sprint.sprintEndday ? sprint.sprintEndday : 1))}</span>
                             <div className="sprintlistline"></div>
                             {Array.isArray(sprint.sprintIssue) && sprint.sprintIssue && sprint.sprintIssue.slice(0, 3).map(issue =>
-                                <div className="sprintlistissue">
+                                <div className="sprintlistissue" style={{ border: '1px solid cornflowerblue' }}>
                                     <span>{issue.issueName}</span>
                                     <br />
                                     <span style={{}}>담당자 : {issue.employeeName}</span>
@@ -85,20 +85,20 @@ function SprintList() {
                             )}
                         </div>
                     </div>
-                    ))}
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <button className='button2' onClick={prevpage}> ◀ </button>
-                        {pageNumber.map((num) => (
-                            <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-                                <button style={currentPage === num ? { backgroundColor: 'orange' } : null}>
-                                    {num}
-                                </button>
-                            </li>
-                        ))}
-                        <button className='button2' onClick={nextpage}>▶</button>
-                    </div>
-                </>
+                ))}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button>
+                {pageNumber.map((num) => (
+                    <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                        <button class="btn btn-outline-primary" style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
+                            {num}
+                        </button>
+                    </li>
+                ))}
+                <button className='button2' class="btn btn-outline-primary" onClick={nextpage}>▶</button>
+            </div>
+        </>
     );
 }
 

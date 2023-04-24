@@ -1,16 +1,42 @@
 .border {
   width: 500px;
-  
   align-items: absolute;
   margin: auto;
   margin-top: 200px;
 
 }
+
+.border2 {
+  width: 500px;
+  margin: auto;
+  margin-top: 200px;
+  border: #0e1010;
+  padding-top: 100px;
+  border: 1px solid black;
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  padding-left: 50px;
+  justify-content: space-between;
+  color: #4e73df
+}
+
 .myname {
   border: #0e1010;
+  padding-top: 170px;
+  border: 1px solid black;
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  padding-left: 50px;
+  justify-content: space-between;
+  color: #4e73df;
 }
 
 .find-box {
+  border: #0e1010;
+  color: #4e73df;
+  border: 1px solid black;
   width: 500px;
   align-items: absolute;
   margin: auto;
@@ -71,13 +97,13 @@
   top: -20px;
   left: 0;
   color: #0e1010;
-  
+
   font-size: 16px;
 }
 
 .login-box form a {
   position: relative;
-  display:inline-flex;
+  display: inline-flex;
   /* margin: 12.5px; */
   padding: 10px 20px;
   color: #17757a;

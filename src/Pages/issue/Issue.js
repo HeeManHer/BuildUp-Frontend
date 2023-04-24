@@ -138,7 +138,6 @@ function Issue() {
             <h2 className="line" />
             <form>
                 <div class="input-group" style={{ position: 'sticky', top: '225px', left: '1500px', width: "400px" }}>
-
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2"
                         value={searchValue}
@@ -158,7 +157,6 @@ function Issue() {
                 </div>
             </form>
             <div className="container1">
-
                 <table className="user-table" class="table table-striped table-hover" width="90%">
                     <thead>
                         <tr>
@@ -212,9 +210,7 @@ function Issue() {
                 </div>
 
             </div >
-
-
-
+            
             <Modal className="modalcreate" isOpen={isModal1} onRequestClose={() => { setIsModal1(false) }}>
                 <h6 className="smalltitle">이슈</h6>
                 <hr className="line3" />

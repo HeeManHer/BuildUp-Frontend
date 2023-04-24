@@ -50,8 +50,8 @@ function Findpassword() {
     };
 
     // 회원가입페이지로 넘어가는 화면 나는 비밀번호 찾기 화면으로 가야한다. 
-   
-    
+
+
 
     // 로그인 버튼 클릭시 디스패처 실행 및 메인 페이지로 이동
     const onClickLoginHandler = () => {
@@ -69,7 +69,7 @@ function Findpassword() {
     // }
 
     return (
-        <div className="find-box">
+        <div className="find-box" >
             <h2>비밀번호 찾기</h2>
             <div className="name">
                 <label>이름 : </label>
@@ -87,7 +87,7 @@ function Findpassword() {
             <hr />
             <div className="email">
                 <label>이메일 : </label>
-                <input type="email" name="employeeEmail" onChange={onChangeHandler}/>
+                <input type="email" name="employeeEmail" onChange={onChangeHandler} />
             </div>
             <button onClick={onClickLoginHandler}>비밀번호 재설정</button>
         </div>
