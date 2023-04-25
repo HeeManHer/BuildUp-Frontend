@@ -31,17 +31,13 @@ function Login() {
         if (loginEmployee.status === 200) {
             console.log("[Login] Login SUCCESS {}", loginEmployee);
             navigate("/mypage/newproject", { replace: true });
-        } else if(loginEmployee.status !== 200){
+        } else if(form.employeeNo && form.employeePassword !== 200){
             alert("아이디 혹은 비밀번호가 일치하지 않습니다.")
         }
     }
         , [loginEmployee]);
 
-    // 로그인 상태일 시 로그인페이지로 접근 방지
-    // if(loginEmployee.length > 0) {
-    //     console.log("[Login] Login is already authenticated by the server");        
-    //     return <Navigate to="/"/>
-    // }
+   
 
     const onChangeHandler = (e) => {
         setForm({

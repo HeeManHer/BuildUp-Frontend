@@ -75,34 +75,6 @@ export const callLogoutAPI = () => {
     };
 }
 
-
-// export const callRegisterAPI = ({form}) => {
-//     const requestURL = `http://${process.env.REACT_APP_RESTAPI_IP}:8080/auth/signup`;
-
-//     return async (dispatch, getState) => {
-
-//         const result = await fetch(requestURL, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "Accept": "*/*"
-//             },
-//             body: JSON.stringify({
-//                 memberId: form.memberId,
-//                 memberPassword: form.memberPassword,
-//                 memberName: form.memberName,
-//                 memberEmail: form.memberEmail                
-//             })
-//         })
-//         .then(response => response.json());
-
-//         console.log('[MemberAPICalls] callRegisterAPI RESULT : ', result);        
-        
-//         if(result.status === 201){
-//             dispatch({ type: POST_REGISTER,  payload: result });
-//         }        
-//     };
-// }
 export  const  callPutEmployeeAPI = async (modifyPwd) => {
     const requestURL = `http://localhost:8888/api/v1/changepassword/${modifyPwd.employeeNo}`;
     
