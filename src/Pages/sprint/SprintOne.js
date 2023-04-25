@@ -140,8 +140,8 @@ function SprintOne() {
                     </div>
                 )
                 }
-                {/* <div className="sprintboardlist" >
-                    <div className="sprintlistboard2" >
+                {/* <div className="sprintboardlist">
+                    <div className="sprintlistboard2">
                         <div className="sprintboard">
                             <div className="sprinttboard">
                                 <span style={{ fontWeight: "bold" }}>공지 사항</span>

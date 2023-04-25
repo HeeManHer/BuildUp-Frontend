@@ -19,28 +19,12 @@ function Changepassword() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
-    // const changeEmployee = useSelector(state => state.employeeReducer);
-
-    // 리덕스를 이용하기 위한 디스패처, 셀렉터 선언
-    // const dispatch = useDispatch();
-    // const loginEmployee = useSelector(state => state.employeeReducer); 
-
-    // 현재 비밀번호와 일치하는 지 확인해야함
-    // const [currentPwd, setCurrentPwd] = useState('');
-    // // newPwd, checkNewPwd 두 개가 일치하는 지 확인해야함.
-    // const [newPwd, setNewPwd] = useState('');
-    // const [checkNewPwd, setCheckNewPwd] = useState('');
-
+ 
     const [modalOpen, setModalOpen] = useState(false);
     const [check, setCheck] = useState();
     const [pwd, setPwd] = useState({ employeeNo: token.sub });
 
-    /* 내가 해야 될 것 
-        1. 현재 비밀번호를 입력 하면 그것이 지금 내가 사용하는 비밀번호와 같은 지 확인 해야됨.
-        2. 새 비밀번호를 입력하고, 다시 한 번 입력한 값이 일치하는 지 확인
-        3. 2번의 값이 확인되면 새 비밀번호를 database에 update 하기 
-     */
-
+   
 
     const [checkmessage, setCheckMessage] = useState();
 
@@ -79,6 +63,11 @@ function Changepassword() {
     };
 
     return (
+    <div>  
+        <div className="newproject">
+            <h1>마이페이지</h1>
+        </div> 
+        <hr className="line"/>
         <div className="border2">
             <h2>비밀번호 변경</h2>
             <div className="now">
@@ -103,11 +92,12 @@ function Changepassword() {
             </label>
             <br />
             <React.Fragment>
-                <button class="btn btn-outline-primary" onClick={openModal}>수정하기</button>
+                <button className="btn btn-outline-primary" onClick={openModal}>수정하기</button>
                 <Modal open={modalOpen} close={closeModal} header={checkmessage}>
                 </Modal>
             </React.Fragment>
         </div>
+    </div>    
     );
 
 }

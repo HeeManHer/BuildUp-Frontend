@@ -106,6 +106,10 @@
     width: 98%;
 }
 
+.line2:hover {
+    color: white;
+}
+
 .line3 {
     border-top: 1px solid black;
 }
@@ -161,7 +165,6 @@
     border: 3px solid #4e73df;
     width: 200px;
     margin-left: 10px;
-
 }
 
 .build p {
