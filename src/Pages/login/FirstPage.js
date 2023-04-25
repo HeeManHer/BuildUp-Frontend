@@ -6,22 +6,22 @@ function Firstpage() {
 
     const navigate = useNavigate();
 
-    const onClickHandler = () => { 
+    const onClickHandler = () => {
         navigate("./auth/login", { replace: true })
     }
 
-    return(
+    return (
         <>
-        <div className="first-box">
-        {/* <img src={첫페이지} style={{height:'750px'}}/> */}
-                <button 
-                style={{border:'none'}}
-                className="start-btn"
-                onClick={onClickHandler}
+            <div className="first-box">
+                {/* <img src={첫페이지} style={{height:'750px'}}/> */}
+                <button
+                    style={{ border: 'none' }}
+                    className="start-btn"
+                    onClick={onClickHandler}
                 >
-                <img src={첫페이지} style={{height:'830px', width:'1520px'}}/>
-                </button> 
-        </div>
+                    <img src={첫페이지} style={{ height: '830px', width: '1520px' }} />
+                </button>
+            </div>
         </>
     );
 }

@@ -66,7 +66,7 @@ function SprintList() {
     };
 
     return (
-
+        Array.isArray(sprintList) &&
         <>
             <div className="newproject" >
                 <h1>스프린트 목록</h1>

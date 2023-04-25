@@ -51,12 +51,13 @@
 .sprintboardlist {
     width: 200px;
     height: 400px;
-    border: 1px solid black;
+    border: 1px solid #5c77ec;
     margin: 10px;
     justify-Content: flex-start;
     display: flex;
     align-Items: flex-start;
     position: relative;
+    border-radius: 20px;
 }
 
 .sprintboard {
