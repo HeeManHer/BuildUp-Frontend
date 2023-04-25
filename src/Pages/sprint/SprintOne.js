@@ -115,20 +115,20 @@ function SprintOne() {
                 </div>
             </div>
             <hr className="line" />
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }} >
                 {Array.isArray(sprint.boardIssue) && sprint.boardIssue.map((board, index) =>
-                    <div key={index} className="sprintboardlist">
+                    <div class="btn btn-outline-primary" key={index} className="sprintboardlist" >
                         <div className="sprintlistboard2" >
-                            <div className="sprintboard">
-                                <div className="sprinttboard">
-                                    <span style={{ fontWeight: "bold" }}>{board.issueState}</span>
+                            <div className="sprintboard" >
+                                <div className="sprinttboard" class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "150px" }}>
+                                    <span style={{ fontWeight: "bold" }}>{board.issueState} </span>
                                 </div>
                             </div>
-                            <div className="sprintlistline"></div>
+                            <div className="sprintlistline2" ></div>
                             <div style={{ height: '85%', overflowY: 'auto' }}>
                                 {Array.isArray(board.sprintIssue) &&
                                     board.sprintIssue.map(issue =>
-                                        <div style={{ position: 'relative', margin: '10px', padding: '10px', border: '1px solid black', color: 'black' }}
+                                        <div class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "180px" }}
                                             onClick={() => { setIsModal2(true); dispatch(SearchIssueAPI(issue.issueNo, projectNo)); dispatch(GetBacklogListAPI(projectNo)) }}>
                                             <span>{issue.issueName}</span>
                                             <br />
