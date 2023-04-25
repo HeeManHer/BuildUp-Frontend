@@ -97,15 +97,28 @@ function Issue() {
     );
 
     const nextPage = () => {
-        const next = Math.min(currentPage + 5, PageInfo.maxPage);
+        const next = Math.min(currentPage + 1, PageInfo.maxPage);
         setCurrentPage(next);
     }
 
     const prevPage = () => {
         if (currentPage - 1 >= 1) {
-            setCurrentPage(Math.max(currentPage - 5, 1));
+            setCurrentPage(Math.max(currentPage - 1, 1));
         }
     }
+
+    // 10페이지 추가
+    const doublenextpage = () => {
+        const next = Math.min(currentPage + 10, PageInfo.maxPage);
+        setCurrentPage(next);
+    }
+
+    // 10페이지 뺴기
+    const doubleprevpage = () => {
+        const prev = Math.max(currentPage - 10, 1);
+        setCurrentPage(prev);
+    };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -120,6 +133,7 @@ function Issue() {
     }
 
 
+
     const handleIssueHover = (event, issue) => {
         setHoveredIssue(issue);
     }
@@ -127,17 +141,18 @@ function Issue() {
     return (
 
         <>
-            <h1 className="head1">이슈
+            <div className="newproject">
+                <h1>이슈</h1>
 
                 {auth.indexOf('C') >= 0 && (
-                    <button className="btn btn-outline-primary" style={{ position: 'sticky', right: '20px', height: "50px", width: "200px" }} onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
+                    <button className="btn btn-outline-primary" style={{ position: 'sticky', right: '10px', top: '100px', width: "200px" }} onClick={() => { setIsModal1(true); dispatch(GetBacklogListAPI(projectNo)) }}>이슈 생성</button>
                 )}
-            </h1>
+            </div>
 
 
-            <h2 className="line" />
+            <hr className="line" />
             <form>
-                <div className="input-group" style={{ position: 'sticky', top: '225px', left: '1500px', width: "400px" }}>
+                <div className="input-group" style={{ position: 'sticky', top: '225px', left: '1290px', width: "400px" }}>
                     <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2"
                         value={searchValue}
@@ -156,6 +171,7 @@ function Issue() {
                     </div>
                 </div>
             </form>
+            <br />
             <div className="container1">
                 <table className="table table-striped table-hover" width="90%">
                     <thead>
@@ -189,22 +205,18 @@ function Issue() {
                 </table>
 
                 <div className="pageset">
-
-                    <div className="pagebtn">
-                        <button className="btn btn-outline-primary" onClick={prevPage}>
-                            &lt;
-                        </button>
+                    <div className="pagebutton">
+                        <span style={{ marginLeft: ' 10px', padding: "5px" }}> <button className="btn btn-outline-primary" onClick={doubleprevpage}> ◀◀ </button></span>
+                        <span > <button className='button2' class="btn btn-outline-primary" onClick={prevPage}> ◀ </button></span>
                         {pageNumber.map((num) => (
-                            <li className="pagenum" key={num} onClick={() => setCurrentPage(num)}>
+                            <li className="pagenum" style={{ marginLeft: ' 10px', padding: "5px" }} key={num} onClick={() => setCurrentPage(num)}>
                                 <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
                                     {num}
                                 </span>
                             </li>
                         ))}
-
-                        <button className="btn btn-outline-primary" onClick={nextPage} >
-                            &gt;
-                        </button>
+                        <span style={{ marginLeft: ' 10px', padding: "0px" }}><button className="btn btn-outline-primary" onClick={nextPage}>▶</button></span>
+                        <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
                     </div>
 
                 </div>
