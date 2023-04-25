@@ -103,7 +103,7 @@ function Changepassword() {
             </label>
             <br />
             <React.Fragment>
-                <button class="btn btn-outline-primary" onClick={openModal}>수정하기</button>
+                <button className="btn btn-outline-primary" onClick={openModal}>수정하기</button>
                 <Modal open={modalOpen} close={closeModal} header={checkmessage}>
                 </Modal>
             </React.Fragment>

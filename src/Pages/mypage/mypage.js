@@ -88,7 +88,7 @@ function Mypage() {
                         value={employeeDetail.employeeName || ''}
                     />
                     <label>비밀번호 : </label>
-                    <button class="btn btn-outline-primary" onClick={onClickModifyHandler}>  수정하기</button>
+                    <button className="btn btn-outline-primary" onClick={onClickModifyHandler}>  수정하기</button>
                     <input
                         type="text"
                         placeholder="이메일"

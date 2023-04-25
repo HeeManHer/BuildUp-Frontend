@@ -217,7 +217,7 @@ function Manager() {
                                             value={inviteText}
                                             onChange={handleInviteTextChange}
                                             style={{ width: "350px" }} />
-                                        <button className="btn btn-success btn-icon-split btn-sm" class="btn btn-outline-success" type="button" onClick={handleInviteAdd}>추가</button>
+                                        <button className="btn btn-outline-success btn-icon-split" type="button" onClick={handleInviteAdd}>추가</button>
                                     </label>
                                     <div className="row" style={{ overflow: "auto", height: "150px" }}>
                                         {inviteList.map((invite, index) => (
@@ -239,15 +239,15 @@ function Manager() {
                                 </div>
                                 <br />
                             </div>
-                            <button className="button2" class="btn btn-outline-primary" type="submit" >{selectedItemIndex === -1 ? "추가" : "Save"}</button>
-                            <button className="button33" class="btn btn-outline-danger" style={{ marginLeft: "50px" }} type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}</button>
+                            <button className="btn btn-outline-primary" type="submit" >{selectedItemIndex === -1 ? "추가" : "Save"}</button>
+                            <button className="btn btn-outline-danger" style={{ marginLeft: "50px" }} type="button" onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "닫기" : "Cancel"}</button>
                         </form>
                     </div>
                 </div>
             </div>
             <div className="newproject">
                 <h1>프로젝트 관리/<span id="size">{project.projectTitle}</span></h1>
-                {auth.indexOf('D') >= 0 && <button className="button1" class="btn btn-outline-danger" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>}
+                {auth.indexOf('D') >= 0 && <button className="btn btn-outline-danger" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={onClickProjectDeleteBtn} >프로젝트 삭제</button>}
             </div>
             <hr className="line" />
             <div className="projectname" >
@@ -262,7 +262,7 @@ function Manager() {
                         <br />
                         <h6 id="name" >{project.projectTitle}</h6>
                         {token.auth[0] == 1 && auth.indexOf('U') >= 0 &&
-                            <button className="button5" class="btn btn-outline-primary btn-sm " style={{ marginLeft: "20px", height: "35px" }} onClick={onClickProjectTitleEditBtn}>
+                            <button className="btn btn-outline-primary btn-sm " style={{ marginLeft: "20px", height: "35px" }} onClick={onClickProjectTitleEditBtn}>
                                 수정
                             </button>}
                     </>
@@ -270,7 +270,7 @@ function Manager() {
             </div>
 
             <br />
-            <table className="user-table" class="table table-striped table-hover" width="90%">
+            <table className="table table-striped table-hover" width="90%">
                 <thead>
                     <tr>
                         <th></th>
@@ -315,9 +315,9 @@ function Manager() {
             <br />
             <div className="button">
                 {auth.indexOf('U') >= 0 &&
-                    <button type="button" className="button4" class="btn btn-outline-primary" onClick={handleOpenModal}>팀원추가</button>}
+                    <button type="button" className="btn btn-outline-primary" onClick={handleOpenModal}>팀원추가</button>}
                 {auth.indexOf('D') >= 0 &&
-                    <button type="button" className="button44" class="btn btn-outline-danger" onClick={onClickDeleteBtn}>팀원삭제</button>}
+                    <button type="button" className="btn btn-outline-danger" onClick={onClickDeleteBtn}>팀원삭제</button>}
             </div>
         </div>
     );

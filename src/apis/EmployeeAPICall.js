@@ -24,7 +24,7 @@ export const callGetEmployeeAPI = ({employeeNo}) => {
         })
         .then(response => response.json());
 
-        console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
+        // //console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
 
         dispatch({ type: GET_EMPLOYEE,  payload: result });
         
@@ -55,7 +55,7 @@ export const callLoginAPI = ({form}) => {
         .then(response => response.json());
 
         // result에 data가 없어서 안 뜨는 것 같음.
-        console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
+        //console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
         if(result.status === 200){
             window.localStorage.setItem('accessToken', result.data.accessToken);            
         }
@@ -71,7 +71,7 @@ export const callLogoutAPI = () => {
     return async (dispatch, getState) => {            
 
         dispatch({ type: POST_LOGIN,  payload: '' });        
-        console.log('[EmployeeAPICalls] callLogoutAPI RESULT : SUCCESS');
+        //console.log('[EmployeeAPICalls] callLogoutAPI RESULT : SUCCESS');
     };
 }
 
@@ -96,7 +96,7 @@ export const callLogoutAPI = () => {
 //         })
 //         .then(response => response.json());
 
-//         console.log('[MemberAPICalls] callRegisterAPI RESULT : ', result);        
+//         //console.log('[MemberAPICalls] callRegisterAPI RESULT : ', result);        
         
 //         if(result.status === 201){
 //             dispatch({ type: POST_REGISTER,  payload: result });
@@ -168,7 +168,7 @@ export const callPOSTFindEmployeeAPI = ({form}) => {
 
         .then(response => response.json());
 
-        // console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
+        // //console.log('[EmployeeAPICalls] callGetEmployeeAPI RESULT : ', result);
 
         dispatch({ type: GET_EMPLOYEE,  payload: result });
         
@@ -198,7 +198,7 @@ export const callLoginAPI1 = ({form}) => {
         .then(response => response.json());
 
         // result에 data가 없어서 안 뜨는 것 같음.
-        console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
+        //console.log('[EmployeeAPICalls] callLoginAPI RESULT : ', result);
         if(result.status === 200){
             window.localStorage.setItem('accessToken', result.data.accessToken);            
         }

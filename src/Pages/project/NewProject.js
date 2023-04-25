@@ -122,7 +122,7 @@ function NewProject() {
         />
         <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <div style={{ background: '#fff', padding: 30, borderRadius: '10px', width: '600px', height: '600px' }}>
-            <h6 className="smalltitle">프로젝트 설정</h6>
+            <h6 className="smalltitle">프로젝트</h6>
             <hr className="line3" />
             <br />
             <form onSubmit={handleSubmit}>
@@ -142,7 +142,7 @@ function NewProject() {
               <div>
                 <label className="invite">
                   팀원 초대 : <input type="text" value={inviteText} onChange={handleInviteTextChange} style={{ width: '350px' }} />
-                  <button className="btn btn-success btn-icon-split btn-sm" class="btn btn-outline-success" type="button" onClick={handleInviteAdd}>추가</button>
+                  <button className="btn btn-outline-success btn-icon-split" type="button" onClick={handleInviteAdd}>추가</button>
                 </label>
                 <div className="row" style={{ overflow: 'auto', height: '150px' }}>
 
@@ -158,8 +158,8 @@ function NewProject() {
                 <br />
               </div>
               <div>
-                <button className="button2" type="submit" class="btn btn-outline-primary" >{selectedItemIndex === -1 ? "생성" : "Save"}</button>
-                <button className="button33" type="button" class="btn btn-outline-danger" style={{ marginLeft: "50px" }} onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "취소" : "Cancel"}
+                <button type="submit" className="btn btn-outline-primary" >{selectedItemIndex === -1 ? "생성" : "Save"}</button>
+                <button type="button" className="btn btn-outline-danger" style={{ marginLeft: "50px" }} onClick={() => handleCloseModal()}>{selectedItemIndex === -1 ? "닫기" : "Cancel"}
                 </button>
               </div>
             </form>
@@ -170,16 +170,16 @@ function NewProject() {
         <h1>프로젝트</h1>
         {
           token.auth[0] == 1 &&
-          <button className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={handleOpenModal}>프로젝트 생성</button>
+          <button className="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={handleOpenModal}>프로젝트 생성</button>
         }
       </div>
       <hr className="line" />
       <div className="project2">
         {Array.isArray(items) && items.map((item, index) => (
-          <div style={{ padding: "10px" }}>
-            <div className="build" class="btn btn-outline-primary" style={{ maginLeft: "100px", width: "300px" }}><p>Build Up</p>
+          <div key={index} style={{ padding: "10px" }}>
+            <div className="btn btn-outline-primary" style={{ maginLeft: "100px", width: "300px" }}><p>Build Up</p>
               <hr className="line2" />
-              <NavLink to={`/project/${item.projectNo}/Manager`}>
+              <NavLink to={`/project/${item.projectNo}/backlog`}>
                 <div className="title2" style={{ height: '80px' }}><h4>{item.projectTitle}</h4></div>
                 <div className="title3" style={{ height: '25px' }}><h6>(PM : {item.employeeName} )</h6></div>
               </NavLink>
