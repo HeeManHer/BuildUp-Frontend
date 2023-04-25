@@ -19,7 +19,7 @@ function Firstpage() {
                     className="start-btn"
                     onClick={onClickHandler}
                 >
-                    <img src={첫페이지} style={{ height: '830px', width: '1520px' }} />
+                    <img src={첫페이지} style={{ height: '1080px', width: '1900px' }} />
                 </button>
             </div>
         </>

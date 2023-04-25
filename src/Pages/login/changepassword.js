@@ -68,30 +68,56 @@ function Changepassword() {
             <h1>마이페이지</h1>
         </div> 
         <hr className="line"/>
-        <div className="border2">
+        <div className="find-box">
             <h2>비밀번호 변경</h2>
             <div className="now">
-                <label>현재 비밀번호 : </label>
+            <hr className="line"/>
+            <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>현재 비밀번호 : &nbsp;&nbsp;</label>
                 <input type="password" name="employeePassword" placeholder="현재 비밀번호를 입력하세요" onChange={ModifyPwd} />
             </div>
             <br />
+            <hr/>
             <br />
             <div className="newPwd">
-                <label>새 비밀번호 : </label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>새 비밀번호 : &nbsp;&nbsp;&nbsp;</label>
                 <input type="password" name="newPassword" placeholder="새 비밀번호를 입력하세요" onChange={ModifyPwd} />
             </div>
             <br />
+            <hr/>
             <br />
             <div className="newOk">
-                <lable>새 비밀번호 확인 : </lable>
+                <lable>새 비밀번호 확인 : &nbsp;&nbsp;&nbsp;</lable>
                 <input type="password" placeholder="새 비밀번호 확인" onChange={e => e.target.value === pwd.newPassword ? setCheck(true) : setCheck(false)} />
             </div>
+            
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    
             <label>
                 {pwd.newPassword == undefined || check == undefined ? <></> : check ? '일치합니다.' : '일치하지 않습니다.'}
 
             </label>
-            <br />
+            <hr/>
+            
             <React.Fragment>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                    
+                    
                 <button className="btn btn-outline-primary" onClick={openModal}>수정하기</button>
                 <Modal open={modalOpen} close={closeModal} header={checkmessage}>
                 </Modal>
