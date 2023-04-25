@@ -69,6 +69,11 @@ function Findpassword() {
     // }
 
     return (
+    <div>   
+        <div className="newproject">
+        <h1>비밀번호 찾기</h1>
+        </div> 
+        <hr className="line"/>
         <div className="find-box" >
             <h2>비밀번호 찾기</h2>
             <div className="name">
@@ -91,6 +96,7 @@ function Findpassword() {
             </div>
             <button onClick={onClickLoginHandler}>비밀번호 재설정</button>
         </div>
+    </div>     
     );
 
 }

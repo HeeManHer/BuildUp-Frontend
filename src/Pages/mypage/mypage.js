@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { decodeJwt } from '../../utils/tokenUtils';
+import '../../css/project.css';
 
 import {
     callGetEmployeeAPI
@@ -47,40 +48,15 @@ function Mypage() {
 
 
     return (
-
-
-        // <div className="border">
-        //     <h2>내정보</h2>
-        //     <div className="myname">
-        //         <label>이름 : 허희만</label>
-        //         {/* <input type="text" placeholder="이름을 입력하세요" /> */}
-        //     </div>
-        //     <br />
-        //     <br />
-
-        //     <br />
-        //     <br />
-        //     <div className="passwordupdate">
-        //         <label>비밀번호 : </label>
-        //         {/* 버튼에 링크 or 핸들러 이용해서 수정페이지로 넘어가게 해야됨 */}
-        //         {/* 수정필요 */}
-        //         <button onClick={onClickModifyHandler}>  수정하기</button>
-        //     </div>
-        //     <br />
-        //     <br />
-
-        //     <br />
-        //     <br />
-        //     <div className="myemail">
-        //         <label>Email : heeman0401@naver.com</label>
-        //         {/* <input type="email" placeholder="이메일" /> */}
-        //     </div>
-        // </div>
+    <div>    
+        <div className="newproject">
+            <h1>마이페이지</h1>
+        </div> 
+        <hr className="line"/>
         <div className="border">
-
             {employeeDetail &&
                 <div className="myname">
-                    <h1>내 정보</h1>
+                    <h1>내정보</h1>
                     <input
                         type="text"
                         placeholder="이름"
@@ -99,6 +75,7 @@ function Mypage() {
 
             }
         </div>
+    </div>    
     );
 }
 export default Mypage;
