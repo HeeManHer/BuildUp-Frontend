@@ -68,11 +68,13 @@ function Backlog() {
     }
   };
 
-  // 10페이지 추가
   const doublenextpage = () => {
     const next = Math.min(currentPage + 10, pageInfo.maxPage);
-    setCurrentPage(next);
-  }
+    const nextStart = next - ((next - 1) % 10);
+    setCurrentPage(nextStart);
+  };
+
+
 
   // 이전 페이지로 이동
   const prevpage = () => {
@@ -244,7 +246,7 @@ function Backlog() {
               <td >{item.backlogPriority}</td>
               <td >
                 <button className='button2' class="btn btn-outline-primary btn-sm" style={{ position: 'sticky', top: '100px', right: '100px', width: "100px" }} onClick={() => handleEditItem(item)}>
-                {/* 모달내용 조회 */}
+                  {/* 모달내용 조회 */}
                   조회
                 </button>
                 {/* 권한비교해서 맞으면 삭제 */}
