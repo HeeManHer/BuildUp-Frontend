@@ -26,16 +26,16 @@ function Login() {
         employeePassword: ''
     });
 
-    useEffect(() => {
-
-        if (loginEmployee.status === 200) {
-            console.log("[Login] Login SUCCESS {}", loginEmployee);
-            navigate("/mypage/newproject", { replace: true });
-        } else if(form.employeeNo && form.employeePassword !== 200){
-            alert("아이디 혹은 비밀번호가 일치하지 않습니다.")
-        }
-    }
-        , [loginEmployee]);
+    useEffect(
+        () => {
+            if (loginEmployee.status === 200) {
+                navigate("/mypage/newproject", { replace: true });
+            } else if (form.employeeNo && form.employeeNo) {
+                alert("아이디 혹은 비밀번호가 일치하지 않습니다.")
+            }
+        },
+        [loginEmployee]
+    );
 
    
 

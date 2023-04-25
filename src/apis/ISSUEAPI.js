@@ -1,6 +1,5 @@
 import { GET_BACKLOG } from "../modules/Backlog";
 import { CREATE_ISSUE, DELETE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE, SEARCH_ISSUE } from "../modules/Issue";
-import Issue from "../Pages/issue/Issue.json";
 
 export function SetIssueAPI(projectNo, pageNumber, searchValue) {
     let RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues?offset=" + pageNumber;
@@ -20,7 +19,6 @@ export function SetIssueAPI(projectNo, pageNumber, searchValue) {
 
         dispatch({ type: CREATE_ISSUE, payload: result.data });
     }
-
 }
 
 export function SaveIssueAPI(issue) {

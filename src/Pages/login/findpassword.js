@@ -30,7 +30,7 @@ function Findpassword() {
         if (loginEmployee.message === "정보가 일치합니다") {
             console.log("[Login] Login SUCCESS {}", loginEmployee);
             navigate("./afterchange", { replace: true });
-        } else if(form.employeeEmail && form.employeeName && form.employeeNo !== 200) {
+        } else if (form.employeeName && form.employeeNo && form.employeeEmail) {
             alert("정보를 찾을 수 없습니다.")
         }
     }

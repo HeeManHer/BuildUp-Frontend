@@ -8,22 +8,21 @@ import employeeReducer from "../../modules/EmployeeModule";
 
 function Header() {
     const token = decodeJwt(window.localStorage.getItem("accessToken"));
-    const employee = useSelector(state => state.employeeReducer);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const employee = useSelector(state => state.employeeReducer);
     const employeeDetail = employee.data;
-    // const employeeName = token.sub;
+
 
     useEffect(
         () => {
-            console.log('token', token);
             if (token !== null) {
-                dispatch(callGetEmployeeAPI({
-                    employeeNo: token.sub
-                }));
+                dispatch(callGetEmployeeAPI(token.sub));
             }
-        }
-        , []
+        },
+        []
     );
 
     if (token === null) {
