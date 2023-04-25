@@ -30,7 +30,7 @@ function SprintOne() {
     const [textareaValue, setTextareaValue] = useState('');
 
 
-    const sprint = useSelector(state => state.SprintReducer);
+    const sprint = useSelector(state => state.SprintReducer.data);
     const backlogList = useSelector(state => state.BacklogReducer.data);
     const issueReducer = useSelector(state => state.IssueReducer.data);
     const authorityReducer = useSelector(state => state.employeebtnReducer);
@@ -77,7 +77,7 @@ function SprintOne() {
     }
 
 
-    console.log(sprint);
+    //console.log(sprint);
 
     const sprintDelete = () => {
         deleteSprint(sprintNo);
@@ -97,14 +97,14 @@ function SprintOne() {
     const handleSubmit = (event) => {
         event.preventDefault();
         // 새로운 이슈 생성 로직
-        console.log('새로운 이슈가 생성되었습니다.');
+        //console.log('새로운 이슈가 생성되었습니다.');
     }
-    console.log(oneIssue)
+    //console.log(oneIssue)
 
     return (
         <>
             <div className="newproject" dispaly="flex" justifyContent="space-between" >
-                <h1 onClick={gosprintList}>스프린트/<span id="size">{sprint.sprintName}</span></h1>
+                {sprint && <h1 onClick={gosprintList}>스프린트/<span id="size">{sprint.sprintName}</span></h1>}
                 <div display="flex">
                     {auth.indexOf('U') >= 0 &&
                         <button id="sprintDeleteBtn" className="button1" class="btn btn-outline-danger" style={{ position: 'sticky', marginRight: '20px', top: '100px', right: '10px', width: "200px" }} margin-left="auto" onClick={sprintDelete}>스프린트 삭제</button>
@@ -115,32 +115,34 @@ function SprintOne() {
                 </div>
             </div>
             <hr className="line" />
-            <div style={{ display: 'flex', flexDirection: 'row' }} >
-                {Array.isArray(sprint.boardIssue) && sprint.boardIssue.map((board, index) =>
-                    <div class="btn btn-outline-primary" key={index} className="sprintboardlist" >
-                        <div className="sprintlistboard2" >
-                            <div className="sprintboard" >
-                                <div className="sprinttboard" class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "150px" }}>
-                                    <span style={{ fontWeight: "bold" }}>{board.issueState} </span>
+
+            {sprint &&
+                <div style={{ display: 'flex', flexDirection: 'row' }} >
+                    {Array.isArray(sprint.boardIssue) && sprint.boardIssue.map((board, index) =>
+                        <div class="btn btn-outline-primary" key={index} className="sprintboardlist" >
+                            <div className="sprintlistboard2" >
+                                <div className="sprintboard" >
+                                    <div className="sprinttboard" class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "150px" }}>
+                                        <span style={{ fontWeight: "bold" }}>{board.issueState} </span>
+                                    </div>
+                                </div>
+                                <div className="sprintlistline2" ></div>
+                                <div style={{ height: '85%', overflowY: 'auto' }}>
+                                    {Array.isArray(board.sprintIssue) &&
+                                        board.sprintIssue.map(issue =>
+                                            <div class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "180px", color: 'black' }}
+                                                onClick={() => { setIsModal2(true); dispatch(SearchIssueAPI(issue.issueNo, projectNo)); dispatch(GetBacklogListAPI(projectNo)) }}>
+                                                <span>{issue.issueName}</span>
+                                                <br />
+                                                <span style={{ fontSize: '9px' }}>담당자 : {issue.employeeName ? issue.employeeName : '없음'}</span>
+                                            </div>
+                                        )}
                                 </div>
                             </div>
-                            <div className="sprintlistline2" ></div>
-                            <div style={{ height: '85%', overflowY: 'auto' }}>
-                                {Array.isArray(board.sprintIssue) &&
-                                    board.sprintIssue.map(issue =>
-                                        <div class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "180px" }}
-                                            onClick={() => { setIsModal2(true); dispatch(SearchIssueAPI(issue.issueNo, projectNo)); dispatch(GetBacklogListAPI(projectNo)) }}>
-                                            <span>{issue.issueName}</span>
-                                            <br />
-                                            <span style={{ fontSize: '9px' }}>담당자 : {issue.employeeName ? issue.employeeName : '없음'}</span>
-                                        </div>
-                                    )}
-                            </div>
                         </div>
-                    </div>
-                )
-                }
-                {/* <div className="sprintboardlist">
+                    )
+                    }
+                    {/* <div className="sprintboardlist">
                     <div className="sprintlistboard2">
                         <div className="sprintboard">
                             <div className="sprinttboard">
@@ -155,8 +157,8 @@ function SprintOne() {
                         </div>
                     </div>
                 </div> */}
-            </div>
-
+                </div>
+            }
             {oneIssue !== undefined ?
                 <Modal className="modalsub" isOpen={isModal2} onRequestClose={() => { setIsModal2(false) }}>
                     <h6 className="smalltitle">이슈</h6>

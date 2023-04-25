@@ -26,7 +26,7 @@ function MypageSideBar() {
 
             {/* 프로젝트*/}
             <li className="nav-item">
-                <a className="nav-link" onClick={navigate("/mypage/newProject")}>
+                <a className="nav-link" onClick={() => navigate("/mypage/newProject")}>
                     <i className="fas fa-fw fa-cog"></i>
                     <span>프로젝트</span>
                 </a>
@@ -34,7 +34,7 @@ function MypageSideBar() {
 
             {/* 내정보*/}
             <li className="nav-item">
-                <a className="nav-link" onClick={navigate("/mypage")}>
+                <a className="nav-link" onClick={() => navigate("/mypage")}>
                     <i className="fas fa-fw fa-wrench"></i>
                     <span>내정보</span>
                 </a>

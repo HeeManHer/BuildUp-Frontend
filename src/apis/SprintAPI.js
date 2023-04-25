@@ -35,7 +35,7 @@ export function getSprintDetail(sprintNo) {
             }
         }).then(response => response.json());
 
-        dispatch({ type: GET_SPRINT, payload: result.data });
+        dispatch({ type: GET_SPRINT, payload: result });
     }
 }
 
@@ -74,7 +74,7 @@ export async function postSprint(sprint) {
 
 export async function putSprint(sprint) {
 
-    const URL = "http://localhost:8888/api/v1/sprints/"+sprint;
+    const URL = "http://localhost:8888/api/v1/sprints/" + sprint;
 
     return await fetch(URL, {
         method: "PUT",

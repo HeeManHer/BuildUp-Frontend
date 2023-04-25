@@ -2,21 +2,21 @@ import { ADD_COMMENT, GET_COMMENT, UPDATE_COMMENT, DELETE_COMMENT } from "../mod
 
 export function getComment(issueNo) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/issue/"+issueNo+"/comments";
+  const RequestUrl = "http://localhost:8888/api/v1/issue/" + issueNo + "/comments";
 
 
-    return async function (dispatch, getState) {
+  return async function (dispatch, getState) {
 
-        const result = await fetch(RequestUrl, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "*/*"
-            }
-        }).then(res => res.json());
+    const result = await fetch(RequestUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "*/*"
+      }
+    }).then(res => res.json());
 
-        dispatch({ type: GET_COMMENT, payload: result.data });
-    }
+    dispatch({ type: GET_COMMENT, payload: result.data });
+  }
 
 }
 
@@ -30,8 +30,7 @@ export function addComment(comment) {
         "Accept": "*/*"
       },
       body: JSON.stringify(comment)
-    }).then(res => res.json());
-    dispatch({ type: ADD_COMMENT, payload: result.data });
+    })
   }
 }
 
@@ -47,7 +46,7 @@ export function updateComment(comment) {
       },
       body: JSON.stringify(comment)
     }).then(res => res.json());
-    dispatch({ type: UPDATE_COMMENT , payload: result.data });
+    dispatch({ type: UPDATE_COMMENT, payload: result.data });
   }
 }
 

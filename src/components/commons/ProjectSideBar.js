@@ -48,7 +48,7 @@ function ProjectSideBar() {
 
             {/* 내정보*/}
             <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/mypage/newProject")}>
+                <a className="nav-link" onClick={() => navigate("/mypage")}>
                     <i className="fas fa-fw fa-wrench"></i>
                     <span>내정보</span>
                 </a>

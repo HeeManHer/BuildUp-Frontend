@@ -204,8 +204,8 @@ function Issue() {
                                 <td >{issue.issueName.length > 10 ? issue.issueName.substring(0, 10) + "..." : issue.issueName}</td>
                                 {/* <td >{issue.issueContent}</td> */}
                                 <td >{issue.issueContent.length > 10 ? issue.issueContent.substring(0, 10) + "..." : issue.issueContent}</td>
-                                <td >{issue.issuePriority}</td>
                                 <td >{issue.issueStatus}</td>
+                                <td >{issue.issuePriority}</td>
                                 <td>
                                     <button className="btn btn-outline-primary" onClick={() => { setIsModal2(true); setoneissue(issue); dispatch(GetBacklogListAPI(projectNo)) }}>
                                         조회
