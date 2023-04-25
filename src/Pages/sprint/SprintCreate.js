@@ -177,24 +177,24 @@ function SprintCreate(props) {
                                 )}
                             </tbody>
                         </table>
-                        </div>
+                    </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <button className='button2' onClick={prevpage}> ◀ </button>
+                        <button className='button2' class="btn btn-outline-primary" style={{ width: "100px", height: "40px", float: "left" }} onClick={prevpage}> ◀ </button>
                         {pageNumber.map((num) => (
-                            <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-                                <button style={currentPage === num ? { backgroundColor: 'orange' } : null}>
+                            <li style={{ marginLeft: ' 35px', padding: "10px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                                <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
                                     {num}
-                                </button>
+                                </span>
                             </li>
                         ))}
-                        <button className='button2' onClick={nextpage}>▶</button>
-                    
+                        <button className='button2' class="btn btn-outline-primary" style={{width: "100px", height: "40px", float: "left" }} onClick={nextpage}>▶</button>
+
                     </div>
                     <br />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <button style={{ width: "100px", height: "40px", float: "left" }}
+                        <button class="btn btn-outline-primary" style={{ bottom: "100px", width: "100px", height: "40px", float: "left" }}
                             onClick={startsprint}>시작</button>
-                        <button id="sprintCancel" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
+                        <button id="sprintCancel" class="btn btn-outline-danger" style={{ width: "100px", height: "40px", float: "right" }} onClick={handleCloseModal}>취소</button>
                     </div>
                 </div>
 
