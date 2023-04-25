@@ -22,15 +22,6 @@ function Afterchange() {
 
     const changeEmployee = useSelector(state => state.employeeReducer.data);
     
-    // 리덕스를 이용하기 위한 디스패처, 셀렉터 선언
-    // const dispatch = useDispatch();
-    // const loginEmployee = useSelector(state => state.employeeReducer); 
-    
-    // 현재 비밀번호와 일치하는 지 확인해야함
-    // const [currentPwd, setCurrentPwd] = useState('');
-    // // newPwd, checkNewPwd 두 개가 일치하는 지 확인해야함.
-    // const [newPwd, setNewPwd] = useState('');
-    // const [checkNewPwd, setCheckNewPwd] = useState('');
     
     const[modalOpen, setModalOpen] = useState(false);
     const[check, setCheck] = useState();
@@ -91,28 +82,52 @@ function Afterchange() {
             <h1>비밀번호 찾기</h1>
         </div> 
         <hr className="line"/>
-        <div className="border">
-            <h2>비밀번호 변경</h2>
+        <div className="find-box2">
+            <h2>&nbsp;비밀번호 변경</h2>
+            <hr className='line'/>
+            <br/>
             <div className="newPwd">
-                <label>새 비밀번호 : </label>
-                <input type="password" name="newPassword" placeholder="새 비밀번호를 입력하세요" onChange={ModifyPwd} />
+                <label> &nbsp; &nbsp; &nbsp; &nbsp;새 비밀번호 :  &nbsp;&nbsp; &nbsp;</label>
+                <input type="password" name="newPassword" placeholder="새 비밀번호 입력" onChange={ModifyPwd} />
             </div>
             <br />
+            <hr/>
             <br />
             <div className="newOk"> 
-                <lable>새 비밀번호 확인 : </lable>
+                <lable>새 비밀번호 확인 :  &nbsp; &nbsp;</lable>
                 <input type="password" placeholder="새 비밀번호 확인" onChange={e => e.target.value === pwd.newPassword ? setCheck(true) : setCheck(false)} />
             </div>
+            
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label>
                 {pwd.newPassword == undefined || check == undefined ? <></>:    check ? '일치합니다.' : '일치하지 않습니다.'}
             </label>
-            <br/>
+            <hr/>
+            
             <React.Fragment>
-            <button onClick={openModal}>수정하기</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+            <button onClick={openModal} className="btn btn-outline-primary">수정하기</button>
             <Modal open={modalOpen} close={closeModal} header={checkmessage}>
             </Modal>
             </React.Fragment>
+            <br/>    
         </div>
+        
     </div>      
     );
 

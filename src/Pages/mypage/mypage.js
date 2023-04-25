@@ -53,24 +53,40 @@ function Mypage() {
             <h1>마이페이지</h1>
         </div> 
         <hr className="line"/>
-        <div className="border">
+        <div className="find-box">
             {employeeDetail &&
                 <div className="myname">
                     <h1>내정보</h1>
-                    <input
+                    <hr className="line"/>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                         type="text"
                         placeholder="이름"
                         readOnly={true}
                         value={employeeDetail.employeeName || ''}
                     />
-                    <label>비밀번호 : </label>
-                    <button className="btn btn-outline-primary" onClick={onClickModifyHandler}>  수정하기</button>
-                    <input
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                         type="text"
                         placeholder="이메일"
                         readOnly={true}
                         value={employeeDetail.employeeEmail || ''}
                     />
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>비밀번호 : &nbsp;&nbsp;</label>
+                    <button className="btn btn-outline-primary" onClick={onClickModifyHandler}>  수정하기</button>
                 </div>
 
             }

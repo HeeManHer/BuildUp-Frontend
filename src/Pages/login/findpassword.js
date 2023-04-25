@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import 로그인창 from '../../img/로그인창.png';
 
 import {
     callPOSTFindEmployeeAPI
@@ -69,34 +70,49 @@ function Findpassword() {
     // }
 
     return (
-    <div>   
-        <div className="newproject">
-        <h1>비밀번호 찾기</h1>
-        </div> 
-        <hr className="line"/>
-        <div className="find-box" >
-            <h2>비밀번호 찾기</h2>
-            <div className="name">
-                <label>이름 : </label>
-                <input type="text" name="employeeName" onChange={onChangeHandler} />
-            </div>
-            <br />
-            <br />
-            <hr />
-            <div className="id">
-                <label>사번 : </label>
-                <input type="text" name="employeeNo" onChange={onChangeHandler} />
-            </div>
-            <br />
-            <br />
-            <hr />
-            <div className="email">
-                <label>이메일 : </label>
-                <input type="email" name="employeeEmail" onChange={onChangeHandler} />
-            </div>
-            <button onClick={onClickLoginHandler}>비밀번호 재설정</button>
+    <div>
+            <div className="newproject">
+                <h1>비밀번호 찾기</h1>
+            </div> 
+            <hr className="line"/>
+            <div className="find-box" style={{ zIndex:'1'}}>
+                    <h2>&nbsp;비밀번호 찾기</h2>
+                    <hr className="line"/>
+                    <div className="name">
+                    <br/>
+                    <label>&nbsp;&nbsp;&nbsp;이름 : &nbsp;&nbsp;</label>
+                    <input type="text" name="employeeName" onChange={onChangeHandler} />
+                </div>
+                    <br />
+                    <hr />
+                <div className="id">
+                    <br/>
+                    <label>&nbsp;&nbsp;&nbsp;사번 : &nbsp;&nbsp;</label>
+                    <input type="text" name="employeeNo" onChange={onChangeHandler} />
+                </div>
+                    <br />
+                    <hr />
+                <div className="email">
+                    <br/>
+                    <label>이메일 : &nbsp;</label>
+                    <input type="email" name="employeeEmail" onChange={onChangeHandler} />
+                </div>
+                <br/>
+                <hr/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onClick={onClickLoginHandler} className="btn btn-outline-primary">비밀번호 재설정</button>
+                    <br/>
+                    <br/>
         </div>
-    </div>     
+      
+    </div>
+         
     );
 
 }
