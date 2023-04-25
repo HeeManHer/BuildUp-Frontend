@@ -68,11 +68,13 @@ function Backlog() {
     }
   };
 
-  // 10페이지 추가
   const doublenextpage = () => {
     const next = Math.min(currentPage + 10, pageInfo.maxPage);
-    setCurrentPage(next);
-  }
+    const nextStart = next - ((next - 1) % 10);
+    setCurrentPage(nextStart);
+  };
+
+
 
 
   // 이전 페이지로 이동
