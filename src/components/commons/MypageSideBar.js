@@ -1,6 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function MypageSideBar() {
+
+    const navigate = useNavigate();
 
     return (
         // Sidebar
@@ -24,22 +26,18 @@ function MypageSideBar() {
 
             {/* 프로젝트*/}
             <li className="nav-item">
-                <NavLink to="/mypage/newproject">
-                    <a className="nav-link">
-                        <i className="fas fa-fw fa-cog"></i>
-                        <span>프로젝트</span>
-                    </a>
-                </NavLink>
+                <a className="nav-link" onClick={navigate("/mypage/newProject")}>
+                    <i className="fas fa-fw fa-cog"></i>
+                    <span>프로젝트</span>
+                </a>
             </li>
 
             {/* 내정보*/}
             <li className="nav-item">
-                <NavLink to="/mypage">
-                    <a className="nav-link">
-                        <i className="fas fa-fw fa-wrench"></i>
-                        <span>내정보</span>
-                    </a>
-                </NavLink>
+                <a className="nav-link" onClick={navigate("/mypage")}>
+                    <i className="fas fa-fw fa-wrench"></i>
+                    <span>내정보</span>
+                </a>
             </li>
 
             {/* <!-- Divider --> */}

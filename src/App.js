@@ -27,29 +27,21 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<LoginLayout />}>
-          <Route index element={<Login />} />
-          <Route path="findpassword" element={<Findpassword/>}/>
-         </Route> 
-
-        <Route path="/" element={<MypageLayout />}>
-          <Route index element={<NewProject />} />
-          <Route path="mypage">
-            <Route index element={<MyPage />} />
-            <Route path="changepassword" element={<Changepassword/>} />
-          </Route>
-        </Route> */}
         <Route path="/" element={<Firstpage />} />
         <Route path="/auth" element={<LoginLayout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="login/findpassword" element={<Findpassword />} />
-          <Route path="login/findpassword/afterchange" element={<Afterchange />} />
+          <Route path="login">
+            <Route index element={<Login />} />
+            <Route path="findPassword">
+              <Route index element={<Findpassword />} />
+              <Route path="afterChange" element={<Afterchange />} />
+            </Route>
+          </Route>
         </Route>
 
         <Route path="mypage" element={<MypageLayout />}>
           <Route index element={<MyPage />} />
-          <Route path="changepassword" element={<Changepassword />} />
-          <Route path="newproject" element={<NewProject />} />
+          <Route path="changePassword" element={<Changepassword />} />
+          <Route path="newProject" element={<NewProject />} />
         </Route>
 
 
@@ -61,7 +53,7 @@ function App() {
               <Route index element={<SprintList />} />
               <Route path=":sprintNo" element={<SprintOne />} />
             </Route>
-            <Route path="Manager" element={<Manager />} />
+            <Route path="manager" element={<Manager />} />
           </Route>
         </Route>
       </Routes>
