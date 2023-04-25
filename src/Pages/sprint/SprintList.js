@@ -41,10 +41,20 @@ function SprintList() {
         }
     };
 
+    const doublenextpage = () => {
+        const next = Math.min(currentPage + 10, pageInfo.maxPage);
+        setCurrentPage(next);
+    }
+
     const prevpage = () => {
         if (currentPage - 1 >= 1) {
             setCurrentPage(currentPage - 1);
         }
+    };
+
+    const doubleprevpage = () => {
+        const prev = Math.max(currentPage - 10, 1);
+        setCurrentPage(prev);
     };
 
     const openSprintCreateModal = () => {
@@ -58,7 +68,7 @@ function SprintList() {
     return (
 
         <>
-            <div className="newproject">
+            <div className="newproject" >
                 <h1>스프린트 목록</h1>
                 {auth.indexOf('C') >= 0 &&
                     <button id="sprintCreateBtn" className="button1" class="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={openSprintCreateModal}>스프린트 생성</button>
@@ -69,8 +79,8 @@ function SprintList() {
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 {sprintList && sprintList.map((sprint, index) => (
                     <div key={index} className="sprintlistboard1" onClick={() => navigate("./" + sprint.sprintNo)}>
-                        <div className="sprintlistboard2">
-                            <div className="sprintlistboard3">
+                        <div className="sprintlistboard2"  >
+                            <div className="sprintlistboard3" >
                                 <div className="sprintname">
                                     <span class="btn btn-outline-primary" >{sprint.sprintName}  </span>
                                 </div>
@@ -94,16 +104,19 @@ function SprintList() {
                     </div>
                 ))}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button>
+            <div className='pagebutton' >
+                <span style={{ marginLeft: ' 35px', padding: "10px" }}> <button className='button2' class="btn btn-outline-primary" onClick={doubleprevpage}> ◀◀ </button></span>
+                <span > <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button></span>
                 {pageNumber.map((num) => (
-                    <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-                        <button class="btn btn-outline-primary" style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
+                    <li style={{ marginLeft: ' 35px', padding: "10px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                        <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
                             {num}
-                        </button>
+                        </span>
                     </li>
                 ))}
-                <button className='button2' class="btn btn-outline-primary" onClick={nextpage}>▶</button>
+
+                <span style={{ marginLeft: ' 35px', padding: "10px" }}><button className='button2' class="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
+                <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
             </div>
         </>
     );

@@ -2,14 +2,15 @@
   width: 500px;
   align-items: absolute;
   margin: auto;
-  margin-top: 200px;
+  margin-top: 100px;
+  
 
 }
 
 .border2 {
   width: 500px;
   margin: auto;
-  margin-top: 200px;
+  margin-top: 70px;
   border: #0e1010;
   padding-top: 100px;
   border: 1px solid black;
@@ -23,10 +24,10 @@
 
 .myname {
   border: #0e1010;
-  padding-top: 170px;
+  padding-top: 50px;
   border: 1px solid black;
   width: 500px;
-  height: 500px;
+  height: 300px;
   border-radius: 10px;
   padding-left: 50px;
   justify-content: space-between;
