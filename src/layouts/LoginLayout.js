@@ -2,6 +2,7 @@
 import LoginHeader from "../components/commons/LoginHeader";
 import LoginSideBar from "../components/commons/LoginSideBar";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/commons/Footer";
 import '../css/sb-admin-2.min.css';
 import '../vendor/fontawesome-free/css/all.min.css';
 
@@ -18,7 +19,7 @@ function LoginLayout() {
                         <LoginHeader />
                         <Outlet />
                     </div>
-                    {/* <Footer /> */}
+                    <Footer />
                 </div>
             </div>
         </>
