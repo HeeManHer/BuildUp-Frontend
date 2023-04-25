@@ -96,27 +96,40 @@ function Issue() {
         [currentPage]
     );
 
+    // 다음 페이지로 이동
     const nextPage = () => {
-        const next = Math.min(currentPage + 1, PageInfo.maxPage);
-        setCurrentPage(next);
-    }
+        if (currentPage + 1 <= PageInfo.endPage) {
+            setCurrentPage(currentPage + 1);
+        } else {
+            doublenextPage();
+        }
+    };
 
+    // 10페이지뒤 첫화면
+    const doublenextPage = () => {
+        const next = Math.min(currentPage + 10, PageInfo.maxPage);
+        const nextStart = next - ((next - 1) % 10);
+        setCurrentPage(nextStart);
+
+    };
+
+
+
+    // 이전 페이지로 이동
     const prevPage = () => {
         if (currentPage - 1 >= 1) {
-            setCurrentPage(Math.max(currentPage - 1, 1));
+            setCurrentPage(currentPage - 1);
+        } else {
+            doubleprevpage();
         }
-    }
+    };
 
-    // 10페이지 추가
-    const doublenextpage = () => {
-        const next = Math.min(currentPage + 10, PageInfo.maxPage);
-        setCurrentPage(next);
-    }
-
-    // 10페이지 뺴기
+    // 10페이지뒤 첫화면
     const doubleprevpage = () => {
         const prev = Math.max(currentPage - 10, 1);
-        setCurrentPage(prev);
+        const prevStart = prev - ((prev - 1) % 10 || 10);
+        const prevPage = prevStart < 1 ? 1 : prevStart;
+        setCurrentPage(prevPage);
     };
 
 
@@ -216,7 +229,7 @@ function Issue() {
                             </li>
                         ))}
                         <span style={{ marginLeft: ' 10px', padding: "0px" }}><button className="btn btn-outline-primary" onClick={nextPage}>▶</button></span>
-                        <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
+                        <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextPage}>▶▶</button></span>
                     </div>
 
                 </div>
