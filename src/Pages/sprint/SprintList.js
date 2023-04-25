@@ -97,10 +97,10 @@ function SprintList() {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button>
                 {pageNumber.map((num) => (
-                    <li className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-                        <button class="btn btn-outline-primary" style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
+                    <li style={{ marginLeft: ' 35px', padding: "10px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                        <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
                             {num}
-                        </button>
+                        </span>
                     </li>
                 ))}
                 <button className='button2' class="btn btn-outline-primary" onClick={nextpage}>▶</button>

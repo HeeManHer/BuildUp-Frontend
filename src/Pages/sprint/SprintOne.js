@@ -44,10 +44,10 @@ function SprintOne() {
         () => {
             dispatch(getSprintDetail(sprintNo));
 
-            const storedValue = localStorage.getItem('textareaValue');
-            if (storedValue) {
-                setTextareaValue(storedValue);
-            }
+            // const storedValue = localStorage.getItem('textareaValue');
+            // if (storedValue) {
+            //     setTextareaValue(storedValue);
+            // }
         },
         []
     )
@@ -59,10 +59,10 @@ function SprintOne() {
         [issueReducer]
     )
 
-    // Local Storage에 값 저장하기
-    useEffect(() => {
-        localStorage.setItem('textareaValue', textareaValue);
-    }, [textareaValue]);
+    // // Local Storage에 값 저장하기
+    // useEffect(() => {
+    //     localStorage.setItem('textareaValue', textareaValue);
+    // }, [textareaValue]);
 
 
 
@@ -140,7 +140,7 @@ function SprintOne() {
                     </div>
                 )
                 }
-                <div className="sprintboardlist">
+                {/* <div className="sprintboardlist">
                     <div className="sprintlistboard2">
                         <div className="sprintboard">
                             <div className="sprinttboard">
@@ -154,7 +154,7 @@ function SprintOne() {
                                 onChange={(event) => setTextareaValue(event.target.value)}></textarea>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {oneIssue !== undefined ?
