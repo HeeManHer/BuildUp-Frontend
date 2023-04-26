@@ -263,6 +263,7 @@ function Issue() {
                     <br />
                     <label>
                         백로그 이름 : <select value={backlogname} onChange={handleBacklognameChange} >
+                            <option value="">선택</option>
                             {backlogList.map(backlog => {
                                 // console.log(backlog);
                                 return <option key={backlog.backlogNo} value={backlog.backlogNo}>{backlog.backlogName}</option>;
@@ -317,7 +318,8 @@ function Issue() {
                     </label>
                     <br />
                     <label>
-                        백로그 이름 : <select value={oneissue.backlogNo} onChange={e => setoneissue({ ...oneissue, backlogNo: e.target.value })} >
+                        백로그 이름 :  <select value={oneissue.backlogNo} onChange={e => setoneissue({ ...oneissue, backlogNo: e.target.value })} >
+                            <option value="">선택</option>
                             {backlogList.map(backlog =>
                                 <option key={backlog.backlogNo} value={backlog.backlogNo}>{backlog.backlogName}</option>
                             )}
