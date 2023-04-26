@@ -2,7 +2,7 @@ import { GET_BACKLOG, DELETE_BACKLOG, POST_BACKLOG, PUT_BACKLOG } from '../modul
 
 
 export function getBacklog(projectNo, pageNo, searchValue) {
-
+    // 43.201.211.175
     let URL = "http://43.201.211.175:8888/api/v1/" + projectNo + "/backlogs?offset=" + pageNo + "&search=" + searchValue;
 
     return async (dispatch, getState) => {

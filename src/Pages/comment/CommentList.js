@@ -12,6 +12,7 @@ function CommentList({ issueNo }) {
 
   const [value, setValue] = useState('');
   const [update, setUpdate] = useState(null);
+  let count;
 
   const comments = useSelector(state => state.CommentReducer);
 
@@ -21,7 +22,7 @@ function CommentList({ issueNo }) {
     () => {
       dispatch(getComment(issueNo));
     },
-    []
+    [count]
   );
 
   // console.log(issueNo) 작동하는지 확인용
@@ -45,13 +46,13 @@ function CommentList({ issueNo }) {
 
     setUpdate();
     dispatch(updateComment({ ...modifyComment, replyContent: value }));
-    dispatch(getComment(issueNo));
+    count = 0;
   };
 
   //댓글 삭제
   const deleteList = (no) => {
     dispatch(deleteComment(no));
-    dispatch(getComment(issueNo));
+    count--;
   };
 
 

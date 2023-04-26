@@ -87,24 +87,6 @@ function NewProject() {
     setInviteList(inviteList.filter(invite => inviteList.indexOf(invite) !== index));
   };
 
-
-  // const handleEditItem = (index) => {
-  //   setSelectedItemIndex(index);
-  //   const selectedItem = items[index];
-  //   setTitle(selectedItem.title);
-  //   setManager(selectedItem.manager);
-  //   setInviteText(selectedItem.inviteText);
-  //   handleOpenModal();
-  // };
-
-  // const handleDeleteItem = (index) => {
-  //   const updatedItems = [...items];
-  //   updatedItems.splice(index, 1);
-  //   setItems(updatedItems);
-  // };
-
-
-
   return (
     <div>
       {/* 모달스타일 적용 */}
