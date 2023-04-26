@@ -8,6 +8,8 @@ import {
 } from '../modules/EmployeeModule';
 
 export const callGetEmployeeAPI = (employeeNo) => {
+
+
     const requestURL = `http://43.201.211.175:8888/api/v1/auth/login/${employeeNo}`;
 
     return async (dispatch, getState) => {

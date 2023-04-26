@@ -15,7 +15,6 @@ function Header() {
     const employee = useSelector(state => state.employeeReducer);
     const employeeDetail = employee.data;
 
-
     useEffect(
         () => {
             if (token !== null) {
