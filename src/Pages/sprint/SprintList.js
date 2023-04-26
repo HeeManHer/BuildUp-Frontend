@@ -105,19 +105,19 @@ function SprintList() {
                 ))}
             </div>
             <div className='pagebutton' >
-                <span style={{ marginLeft: ' 35px', padding: "10px" }}> <button className='button2' class="btn btn-outline-primary" onClick={doubleprevpage}> ◀◀ </button></span>
+                <span style={{ marginLeft: ' 10px', padding: "5px" }}> <button className="btn btn-outline-primary" onClick={doubleprevpage}> ◀◀ </button></span>
                 <span > <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button></span>
                 {pageNumber.map((num) => (
-                    <li style={{ marginLeft: ' 35px', padding: "10px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                    <li style={{ marginLeft: ' 10px', padding: "5px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
                         <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
                             {num}
                         </span>
                     </li>
                 ))}
-
-                <span style={{ marginLeft: ' 35px', padding: "10px" }}><button className='button2' class="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
+                <span style={{ marginLeft: ' 10px', padding: "5px" }}><button className="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
                 <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
             </div>
+
         </>
     );
 }

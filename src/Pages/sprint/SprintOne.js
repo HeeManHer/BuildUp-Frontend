@@ -121,13 +121,13 @@ function SprintOne() {
                     {Array.isArray(sprint.boardIssue) && sprint.boardIssue.map((board, index) =>
                         <div class="btn btn-outline-primary" key={index} className="sprintboardlist" >
                             <div className="sprintlistboard2" >
-                                <div className="sprintboard" >
-                                    <div className="sprinttboard" class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "150px" }}>
+                                <div className="sprintboard" style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <div className="sprinttboard" class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "150px"}}>
                                         <span style={{ fontWeight: "bold" }}>{board.issueState} </span>
                                     </div>
                                 </div>
                                 <div className="sprintlistline2" ></div>
-                                <div style={{ height: '85%', overflowY: 'auto' }}>
+                                <div style={{ height: '73%', overflowY: 'auto' }}>
                                     {Array.isArray(board.sprintIssue) &&
                                         board.sprintIssue.map(issue =>
                                             <div class="btn btn-outline-primary" style={{ position: 'relative', margin: '10px', padding: '10px', width: "180px", color: 'black' }}

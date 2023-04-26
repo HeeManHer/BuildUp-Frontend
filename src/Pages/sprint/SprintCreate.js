@@ -83,20 +83,28 @@ function SprintCreate(props) {
         })
     }
 
-
     const nextpage = () => {
         if (currentPage + 1 <= pageInfo.maxPage) {
             setCurrentPage(currentPage + 1)
         }
     };
 
+    const doublenextpage = () => {
+        const next = Math.min(currentPage + 10, pageInfo.maxPage);
+        setCurrentPage(next);
+    }
+
     const prevpage = () => {
         if (currentPage - 1 >= 1) {
-            setCurrentPage(currentPage - 1)
+            setCurrentPage(currentPage - 1);
         }
     };
 
-    // console.log(onesprint);
+    const doubleprevpage = () => {
+        const prev = Math.max(currentPage - 10, 1);
+        setCurrentPage(prev);
+    };
+
 
     const startsprint = async () => {
         if (onesprint.sprintName !== undefined) {
@@ -178,18 +186,19 @@ function SprintCreate(props) {
                             </tbody>
                         </table>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <button className='button2' class="btn btn-outline-primary" style={{ width: "100px", height: "40px", float: "left" }} onClick={prevpage}> ◀ </button>
-                        {pageNumber.map((num) => (
-                            <li style={{ marginLeft: ' 35px', padding: "10px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
-                                <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
-                                    {num}
-                                </span>
-                            </li>
-                        ))}
-                        <button className='button2' class="btn btn-outline-primary" style={{width: "100px", height: "40px", float: "left" }} onClick={nextpage}>▶</button>
-
-                    </div>
+                    <div className='pagebutton' >
+                <span style={{ marginLeft: ' 10px', padding: "5px" }}> <button className="btn btn-outline-primary" onClick={doubleprevpage}> ◀◀ </button></span>
+                <span > <button className='button2' class="btn btn-outline-primary" onClick={prevpage}> ◀ </button></span>
+                {pageNumber.map((num) => (
+                    <li style={{ marginLeft: ' 10px', padding: "5px" }} className='pageno' key={num} onClick={() => setCurrentPage(num)}>
+                        <span style={currentPage === num ? { backgroundColor: 'cornflowerblue' } : null}>
+                            {num}
+                        </span>
+                    </li>
+                ))}
+                <span style={{ marginLeft: ' 10px', padding: "5px" }}><button className="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
+                <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
+            </div>
                     <br />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <button class="btn btn-outline-primary" style={{ bottom: "100px", width: "100px", height: "40px", float: "left" }}
