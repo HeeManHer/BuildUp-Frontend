@@ -1,5 +1,5 @@
 export async function getProject(employeeNo) {
-    const URL = "http://localhost:8888/api/v1/"+ employeeNo +"/projects";
+    const URL = "http://43.201.211.175:8888/api/v1/" + employeeNo + "/projects";
 
     return await fetch(URL, {
         method: "GET",
@@ -13,7 +13,7 @@ export async function getProject(employeeNo) {
 
 
 export async function postProject(project) {
-    const URL = "http://localhost:8888/api/v1/projects";
+    const URL = "http://43.201.211.175:8888/api/v1/projects";
     await fetch(URL, {
         method: "POST",
         headers: {
@@ -25,7 +25,7 @@ export async function postProject(project) {
 }
 
 export async function getProjectDetail(projectNo) {
-    const URL = "http://localhost:8888/api/v1/projects/" + projectNo;
+    const URL = "http://43.201.211.175:8888/api/v1/projects/" + projectNo;
 
     return await fetch(URL, {
         method: "GET",
@@ -40,7 +40,7 @@ export async function getProjectDetail(projectNo) {
 
 export async function searchMember(search) {
 
-    const URL = "http://localhost:8888/api/v1/projects/search?search=" + search;
+    const URL = "http://43.201.211.175:8888/api/v1/projects/search?search=" + search;
 
     return await fetch(URL, {
         method: "GET",

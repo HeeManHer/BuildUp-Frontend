@@ -8,7 +8,7 @@ import {
 } from '../modules/EmployeeModule';
 
 export const callGetEmployeeAPI = (employeeNo) => {
-    const requestURL = `http://localhost:8888/api/v1/auth/login/${employeeNo}`;
+    const requestURL = `http://43.201.211.175:8888/api/v1/auth/login/${employeeNo}`;
 
     return async (dispatch, getState) => {
 
@@ -34,7 +34,7 @@ export const callGetEmployeeAPI = (employeeNo) => {
 
 
 export const callLoginAPI = ({ form }) => {
-    const requestURL = `http://localhost:8888/auth/login`;
+    const requestURL = `http://43.201.211.175:8888/auth/login`;
 
     return async (dispatch, getState) => {
 
@@ -76,7 +76,7 @@ export const callLogoutAPI = () => {
 }
 
 export const callPutEmployeeAPI = async (modifyPwd) => {
-    const requestURL = `http://localhost:8888/api/v1/changepassword/${modifyPwd.employeeNo}`;
+    const requestURL = `http://43.201.211.175:8888/api/v1/changepassword/${modifyPwd.employeeNo}`;
 
     // 클라이언트 fetch mode : no-cors 사용시 application/json 방식으로 요청이 불가능
     // 서버에서 cors 허용을 해주어야 함
@@ -98,7 +98,7 @@ export const callPutEmployeeAPI = async (modifyPwd) => {
 
 
 export const callPutFindEmployeeAPI = async (modifyPwd) => {
-    const requestURL = `http://localhost:8888/api/v1/password`;
+    const requestURL = `http://43.201.211.175:8888/api/v1/password`;
 
     // 클라이언트 fetch mode : no-cors 사용시 application/json 방식으로 요청이 불가능
     // 서버에서 cors 허용을 해주어야 함
@@ -118,7 +118,7 @@ export const callPutFindEmployeeAPI = async (modifyPwd) => {
 
 
 export const callPOSTFindEmployeeAPI = ({ form }) => {
-    const requestURL = `http://localhost:8888/api/v1/member`;
+    const requestURL = `http://43.201.211.175:8888/api/v1/member`;
 
     return async (dispatch, getState) => {
 
@@ -148,7 +148,7 @@ export const callPOSTFindEmployeeAPI = ({ form }) => {
 }
 
 export const callLoginAPI1 = ({ form }) => {
-    const requestURL = `http://localhost:8888/auth/login`;
+    const requestURL = `http://43.201.211.175:8888/auth/login`;
 
     return async (dispatch, getState) => {
 

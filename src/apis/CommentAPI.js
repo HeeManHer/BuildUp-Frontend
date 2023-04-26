@@ -2,7 +2,7 @@ import { ADD_COMMENT, GET_COMMENT, UPDATE_COMMENT, DELETE_COMMENT } from "../mod
 
 export function getComment(issueNo) {
 
-  const RequestUrl = "http://localhost:8888/api/v1/issue/" + issueNo + "/comments";
+  const RequestUrl = "http://43.201.211.175:8888/api/v1/issue/" + issueNo + "/comments";
 
 
   return async function (dispatch, getState) {
@@ -21,7 +21,7 @@ export function getComment(issueNo) {
 }
 
 export function addComment(comment) {
-  const RequestUrl = "http://localhost:8888/api/v1/comments";
+  const RequestUrl = "http://43.201.211.175:8888/api/v1/comments";
   return async function (dispatch, getState) {
     const result = await fetch(RequestUrl, {
       method: "POST",
@@ -36,7 +36,7 @@ export function addComment(comment) {
 
 export function updateComment(comment) {
   console.log(comment);
-  const RequestUrl = "http://localhost:8888/api/v1/comments";
+  const RequestUrl = "http://43.201.211.175:8888/api/v1/comments";
   return async function (dispatch, getState) {
     const result = await fetch(RequestUrl, {
       method: "PUT",
@@ -51,7 +51,7 @@ export function updateComment(comment) {
 }
 
 export function deleteComment(no) {
-  const RequestUrl = "http://localhost:8888/api/v1/comments/" + no;
+  const RequestUrl = "http://43.201.211.175:8888/api/v1/comments/" + no;
   return async function (dispatch, getState) {
     await fetch(RequestUrl, {
       method: "DELETE",

@@ -2,7 +2,7 @@ import { GET_BACKLOG } from "../modules/Backlog";
 import { CREATE_ISSUE, DELETE_ISSUE, UPDATE_ISSUE, SAVE_ISSUE, SEARCH_ISSUE } from "../modules/Issue";
 
 export function SetIssueAPI(projectNo, pageNumber, searchValue) {
-    let RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues?offset=" + pageNumber;
+    let RequestUrl = "http://43.201.211.175:8888/api/v1/projects/" + projectNo + "/issues?offset=" + pageNumber;
     if (searchValue !== undefined) {
         RequestUrl += `&search=${searchValue}`;
     }
@@ -23,7 +23,7 @@ export function SetIssueAPI(projectNo, pageNumber, searchValue) {
 
 export function SaveIssueAPI(issue) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues";
+    const RequestUrl = "http://43.201.211.175:8888/api/v1/projects/" + issue.projectNo + "/issues";
     // console.log(JSON.stringify(issue));
 
     return async function (dispatch, getState) {
@@ -41,7 +41,7 @@ export function SaveIssueAPI(issue) {
 }
 export function UpdateIssueAPI(issue) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues";
+    const RequestUrl = "http://43.201.211.175:8888/api/v1/projects/" + issue.projectNo + "/issues";
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {
@@ -58,7 +58,7 @@ export function UpdateIssueAPI(issue) {
 
 export function DeleteIssueAPI(issue) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/projects/" + issue.projectNo + "/issues/" + issue.issueNo;
+    const RequestUrl = "http://43.201.211.175:8888/api/v1/projects/" + issue.projectNo + "/issues/" + issue.issueNo;
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {
@@ -74,7 +74,7 @@ export function DeleteIssueAPI(issue) {
 
 export function GetBacklogListAPI(projectNo) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues/backloglist";
+    const RequestUrl = "http://43.201.211.175:8888/api/v1/projects/" + projectNo + "/issues/backloglist";
     return async function (dispatch, getState) {
 
         const result = await fetch(RequestUrl, {
@@ -91,7 +91,7 @@ export function GetBacklogListAPI(projectNo) {
 
 export function SearchIssueAPI(searchValue, projectNo) {
 
-    const RequestUrl = "http://localhost:8888/api/v1/projects/" + projectNo + "/issues?search=" + searchValue;
+    const RequestUrl = "http://43.201.211.175:8888/api/v1/projects/" + projectNo + "/issues?search=" + searchValue;
 
     return async function (dispatch, getState) {
 

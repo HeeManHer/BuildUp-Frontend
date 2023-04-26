@@ -3,7 +3,7 @@ import { GET_BACKLOG, DELETE_BACKLOG, POST_BACKLOG, PUT_BACKLOG } from '../modul
 
 export function getBacklog(projectNo, pageNo, searchValue) {
 
-    let URL = "http://localhost:8888/api/v1/" + projectNo + "/backlogs?offset=" + pageNo + "&search=" + searchValue;
+    let URL = "http://43.201.211.175:8888/api/v1/" + projectNo + "/backlogs?offset=" + pageNo + "&search=" + searchValue;
 
     return async (dispatch, getState) => {
         const result = await fetch(URL, {
@@ -21,7 +21,7 @@ export function getBacklog(projectNo, pageNo, searchValue) {
 
 export function postBacklog(backlog) {
 
-    const URL = "http://localhost:8888/api/v1/project/" + backlog.projectNo + "/backlogs";
+    const URL = "http://43.201.211.175:8888/api/v1/project/" + backlog.projectNo + "/backlogs";
 
     return async function (dispatch, getState) {
 
@@ -40,7 +40,7 @@ export function postBacklog(backlog) {
 
 export function putBacklog(backlog) {
 
-    const URL = "http://localhost:8888/api/v1/project/" + backlog.projectNo + "/backlogs";
+    const URL = "http://43.201.211.175:8888/api/v1/project/" + backlog.projectNo + "/backlogs";
     return async function (dispatch, getState) {
 
         const result = await fetch(URL, {
@@ -59,7 +59,7 @@ export function putBacklog(backlog) {
 
 export function deleteBacklog(backlog) {
 
-    const URL = `http://localhost:8888/api/v1/backlogs/${backlog.backlogNo}`;
+    const URL = `http://43.201.211.175:8888/api/v1/backlogs/${backlog.backlogNo}`;
 
     return async function (dispatch, getState) {
         const result = await fetch(URL, {
@@ -77,7 +77,7 @@ export function deleteBacklog(backlog) {
 
 export function searchBacklog(searchValue, projectNo) {
 
-    const URL = "http://localhost:8888/api/v1/" + projectNo + "/backlogs?search=" + searchValue;
+    const URL = "http://43.201.211.175:8888/api/v1/" + projectNo + "/backlogs?search=" + searchValue;
 
     return async (dispatch, getState) => {
         const result = await fetch(URL, {
