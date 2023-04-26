@@ -82,6 +82,7 @@ function SprintOne() {
     const sprintDelete = () => {
         deleteSprint(sprintNo);
         navigate("../")
+        // window.location.reload();
     }
 
     const gosprintList = () => {
@@ -196,9 +197,9 @@ function SprintOne() {
                         <label>
                             상태 : <select value={oneIssue.issueStatus} onChange={e => setoneIssue({ ...oneIssue, issueStatus: e.target.value })} >
                                 <option value="">선택</option>
-                                <option value="expected">예정</option>
-                                <option value="proceeding">진행중</option>
-                                <option value="success">완료</option>
+                                <option value="예정">예정</option>
+                                <option value="진행중">진행중</option>
+                                <option value="완료">완료</option>
                             </select>
                         </label>
                         <br />
