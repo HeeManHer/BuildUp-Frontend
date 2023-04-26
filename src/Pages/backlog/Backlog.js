@@ -271,7 +271,7 @@ function Backlog() {
             </span>
           </li>
         ))}
-        <span style={{ marginLeft: ' 10px', padding: "0px" }}><button className="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
+        <span style={{ marginLeft: ' 10px', padding: "5px" }}><button className="btn btn-outline-primary" onClick={nextpage}>▶</button></span>
         <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextpage}>▶▶</button></span>
       </div>
     </div >

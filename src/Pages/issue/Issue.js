@@ -228,7 +228,7 @@ function Issue() {
                                 </span>
                             </li>
                         ))}
-                        <span style={{ marginLeft: ' 10px', padding: "0px" }}><button className="btn btn-outline-primary" onClick={nextPage}>▶</button></span>
+                        <span style={{ marginLeft: ' 10px', padding: "5px" }}><button className="btn btn-outline-primary" onClick={nextPage}>▶</button></span>
                         <span><button className='button2' class="btn btn-outline-primary" onClick={doublenextPage}>▶▶</button></span>
                     </div>
 
