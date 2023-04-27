@@ -151,7 +151,7 @@ function NewProject() {
       <div className="newproject">
         <h1>프로젝트</h1>
         {
-          token.auth[0] == 1 &&
+          token.auth[0] === 'ROLE_PM' &&
           <button className="btn btn-outline-primary" style={{ position: 'sticky', top: '100px', right: '10px', width: "200px" }} onClick={handleOpenModal}>프로젝트 생성</button>
         }
       </div>

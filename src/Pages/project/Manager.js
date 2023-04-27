@@ -261,7 +261,7 @@ function Manager() {
                         <h3 >프로젝트 명 : </h3>
                         <br />
                         <h6 id="name" >{project.projectTitle}</h6>
-                        {token.auth[0] == 1 && auth.indexOf('U') >= 0 &&
+                        {auth.indexOf('U') >= 0 &&
                             <button className="btn btn-outline-primary btn-sm " style={{ marginLeft: "20px", height: "35px" }} onClick={onClickProjectTitleEditBtn}>
                                 수정
                             </button>}
