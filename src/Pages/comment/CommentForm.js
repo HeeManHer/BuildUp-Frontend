@@ -15,7 +15,7 @@ function CommentForm({ issueNo }) {
         dispatch(addComment(comment));
         dispatch(getComment(issueNo));
         setComment({ issueNo: issueNo, employeeNo: token.sub, replyContent: '' });
-      };
+    };
 
     // 댓글 등록 화면
     return (
@@ -26,7 +26,7 @@ function CommentForm({ issueNo }) {
                         type='text'
                         className='int'
                         placeholder='댓글을 입력해주세요.'
-                        onChange={e=>setComment({...comment, replyContent:e.target.value})}
+                        onChange={e => setComment({ ...comment, replyContent: e.target.value })}
                         value={comment.replyContent}
                     />
                 </span>
